@@ -33,4 +33,4 @@ Se agregan unas reglas a seguir para la documentacion de commits y permitan tene
 legibles** y proporcionen un facil seguimiento en la **historia
 del proyecto**.
 
-[ver reglas de documentación de commits para mas detalles](doc/documentacion-commits)
+[ver reglas de documentación de commits para mas detalles](doc/documentacion-commits.md)
