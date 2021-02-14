@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -120,5 +120,13 @@
       }
     }
   },
-  "defaultProject": "Team-Angular5-Comfeco-Frontend"
+  "defaultProject": "Team-Angular5-Comfeco-Frontend",
+  "cli": {
+    "analytics": false
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
