@@ -1,1 +1,79 @@
 /* You can add global styles to this file, and also import other style files */
+
+.escala0 {
+  color: #2e2e2e;
+}
+.escala1 {
+  color: #555555;
+}
+.escala2 {
+  color: #777879;
+}
+.escala3 {
+  color: #c4c4c4;
+}
+.escala4 {
+  color: #e3e3e3;
+}
+.escala5 {
+  color: #f3f3f3;
+}
+.escala6 {
+  color: #ffffff;
+}
+
+.pink0 {
+  color: #69156a;
+}
+.pink1 {
+  color: #8a178c;
+}
+.pink2 {
+  color: #b824bb;
+}
+.pink3 {
+  color: #d740da;
+}
+.pink4 {
+  color: #e480e5;
+}
+.pink5 {
+  color: #ecadf6;
+}
+.purple0 {
+  color: #390f64;
+}
+.purple1 {
+  color: #521e87;
+}
+.purple2 {
+  color: #7535b6;
+}
+.purple3 {
+  color: #9349dd;
+}
+.purple4 {
+  color: #b983ff;
+}
+.purple5 {
+  color: #d7b7ff;
+}
+
+.yellow0 {
+  color: #d39c00;
+}
+.yellow1 {
+  color: #f1b406;
+}
+.yellow2 {
+  color: #ffc41f;
+}
+.yellow3 {
+  color: #ffcb38;
+}
+.yellow4 {
+  color: #ffcb38;
+}
+.yellow5 {
+  color: #ffe499;
+}
