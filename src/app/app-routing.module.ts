@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'app', children: aplicationRoutes,
    // TODO implementar seguridad
   },
-  {path:'login', loadChildren: ()=> import('./modules/login/login.module').then(m=> m.LoginModule)},
+  {path:'account', loadChildren: ()=> import('./modules/login/login.module').then(m=> m.LoginModule)},
   { path: '**', redirectTo: 'app' },
 
 ];

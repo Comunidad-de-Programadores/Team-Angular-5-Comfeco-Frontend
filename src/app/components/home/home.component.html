@@ -3,7 +3,7 @@
 <div class="center">
   <mat-card class="tarjeta">
     <mat-card-header>
-      <mat-card-title>Test</mat-card-title>
+      <mat-card-title>Página de inicio</mat-card-title>
       <mat-card-subtitle>Probando Angular material</mat-card-subtitle>
     </mat-card-header>
     <img class="img-tarjeta" mat-card-image src="https://source.unsplash.com/random" alt="Foto del día">
@@ -14,7 +14,7 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>Ok</button>
+      <button mat-button (click)="refresh()">Actualizar</button>
     </mat-card-actions>
   </mat-card>
 </div>
