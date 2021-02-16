@@ -10,6 +10,10 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    const path = this.location.path();
+    if (path === '/account') {
+      this.isActived = true;
+    }
   }
 
 }
