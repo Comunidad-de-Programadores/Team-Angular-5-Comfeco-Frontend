@@ -1,0 +1,47 @@
+<div class="box-flex">
+
+  <div class="box-form-item">
+
+
+    <app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
+    <div class="box-flex">
+      <mat-list>
+        <mat-list-item color="accent" [ngStyle]="{'text-decoration-line: underline;': accion === 'login'}">Inicia sesión</mat-list-item>
+        <mat-divider [vertical]="true"></mat-divider>
+        <mat-list-item color="accent" [ngStyle]="{'text-decoration-line: underline;': accion === 'login'}">Registrate</mat-list-item>
+      </mat-list>
+    </div>
+
+
+    <form (submit)="onSubmit.emit(form.value)" [formGroup]="form">
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Correo eléctronico</mat-label>
+          <input formControlName="email" matInput />
+          <mat-error>{{obtenerMensajeErrorEmail()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input type="password" formControlName="password" matInput />
+          <mat-error>El campo Contraseña es requerido</mat-error>
+        </mat-form-field>
+
+
+      <div class="box-flex">
+        <button mat-flat-button color="primary" [disabled]="form.invalid" class="button">
+          <ng-container *ngIf="accion === 'login'; else elseTemplate">
+            Ingresar
+          </ng-container>
+          <ng-template #elseTemplate>
+            Crear una cuenta
+          </ng-template>
+
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>

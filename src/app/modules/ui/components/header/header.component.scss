@@ -1,0 +1,30 @@
+mat-toolbar {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.box-logo{
+  height: inherit;
+  margin-left: 20px;
+  width: 150px;
+  height: 45px;
+  background-image: url("/assets/Logos-Comfeco/logo1.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.espacio {
+  flex: 1 1 auto;
+}
+
+@media screen and (max-width: 992px) {
+
+}
+
+/* On screens that are 600px or less*/
+@media screen and (max-width: 600px) {
+  .box-logo{
+    background-image: url("/assets/Logos-Comfeco/logo-sin-fondo.png");
+  }
+}

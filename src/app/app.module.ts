@@ -10,12 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { UiModule } from './modules/ui/ui.module';
 import { LoginModule } from './modules/login/login.module';
+import { SharedModule } from './modules/shared/shared.module';
+import { SeguridadModule } from './modules/seguridad/seguridad.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,9 @@ import { LoginModule } from './modules/login/login.module';
     ReactiveFormsModule,
     HttpClientModule,
     UiModule,
-    LoginModule
+    LoginModule,
+    SharedModule,
+    SeguridadModule
 
   ],
   providers: [],
