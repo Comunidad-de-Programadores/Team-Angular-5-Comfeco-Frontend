@@ -63,7 +63,7 @@ export class AuthService {
   private guardarToken(idToken: string): void {
     this.userToken = idToken;
     localStorage.setItem('userToken', idToken);
-
+    // mejorar manejo de tokens
     let timeExpires = new Date();
     timeExpires.setSeconds(3600);
 
