@@ -94,4 +94,13 @@ export class AuthService {
     }
 
   }
+
+  public restablecerPassword(email: string){
+    const data = {
+      requestType: 'PASSWORD_RESET',
+      email: email,
+    }
+
+    return  this.http.post(`${this.urlForgot}${this.apiKey}`, data);
+  }
 }
