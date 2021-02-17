@@ -1,9 +1,11 @@
 footer{
+
     background-color: red;
     height: 100px;
 }
 
 footer {
+   position:fixed;
     left:0px;
     bottom:0px;
     height:50px;
@@ -30,4 +32,9 @@ footer {
    list-style-type: none;
    display: inline;
    padding-right: 5px;
+}
+a{
+   text-decoration: none;
+   color: #1f66ff;
+
 }

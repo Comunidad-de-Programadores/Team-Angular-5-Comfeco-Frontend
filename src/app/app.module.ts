@@ -10,12 +10,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { UiModule } from './modules/ui/ui.module';
 import { LoginModule } from './modules/login/login.module';
+import { RouterModule } from '@angular/router';
+import { PoliticsComponent } from './modules/login/politics/components/politics/politics.component';
+import { TermsServiceComponent } from './modules/login/politics/components/terms-service/terms-service.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    PoliticsComponent, 
+    TermsServiceComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +31,7 @@ import { LoginModule } from './modules/login/login.module';
     HttpClientModule,
     UiModule,
     LoginModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
