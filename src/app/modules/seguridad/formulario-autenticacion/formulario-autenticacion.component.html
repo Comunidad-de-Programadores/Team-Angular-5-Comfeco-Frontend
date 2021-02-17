@@ -28,10 +28,13 @@
       </div>
 
       <div class="input-style">
-        <input type="email" placeholder="Correo electronico" [class.no-valido]="emailNoValido || emailExits" formControlName="email"
-          [class.valido]="!emailNoValido">
+        <input type="email" placeholder="Correo electronico" [class.no-valido]="emailNoValido || emailExits"
+          formControlName="email" [class.valido]="!emailNoValido">
         <small *ngIf="emailNoValido">
           Tu correo electronico no es valido.
+        </small>
+        <small *ngIf="emailExits" style="color: red;">
+          Correo electronico ya ha sido registrado.
         </small>
       </div>
 
@@ -72,9 +75,9 @@
       </div>
       <div class="input-style" style="text-transform: initial; text-align: justify;" *ngIf="accion === 'register'">
         <p>Al registrarte, estas aceptando los <strong>Términos y condiciones </strong>, y la <strong>Política
-                de privacidad y protección</strong>
-            de datos de COMFECO.</p>
-    </div>
+            de privacidad y protección</strong>
+          de datos de COMFECO.</p>
+      </div>
     </form>
 
   </div>

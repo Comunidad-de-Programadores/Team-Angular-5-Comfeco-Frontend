@@ -24,18 +24,15 @@ export class RegisterComponent implements OnInit {
   }
 
   register(usuario: RegisterUser) {
-    console.log(usuario)
     this.auth.register(usuario).subscribe(
       (response) => {
-        console.log(response)
+        alert("Usuario Registrado correctamente")
+        this.router.navigateByUrl('/account/login');
       },
       (error) => {
         this.errores = parsearErroresAPI(error);
-        console.log(this.errores)
-
       }
     )
-    console.log(usuario);
   }
 
 
