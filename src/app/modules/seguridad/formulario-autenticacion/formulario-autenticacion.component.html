@@ -28,7 +28,7 @@
       </div>
 
       <div class="input-style">
-        <input type="email" placeholder="Correo electronico" [class.no-valido]="emailNoValido" formControlName="email"
+        <input type="email" placeholder="Correo electronico" [class.no-valido]="emailNoValido || emailExits" formControlName="email"
           [class.valido]="!emailNoValido">
         <small *ngIf="emailNoValido">
           Tu correo electronico no es valido.

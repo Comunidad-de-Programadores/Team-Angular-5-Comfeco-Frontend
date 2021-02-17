@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { UiModule } from './modules/ui/ui.module';
 import { LoginModule } from './modules/login/login.module';
+import { RouterModule } from '@angular/router';
+import { PoliticsComponent } from './modules/login/politics/components/politics/politics.component';
+import { TermsServiceComponent } from './modules/login/politics/components/terms-service/terms-service.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { SeguridadModule } from './modules/seguridad/seguridad.module';
 
@@ -18,7 +21,8 @@ import { SeguridadModule } from './modules/seguridad/seguridad.module';
   declarations: [
     AppComponent,
     HomeComponent,
-
+    PoliticsComponent, 
+    TermsServiceComponent
   ],
   imports: [
     BrowserModule,
@@ -29,9 +33,9 @@ import { SeguridadModule } from './modules/seguridad/seguridad.module';
     HttpClientModule,
     UiModule,
     LoginModule,
+    RouterModule,
     SharedModule,
     SeguridadModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]

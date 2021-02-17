@@ -45,6 +45,12 @@ export class FormularioAutenticacionComponent implements OnInit {
   get equalsPassowrds() {
     return this.form.get('password').value==this.form.get('passwordConfirm').value;
   }
+
+  get emailExits() {
+    return this.errores[0]==="EMAIL_EXISTS";
+  }
+
+
   obtenerMensajeErrorEmail(){
     var campo = this.form.get('email');
     if (campo.hasError('required')){

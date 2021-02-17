@@ -1,0 +1,40 @@
+footer{
+
+    background-color: red;
+    height: 100px;
+}
+
+footer {
+   position:fixed;
+    left:0px;
+    bottom:0px;
+    height:50px;
+    width:100%;
+    background:#999;
+ }
+
+ mat-grid-tile{
+     background-color: #c4c4c4;
+     color: #1f66ff;
+     cursor: pointer;
+}
+
+.redes-sociales ul
+{
+   padding-right: 0px;
+   padding-left: 0px;
+   padding-bottom: 0px;
+   padding-top: 0px;
+   margin: 0px;
+}
+.redes-sociales li
+{
+   list-style-type: none;
+   display: inline;
+   padding-right: 5px;
+}
+a{
+   text-decoration: none;
+   color: #1f66ff;
+
+}

@@ -8,7 +8,6 @@ import { LoginComponent } from './components/login/login.component';
 import { SeguridadModule } from '../seguridad/seguridad.module';
 import { RegisterComponent } from './components/register/register.component';
 
-
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
   imports: [
@@ -16,7 +15,7 @@ import { RegisterComponent } from './components/register/register.component';
     LoginRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    SeguridadModule,
+    SeguridadModule
 
   ]
 })
