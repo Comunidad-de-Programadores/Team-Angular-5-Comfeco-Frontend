@@ -13,6 +13,8 @@ import { LoginModule } from './modules/login/login.module';
 import { RouterModule } from '@angular/router';
 import { PoliticsComponent } from './modules/login/politics/components/politics/politics.component';
 import { TermsServiceComponent } from './modules/login/politics/components/terms-service/terms-service.component';
+import { SharedModule } from './modules/shared/shared.module';
+import { SeguridadModule } from './modules/seguridad/seguridad.module';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { TermsServiceComponent } from './modules/login/politics/components/terms
     UiModule,
     LoginModule,
     RouterModule
+    SharedModule,
+    SeguridadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

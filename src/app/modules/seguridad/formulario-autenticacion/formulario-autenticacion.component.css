@@ -1,0 +1,36 @@
+form {
+  max-width: 500px;
+}
+
+mat-form-field {
+  width: 70%;
+  border-radius: 5px;
+}
+
+button {
+  margin-right: 1rem;
+}
+.box-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 0px;
+  width: 100%;
+}
+.box-form-item {
+  border: none;
+  border-width: 0.5px;
+  border-radius: 5px;
+  background-color: #c4c4c4;
+  width: 500px;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.button{
+  width: 70%;
+  margin: 0;
+  background-color: #554646;
+}
