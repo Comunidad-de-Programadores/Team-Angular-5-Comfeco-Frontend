@@ -9,6 +9,8 @@ const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
+  // cambiar componente
+  { path: 'recovery', component: LoginComponent}
 ];
 
 @NgModule({

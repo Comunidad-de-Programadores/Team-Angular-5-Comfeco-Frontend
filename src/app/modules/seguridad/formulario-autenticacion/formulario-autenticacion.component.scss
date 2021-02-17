@@ -26,7 +26,7 @@ button {
   border: none;
   border-width: 0.5px;
   border-radius: 5px;
-  background-color: #e7e4e4;
+  background-color: #c4c4c4;
   width: 500px;
 }
 form{
@@ -74,7 +74,7 @@ color: #4b76b6;
 }
 a{
 text-decoration: none;
-color: black;
+color: white;
 }
 .active{
 text-shadow: #CCC 1px 0 10px;
@@ -84,8 +84,58 @@ text-decoration-line: overline;
 }
 .active-a{
 text-decoration-line: underline;
+text-decoration-color: #d39c00;
 
 }
 mat-grid-tile{
 cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}
+.box-section-check {
+  display: flex;
+  justify-content: space-around;
+  margin: 12px 0;
+  color: white;
+}
+.recovery-text{
+  font-weight: 100;
+}
+.recovery-text:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+.text-yellow{
+  color: #d39c00;
+}
+
+element.style {
+}
+.box-login-rrss {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 25px;
+    margin: 0px;
+    color: white;
+    font-weight: 500;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.box-login-rrss_position{
+  display: flex;
+  width: 70%;
+  margin: 0;
+  justify-content: space-between;
+}
+
+.box-login-rrss_position button{
+  margin: 0px;;
+}
+.espacio {
+  flex: 1 1 auto
 }

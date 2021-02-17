@@ -5,6 +5,7 @@ import { MaterialModule } from '../material/material.module';
 import { FormularioAutenticacionComponent } from './formulario-autenticacion/formulario-autenticacion.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     CommonModule,
     MaterialModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   exports:[
     FormularioAutenticacionComponent
