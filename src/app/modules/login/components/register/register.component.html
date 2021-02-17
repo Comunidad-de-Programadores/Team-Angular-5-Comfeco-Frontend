@@ -1,0 +1,63 @@
+<div class="box-flex">
+
+    <div class="box-form-item">
+
+        <mat-grid-list cols="2" rowHeight="3:1" class="header-form center">
+            <mat-grid-tile>
+                <span class="material-icons"> login</span> &nbsp; Inicia sesión
+            </mat-grid-tile>
+            <mat-grid-tile routerLinkActive="active" ><span class="material-icons">app_registration</span> &nbsp;
+                <a  routerLink="/account/register"  routerLinkActive="active-a">Regístrarse </a>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <form [formGroup]="registerForm">
+            <div class="input-style">
+                <input type="text" [class.no-valido]="usernameNoValido" [class.valido]="!usernameNoValido"
+                    formControlName="username" placeholder="Nick">
+                <small *ngIf="usernameNoValido">
+                    Tu nick debe poseer al menos 5 letras.
+                </small>
+            </div>
+            <div class="input-style">
+                <input type="email" [class.no-valido]="emailNoValido" [class.valido]="!emailNoValido"
+                    formControlName="email" placeholder="Correo electronico">
+                <small *ngIf="emailNoValido">
+                    Tu correo electronico no es valido.
+                </small>
+            </div>
+            <div class="input-style">
+                <input type="password" [class.no-valido]="passwordNoValido" [class.valido]="!passwordNoValido"
+                    formControlName="password" placeholder="Contraseña">
+                <small *ngIf="passwordNoValido">
+                    Tu contraseña debe tener al menos 8 caracteres.
+                </small>
+            </div>
+            <div class="input-style">
+                <input type="password" [class.no-valido]="passwordConfirmNoValido"
+                    [class.valido]="!passwordConfirmNoValido" formControlName="passwordConfirm"
+                    placeholder="Confirmar contraseña">
+                <small *ngIf="passwordConfirmNoValido">
+                    Debes ingresar al menos 8 caracteres.
+                </small>
+            </div>
+            <div class="input-style">
+                <small *ngIf="!equalsPassowrds">
+                    Las contraseñas deben ser iguales.
+                </small>
+            </div>
+
+            <div class="box-flex">
+                <button mat-flat-button color="primary" class="button">
+                    <ng-container>
+                        Crear una cuenta
+                    </ng-container>
+                </button>
+            </div>
+            <div class="input-style" style="text-transform: initial; text-align: justify;">
+                <p>Al registrarte, estas aceptando los <strong>Términos y condiciones </strong>, y la <strong>Política
+                        de privacidad y protección</strong>
+                    de datos de COMFECO.</p>
+            </div>
+        </form>
+    </div>
+</div>
