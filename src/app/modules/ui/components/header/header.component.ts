@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/modules/seguridad/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   isActived: boolean = false;
-  constructor(private location: Location) {}
+  constructor(private location: Location,
+    authService: AuthService) {
+    }
 
   ngOnInit(): void {
     const path = this.location.path();
@@ -17,5 +20,4 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  // hacer validaciones cuando no este logueado para boton de iniciar sesion en otras pantallas
 }

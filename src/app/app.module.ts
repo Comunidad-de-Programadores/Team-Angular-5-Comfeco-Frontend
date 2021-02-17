@@ -16,12 +16,11 @@ import { TermsServiceComponent } from './modules/login/politics/components/terms
 import { SharedModule } from './modules/shared/shared.module';
 import { SeguridadModule } from './modules/seguridad/seguridad.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PoliticsComponent, 
+    PoliticsComponent,
     TermsServiceComponent
   ],
   imports: [
@@ -33,7 +32,7 @@ import { SeguridadModule } from './modules/seguridad/seguridad.module';
     HttpClientModule,
     UiModule,
     LoginModule,
-    RouterModule
+    RouterModule,
     SharedModule,
     SeguridadModule
   ],

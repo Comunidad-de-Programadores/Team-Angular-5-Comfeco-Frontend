@@ -16,7 +16,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public login(credencialesUsuario: credencialesUsuario ): void {
+  public login(credencialesUsuario: credencialesUsuario, provider: string = 'google') {
+    if (provider) {
+      this.auth.login(null, 'google');
+      return true;
+    }
+
     this.auth.login(credencialesUsuario).subscribe(
       (respuesta) => {
         console.log(respuesta);
