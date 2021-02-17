@@ -73,7 +73,7 @@ export class AuthService {
 
   public leerToken(): string {
     if (localStorage.getItem('userToken')) {
-      this.userToken = localStorage.getItem('token');
+      this.userToken = localStorage.getItem('userToken');
     }else {
       this.userToken = '';
     }
