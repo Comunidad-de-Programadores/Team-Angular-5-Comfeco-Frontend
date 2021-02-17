@@ -1,0 +1,76 @@
+<div class="box-flex">
+
+  <div class="box-form-item">
+
+    <mat-grid-list cols="2" rowHeight="3:1" class="header-form center" *ngIf="accion !== 'recovery'">
+      <mat-grid-tile>
+        <span class="material-icons" routerLinkActive="active"> login</span> &nbsp;
+        <a routerLink="/account/login" routerLinkActive="active-a">Inicia sesión </a>
+      </mat-grid-tile>
+      <mat-grid-tile routerLinkActive="active"><span class="material-icons">app_registration</span> &nbsp;
+        <a routerLink="/account/register" routerLinkActive="active-a">Regístrarse </a>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="1" rowHeight="3:1" class="header-form center" *ngIf="accion === 'recovery'">
+      <mat-grid-tile>
+        <span class="material-icons"> send</span> &nbsp; Recuperar Credenciales
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <form (submit)="onSubmit.emit(form.value)" [formGroup]="form">
+
+      <div class="input-style" *ngIf="accion === 'register'">
+        <input type="text" placeholder="Nick" [class.no-valido]="usernameNoValido" [class.valido]="!usernameNoValido"
+          formControlName="username">
+        <small *ngIf="usernameNoValido">
+          Tu nick debe poseer al menos 5 letras.
+        </small>
+      </div>
+
+      <div class="input-style">
+        <input type="email" placeholder="Correo electronico" [class.no-valido]="emailNoValido" formControlName="email"
+          [class.valido]="!emailNoValido">
+        <small *ngIf="emailNoValido">
+          Tu correo electronico no es valido.
+        </small>
+      </div>
+
+      <div class="input-style" *ngIf="accion !== 'recovery'">
+        <input type="password" placeholder="Contraseña" [class.no-valido]="passwordNoValido" formControlName="password"
+          [class.valido]="!passwordNoValido">
+        <small *ngIf="passwordNoValido">
+          Tu contraseña debe tener al menos 8 caracteres.
+        </small>
+
+      </div>
+      <div class="input-style" *ngIf="accion === 'register'">
+        <input type="password" placeholder="Confirmar contraseña" [class.no-valido]="passwordConfirmNoValido"
+          [class.valido]="!passwordConfirmNoValido" formControlName="passwordConfirm">
+        <small *ngIf="passwordConfirmNoValido">
+          Debes ingresar al menos 8 caracteres.
+        </small>
+      </div>
+      <div class="input-style" *ngIf="accion === 'register'">
+        <small *ngIf="!equalsPassowrds">
+          Las contraseñas deben ser iguales.
+        </small>
+      </div>
+
+      <div class="box-flex">
+        <button mat-flat-button color="primary" class="button">
+          <ng-container *ngIf="accion === 'login'">
+            Registrarse
+          </ng-container>
+          <ng-container *ngIf="accion === 'register'">
+            Crear una cuenta
+          </ng-container>
+          <ng-container *ngIf="accion === 'recovery'">
+            Recuperar Contraseña
+          </ng-container>
+        </button>
+
+      </div>
+    </form>
+
+  </div>
+</div>

@@ -1,1 +1,12 @@
-<p>header works!</p>
+<mat-toolbar color="backgrond(300)">
+
+    <div class="box-logo" routerLink="/">
+    </div>
+
+    <div class="espacio"></div>
+
+    <div class="box-login" *ngIf="isActived">
+      <button mat-raised-button color="backgrond(100)">Iniciar sesión</button>
+    </div>
+
+</mat-toolbar>
