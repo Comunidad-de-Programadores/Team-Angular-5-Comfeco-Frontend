@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { SeguridadModule } from '../seguridad/seguridad.module';
 
-
 @NgModule({
   declarations: [LoginComponent],
   imports: [
