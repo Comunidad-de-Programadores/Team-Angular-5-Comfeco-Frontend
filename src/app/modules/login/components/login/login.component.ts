@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { credencialesUsuario } from 'src/app/core/models/user';
+import { LoginUser } from 'src/app/core/models/user_login';
 
 @Component({
   selector: 'app-login',
@@ -8,11 +8,13 @@ import { credencialesUsuario } from 'src/app/core/models/user';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   errores: string[] = [];
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  login(credenciales: credencialesUsuario) {}
+  login(credenciales: LoginUser) {
+    console.log(credenciales);
+  }
 }

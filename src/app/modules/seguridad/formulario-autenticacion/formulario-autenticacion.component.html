@@ -2,45 +2,79 @@
 
   <div class="box-form-item">
 
-
-    <app-mostrar-errores [errores]="errores"></app-mostrar-errores>
-
-    <div class="box-flex">
-      <mat-list>
-        <mat-list-item color="accent" [ngStyle]="{'text-decoration-line: underline;': accion === 'login'}">Inicia sesión</mat-list-item>
-        <mat-divider [vertical]="true"></mat-divider>
-        <mat-list-item color="accent" [ngStyle]="{'text-decoration-line: underline;': accion === 'login'}">Registrate</mat-list-item>
-      </mat-list>
-    </div>
-
+    <mat-grid-list cols="2" rowHeight="3:1" class="header-form center" *ngIf="accion !== 'recovery'">
+      <mat-grid-tile>
+        <span class="material-icons" routerLinkActive="active"> login</span> &nbsp;
+        <a routerLink="/account/login" routerLinkActive="active-a">Inicia sesión </a>
+      </mat-grid-tile>
+      <mat-grid-tile routerLinkActive="active"><span class="material-icons">app_registration</span> &nbsp;
+        <a routerLink="/account/register" routerLinkActive="active-a">Regístrarse </a>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="1" rowHeight="3:1" class="header-form center" *ngIf="accion === 'recovery'">
+      <mat-grid-tile>
+        <span class="material-icons"> send</span> &nbsp; Recuperar Credenciales
+      </mat-grid-tile>
+    </mat-grid-list>
 
     <form (submit)="onSubmit.emit(form.value)" [formGroup]="form">
 
+      <div class="input-style" *ngIf="accion === 'register'">
+        <input type="text" placeholder="Nick" [class.no-valido]="usernameNoValido" [class.valido]="!usernameNoValido"
+          formControlName="username">
+        <small *ngIf="usernameNoValido">
+          Tu nick debe poseer al menos 5 letras.
+        </small>
+      </div>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Correo eléctronico</mat-label>
-          <input formControlName="email" matInput />
-          <mat-error>{{obtenerMensajeErrorEmail()}}</mat-error>
-        </mat-form-field>
+      <div class="input-style">
+        <input type="email" placeholder="Correo electronico" [class.no-valido]="emailNoValido" formControlName="email"
+          [class.valido]="!emailNoValido">
+        <small *ngIf="emailNoValido">
+          Tu correo electronico no es valido.
+        </small>
+      </div>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Contraseña</mat-label>
-          <input type="password" formControlName="password" matInput />
-          <mat-error>El campo Contraseña es requerido</mat-error>
-        </mat-form-field>
+      <div class="input-style" *ngIf="accion !== 'recovery'">
+        <input type="password" placeholder="Contraseña" [class.no-valido]="passwordNoValido" formControlName="password"
+          [class.valido]="!passwordNoValido">
+        <small *ngIf="passwordNoValido">
+          Tu contraseña debe tener al menos 8 caracteres.
+        </small>
 
+      </div>
+      <div class="input-style" *ngIf="accion === 'register'">
+        <input type="password" placeholder="Confirmar contraseña" [class.no-valido]="passwordConfirmNoValido"
+          [class.valido]="!passwordConfirmNoValido" formControlName="passwordConfirm">
+        <small *ngIf="passwordConfirmNoValido">
+          Debes ingresar al menos 8 caracteres.
+        </small>
+      </div>
+      <div class="input-style" *ngIf="accion === 'register'">
+        <small *ngIf="!equalsPassowrds">
+          Las contraseñas deben ser iguales.
+        </small>
+      </div>
 
       <div class="box-flex">
-        <button mat-flat-button color="primary" [disabled]="form.invalid" class="button">
-          <ng-container *ngIf="accion === 'login'; else elseTemplate">
-            Ingresar
+        <button mat-flat-button color="primary" class="button">
+          <ng-container *ngIf="accion === 'login'">
+            Registrarse
           </ng-container>
-          <ng-template #elseTemplate>
+          <ng-container *ngIf="accion === 'register'">
             Crear una cuenta
-          </ng-template>
-
+          </ng-container>
+          <ng-container *ngIf="accion === 'recovery'">
+            Recuperar Contraseña
+          </ng-container>
         </button>
+
       </div>
+      <div class="input-style" style="text-transform: initial; text-align: justify;" *ngIf="accion === 'register'">
+        <p>Al registrarte, estas aceptando los <strong>Términos y condiciones </strong>, y la <strong>Política
+                de privacidad y protección</strong>
+            de datos de COMFECO.</p>
+    </div>
     </form>
 
   </div>

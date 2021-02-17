@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Validators,FormBuilder,FormGroup} from '@angular/forms';
-import { RegisterUser } from '../../../../core/models/register_user';
+import { RegisterUser } from 'src/app/core/models/user_register';
 
 
 @Component({
@@ -12,6 +12,8 @@ export class RegisterComponent implements OnInit {
 
   public register_
   registerForm: FormGroup;
+  errores: string[] = [];
+
 
   constructor(private fb: FormBuilder) { 
     this.crearFormulario();
@@ -20,6 +22,11 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  register(usuario: RegisterUser) {
+    console.log(usuario);
+  }
+
 
   get usernameNoValido() {
     return this.registerForm.get('username').invalid && this.registerForm.get('username').touched;
