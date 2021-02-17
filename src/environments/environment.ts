@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiKey: 'AIzaSyANUYP0O-08jqVTa94Qoxd2MECPfEYIeZs',
+  urlLogin: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
+  urlRegister: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
+  urlForgot: 'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=',
 };
 
 /*
