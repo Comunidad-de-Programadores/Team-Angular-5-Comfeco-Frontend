@@ -25,8 +25,7 @@ import { LoginModule } from './modules/login/login.module';
     ReactiveFormsModule,
     HttpClientModule,
     UiModule,
-    LoginModule
-
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
