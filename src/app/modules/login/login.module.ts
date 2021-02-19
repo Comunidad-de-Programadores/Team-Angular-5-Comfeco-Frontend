@@ -8,9 +8,10 @@ import { LoginRoutingModule } from './login-routing.module';
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { RecoveryComponent } from './components/recovery/recovery.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, RecoveryComponent],
   imports: [
     CommonModule,
     LoginRoutingModule,
