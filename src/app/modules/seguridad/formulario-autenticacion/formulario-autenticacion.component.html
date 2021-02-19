@@ -34,6 +34,9 @@
         <small *ngIf="emailNoValido">
           Tu correo electronico no es valido.
         </small>
+        <small *ngIf="emailExits" style="color: red;">
+          Correo electronico ya ha sido registrado.
+        </small>
       </div>
 
       <div class="input-style" *ngIf="accion !== 'recovery' || 'login'">
