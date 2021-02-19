@@ -1,0 +1,91 @@
+
+form {
+    max-width: 500px;
+  }
+  .header-form{
+    width: 100%;
+  }
+
+  .input-style {
+    width: 70%;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  button {
+    margin-right: 1rem;
+  }
+  .box-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em 0px;
+    width: 100%;
+  }
+  .box-form-item {
+    border: none;
+    border-width: 0.5px;
+    border-radius: 5px;
+    background-color: #e7e4e4;
+    width: 500px;
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .button{
+    width: 70%;
+    margin: 0;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 0px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .no-valido{
+    border-color: red;
+}
+
+.no-valido:focus{
+    outline: none !important;
+    border:1px solid red;
+    box-shadow: 0 0 10px rgb(230, 82, 37)
+}
+
+.valido{
+  border-color: rgb(221, 215, 215);
+}
+
+.valido:focus{
+  outline: none !important;
+  border:0.5px solid greenyellow;
+  box-shadow: 0 0 10px rgb(124, 209, 63)
+}
+
+strong{
+  color: #4b76b6;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+.active{
+  text-shadow: #CCC 1px 0 10px;
+  color: #d39c00;
+  text-decoration-line: overline;
+
+}
+.active-a{
+  text-decoration-line: underline;
+
+}
+mat-grid-tile{
+  cursor: pointer;
+}
