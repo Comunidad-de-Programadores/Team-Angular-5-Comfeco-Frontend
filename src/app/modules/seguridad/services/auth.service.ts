@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { credencialesUsuario, User } from 'src/app/core/models/user';
+// import { credencialesUsuario, User } from 'src/app/core/models/user';
 import { environment } from 'src/environments/environment';
 import { map } from "rxjs/operators";
 import { Observable } from 'rxjs';
+import { User } from 'src/app/core/models/user';
+import { LoginUser } from 'src/app/core/models/user_login';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,7 +30,7 @@ export class AuthService {
   /**
    * login
    */
-  public login(credencialesUsuario: credencialesUsuario): Observable<Object> {
+  public login(credencialesUsuario: LoginUser): Observable<Object> {
     const autenticacion = {
       ...credencialesUsuario,
       returnSecureToken: true

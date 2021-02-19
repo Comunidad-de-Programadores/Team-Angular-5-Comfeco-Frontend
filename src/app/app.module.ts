@@ -21,7 +21,7 @@ import { SeguridadModule } from './modules/seguridad/seguridad.module';
   declarations: [
     AppComponent,
     HomeComponent,
-    PoliticsComponent, 
+    PoliticsComponent,
     TermsServiceComponent
   ],
   imports: [
@@ -33,7 +33,7 @@ import { SeguridadModule } from './modules/seguridad/seguridad.module';
     HttpClientModule,
     UiModule,
     LoginModule,
-    RouterModule
+    RouterModule,
     SharedModule,
     SeguridadModule
   ],
