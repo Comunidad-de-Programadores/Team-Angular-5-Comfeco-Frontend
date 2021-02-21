@@ -5,10 +5,10 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class SnackBarService {
+export class NotificationService {
 
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   message: string;
   action: string;
@@ -29,7 +29,7 @@ export class SnackBarService {
         });
       } else { 
         this.createSnack().afterOpened().subscribe(() => {
-          this._router.navigate(['']);
+          this._router.navigate([redirect]);
         });
       }
     } else {
