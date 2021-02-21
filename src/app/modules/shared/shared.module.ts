@@ -3,17 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { MaterialModule } from '../material/material.module';
 import { MostrarErroresComponent } from './mostrar-errores/mostrar-errores.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 
 
 @NgModule({
-  declarations: [MostrarErroresComponent],
+  declarations: [MostrarErroresComponent, CarouselComponent],
   imports: [
     CommonModule,
     MaterialModule
   ],
   exports:[
-    MostrarErroresComponent
+    MostrarErroresComponent,
+    CarouselComponent,
   ],
 })
 export class SharedModule { }

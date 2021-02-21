@@ -1,0 +1,43 @@
+<div class="carousel">
+  <ng-container *ngFor="let item of itemsIn; let i = index">
+    <div *ngIf="!showItemsPerPage">
+      <img *ngIf="i === currentPage" [src]="item.src" class="page" @fadeIn>
+    </div>
+    <div *ngIf="showItemsPerPage" class="test">
+      <ng-container *ngFor="let page of items, let j = index">
+        <div class="items-page" *ngIf="j === currentPage"  @slideInOut >
+
+          <ng-container *ngFor="let child of page">
+            <img [src]="child.src" class="image-item">
+          </ng-container>
+
+          <!-- <img [src]="img" class="image-item">
+          <img [src]="img" class="image-item">
+          <img [src]="img" class="image-item">
+          <img [src]="img" class="image-item"> -->
+          <!-- <ng-container *ngFor="let page of items">
+            <ng-container *ngFor="let child of page">
+              <img [src]="child.src">
+            </ng-container>
+          </ng-container> -->
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <button (click)="previousPage()" class="control-page prev">
+    <div class="arrow-back"><span class="arrow left">
+    </span></div>
+  </button>
+
+  <button (click)="nextPage()" class="control-page next">
+    <div class="arrow-back"><span class="arrow right"></span></div>
+  </button>
+</div>
+<div class="page-indicator">
+  <ng-container *ngFor="let item of items;let i = index">
+    <span [ngClass]="i===currentPage? 'indicator active': 'indicator' " (click)="onPageIndicatorClick(i)">
+    </span>
+  </ng-container>
+</div>
+
