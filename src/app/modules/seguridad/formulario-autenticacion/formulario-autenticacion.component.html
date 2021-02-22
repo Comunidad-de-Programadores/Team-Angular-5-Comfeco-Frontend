@@ -63,7 +63,11 @@
           Las contraseñas deben ser iguales.
         </small>
       </div>
-
+      <div class="box-flex">
+        <ng-container *ngIf="_auth.errorAuthFB">
+          Ya tienes una cuenta vinculada con el correo.
+        </ng-container>
+    </div>
       <div class="box-flex">
         <button mat-raised-button color="primary" class="button">
           <ng-container *ngIf="accion === 'login'">
@@ -82,7 +86,7 @@
         <p><span>Tambien puedes iniciar con tus redes</span></p>
         <div class="box-login-rrss_position">
           <div>
-            <button mat-raised-button color="primary" >Ingresar con facebook</button>
+            <button mat-raised-button color="primary" (click)="_auth.registerWithFacebook()" type="button">Ingresar con facebook</button>
           </div>
           <div class="espacio"></div>
           <div>

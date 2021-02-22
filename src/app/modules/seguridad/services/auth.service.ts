@@ -22,6 +22,7 @@ export class AuthService {
   private urlRegister = environment.urlRegister;
   private urlForgot = environment.urlForgot;
   private userToken: string;
+  public errorAuthFB: boolean = false;
   user$: Observable<UserFirebase>;
   constructor(
     private http: HttpClient,
@@ -115,6 +116,18 @@ export class AuthService {
     const credential = await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     this._notification.openSnackBar("Session Iniciada", "", "", true)
     return this.updateUserData(credential.user);
+  }
+  async registerWithFacebook() {
+
+    await this.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(user => {
+      this._notification.openSnackBar("Session Iniciada", "", "", true)
+      return this.updateUserData(user);
+    }).catch(error => {
+      this.errorAuthFB = true;
+      this._notification.openSnackBar(`Tu correo ${error.email} ya se encuentra registrado.`, "Error", )
+    }
+    )
+
   }
 
   private updateUserData(user) {
