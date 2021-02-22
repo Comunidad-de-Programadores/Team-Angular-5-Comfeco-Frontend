@@ -3,7 +3,10 @@
   justify-content: space-around;
 }
 .more-link{
-  padding-top: 2px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  padding-bottom: 8px;
   width: 100%;
   text-align: end;
 }
