@@ -3,17 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { MaterialModule } from '../material/material.module';
 import { MostrarErroresComponent } from './mostrar-errores/mostrar-errores.component';
+import { SideCommunitiesComponent } from './communities/side-communities/side-communities.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [MostrarErroresComponent],
+  declarations: [MostrarErroresComponent, SideCommunitiesComponent],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule,
   ],
   exports:[
-    MostrarErroresComponent
+    MostrarErroresComponent,
+    SideCommunitiesComponent,
   ],
 })
 export class SharedModule { }
