@@ -2,29 +2,21 @@
   <div class="header-card">
     <h2>Comunidades</h2>
     <span class="divider"></span>
-    <a class="a-link" [routerLink]="['/home/comunidades']" >Ver más</a>
+    <a class="more-link" [routerLink]="['/home/comunidades']" >Ver más</a>
   </div>
 
   <mat-card-content>
 
-    <div class="content-item">
-      <img src="assets/Logos-Comfeco/Logo-con-fondo.png" alt="" class="image-item">
-      <div class="title-item"><h3>Comunidad de Programadores</h3></div>
-      <a class="join-link" href="http://google.com" target="_blank" rel="noopener noreferrer">Unirme</a>
-    </div>
-    <hr>
-    <div class="content-item">
-      <img src="assets/Logos-Comfeco/Logo-con-fondo.png" alt="" class="image-item">
-      <div class="title-item"><h3>Comunidad de Programadores</h3></div>
-      <a class="join-link" href="http://google.com" target="_blank" rel="noopener noreferrer">Unirme</a>
-    </div>
-    <hr>
-    <div class="content-item">
-      <img src="assets/Logos-Comfeco/Logo-con-fondo.png" alt="" class="image-item">
-      <div class="title-item"><h3>Comunidad de Programadores</h3></div>
-      <a class="join-link" href="http://google.com" target="_blank" rel="noopener noreferrer">Unirme</a>
-    </div>
-    <hr>
+    <ng-container *ngFor="let community of communities">
+      <div class="content-item">
+        <img [src]="community.img? community.img : 'assets/Logos-Comfeco/Logo-con-fondo.png'"  class="image-item">
+        <div class="title-item"><h3>{{community.name}}</h3></div>
+        <span class="divider"></span>
+        <a class="join-link" [href]="community.url? community.url :'http://google.com'" target="_blank" rel="noopener noreferrer">Unirme</a>
+      </div>
+      <hr>
+    </ng-container>
+
   </mat-card-content>
 
 </mat-card>
