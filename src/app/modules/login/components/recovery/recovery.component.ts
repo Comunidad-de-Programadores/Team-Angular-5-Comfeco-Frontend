@@ -22,14 +22,10 @@ export class RecoveryComponent implements OnInit {
 
     this.auth.restablecerPassword(usuario.email).subscribe(
       (respuesta) => {
-        alert("Hemos enviado un correo electronico, para cambio de contraseña")
-
+        this.router.navigateByUrl('/account/recovery/success')
       },
       (errores) => {
         this.errores = parsearErroresAPI(errores);
-        if (this.errores[0]==="EMAIL_NOT_FOUND") {
-          alert("Correo no encontrado")
-        }
       }
     );
   }

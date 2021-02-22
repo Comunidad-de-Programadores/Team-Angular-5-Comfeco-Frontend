@@ -29,6 +29,9 @@
       </div>
 
       <div class="input-style">
+        <small *ngIf="emailNotFound" style="color:red">
+          El correo electronico no existe.
+        </small>
         <input type="email" placeholder="Correo electronico" [class.no-valido]="emailNoValido" formControlName="email"
           [class.valido]="!emailNoValido">
         <small *ngIf="emailNoValido">
