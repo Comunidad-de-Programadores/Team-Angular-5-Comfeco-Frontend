@@ -1,0 +1,51 @@
+.custom-card{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  border: 1px;
+  box-shadow: 0px 1px 6px rgb(0 0 0 / 15%)
+}
+
+.header{
+  height: 70%;
+  object-fit: cover;
+}
+
+.header-image{
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px 16px 0 0;
+
+}
+.framework-image{
+  display:flex;
+  justify-content: center;
+  background-color: white;
+  width: 60px;
+  height: 60px;
+  // align-items: center;
+  border-radius: 50%;
+  position: relative;
+  top: -30px;
+  left: 35%;
+
+}
+
+.image-logo{
+  // padding: .5rem;
+  // max-width: 15%;
+  max-width: 100%;
+  height: auto;
+  // display: block;
+  width: 60%;
+}
+
+.title{
+  position: relative;
+  top: -20px;
+  color: #69156A;
+  font-weight: 500;
+  text-align: center;
+}
+

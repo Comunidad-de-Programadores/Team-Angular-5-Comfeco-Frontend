@@ -1,7 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { EventEmitter } from '@angular/core';
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { InputItem } from 'src/app/core/models/carousel/Inputs';
+import { interval, Observable } from 'rxjs';
+import { CarouselMode, InputItem } from 'src/app/core/models/carousel/Inputs';
 
 @Component({
   selector: 'app-carousel',
@@ -46,6 +47,21 @@ export class CarouselComponent implements OnInit {
 
   @Output() indexOf = new EventEmitter<number>(); // return the index position of the item that was clicked
 
+  @Input() mode = CarouselMode.img;
+
+  /**
+   * autoplay: automatic skip next page
+   */
+  @Input() autoPlay: boolean = false;
+  /**
+  * set skip next page time in miliseconds
+  */
+  @Input() autoPlayTime: number = 3000;
+
+  skipPage$:Observable<number>;
+
+  carouselMode = CarouselMode;
+
   showItemsPerPage: boolean = false;
 
   currentPage = 0;
@@ -53,36 +69,21 @@ export class CarouselComponent implements OnInit {
   animation='slideInOut';
 
   img = 'https://source.unsplash.com/random';
+
   items:any[]=[];
 
   constructor() { }
 
   ngOnInit(): void {
     // debugger
-    if(this.itemsPerPage > 1){
-      let count = 0;
-      let arr = [];
-      for (let i = 0; i < this.itemsIn.length; i++) {
-        count++;
-        if(count > this.itemsPerPage){
-          this.items.push(arr);
-          count = 1;
-          arr=[];
-        }
-        arr.push(this.itemsIn[i]);
-
-        if(i===this.itemsIn.length-1){
-          this.items.push(arr);
-        }
-      }
-    }else{
-      this.items = this.itemsIn;
-    }
+    this.setInputElements();
 
     console.log('items var',this.items)
-    // Todo: if changePageMode is by time Set Timer
+    if(this.autoPlay){
+      this.setAutoPlayMode();
+    }
     console.log('elementos por pagina: ',this.itemsPerPage);
-    if(this.itemsPerPage !== undefined && this.itemsPerPage > 1){
+    if(this.itemsPerPage !== undefined && this.itemsPerPage > 0){
       this.showItemsPerPage = true;
     } else {
       this.showItemsPerPage = false;
@@ -105,6 +106,36 @@ export class CarouselComponent implements OnInit {
 
   onPageIndicatorClick(index: number){
     this.currentPage = index;
+  }
+
+  setInputElements(){
+    if(this.itemsPerPage > 0){
+      let count = 0;
+      let arr = [];
+      for (let i = 0; i < this.itemsIn.length; i++) {
+        count++;
+        if(count > this.itemsPerPage){
+          this.items.push(arr);
+          count = 1;
+          arr=[];
+        }
+        arr.push(this.itemsIn[i]);
+
+        if(i===this.itemsIn.length-1){
+          this.items.push(arr);
+        }
+      }
+    }else{
+      this.items = this.itemsIn;
+    }
+  }
+
+  setAutoPlayMode() {
+    this.skipPage$ = interval(this.autoPlayTime)
+    this.skipPage$.subscribe(
+      result => this.nextPage(),
+      err => console.log(err)
+    );
   }
 
 }

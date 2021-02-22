@@ -1,4 +1,14 @@
 <p>test works!</p>
 <div class="carousel">
-  <app-carousel [itemsIn]="images" [itemsPerPage]=1 ></app-carousel>
+  <app-carousel [itemsIn]="images"
+  mode="CARD"
+  [autoPlay]=true
+  [autoPlayTime]=6000
+  itemsPerPage=5
+  >
+</app-carousel>
 </div>
+<!--
+<div class="card">
+  <app-leader-card></app-leader-card>
+</div> -->
