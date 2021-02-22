@@ -12,5 +12,6 @@ export interface InputPage{
 
 export enum CarouselMode{
   img = 'IMG',
-  card= 'CARD'
+  card = 'CARD',
+  icon = 'ICON'
 }
