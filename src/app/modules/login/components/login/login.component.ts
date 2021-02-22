@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
 
 
   public login(credencialesUsuario: LoginUser ): void {
+  
     this.auth.login(credencialesUsuario).subscribe(
       (respuesta) => {
         console.log(respuesta);

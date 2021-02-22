@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { RegisterUser } from 'src/app/core/models/user_register';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-formulario-autenticacion',
@@ -9,7 +10,7 @@ import { RegisterUser } from 'src/app/core/models/user_register';
   styleUrls: ['./formulario-autenticacion.component.scss'],
 })
 export class FormularioAutenticacionComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, public _auth: AuthService) {}
   form: FormGroup;
 
   @Input()

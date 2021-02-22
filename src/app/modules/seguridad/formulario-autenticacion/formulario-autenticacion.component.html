@@ -82,12 +82,12 @@
         <p><span>Tambien puedes iniciar con tus redes</span></p>
         <div class="box-login-rrss_position">
           <div>
-            <button mat-raised-button color="primary">Ingresar con facebook</button>
+            <button mat-raised-button color="primary" >Ingresar con facebook</button>
           </div>
           <div class="espacio"></div>
           <div>
 
-            <button mat-raised-button color="primary">Ingresar con Google</button>
+            <button mat-raised-button color="primary" (click)="_auth.registerWithGoogle()" type="button">Ingresar con Google</button>
           </div>
         </div>
       </div>

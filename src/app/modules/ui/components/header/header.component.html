@@ -1,12 +1,41 @@
 <mat-toolbar color="backgrond(300)">
 
-    <div class="box-logo" routerLink="/">
-    </div>
+  <div class="box-logo" routerLink="/">
+  </div>
 
-    <div class="espacio"></div>
+  <div class="espacio"></div>
 
-    <div class="box-login" *ngIf="isActived">
-      <button mat-raised-button color="backgrond(100)">Iniciar sesión</button>
+  <div *ngIf="auth.user$ | async; then authenticated else guest">
+    <!-- template will replace this div -->
+  </div>
+
+  <!-- User NOT logged in -->
+  <ng-template #guest>
+    <button mat-raised-button color="primary" class="button" routerLink="/account/login">
+      <ng-container>
+        Login
+      </ng-container>
+    </button>
+    <button mat-raised-button color="primary" class="button" routerLink="/account/register">
+      <ng-container>
+        Register
+      </ng-container>
+    </button>
+
+  </ng-template>
+
+
+  <!-- User logged in -->
+  <ng-template #authenticated>
+    <div *ngIf="auth.user$ | async as user">
+      <button mat-raised-button color="primary" class="button" (click)="auth.signOut()">
+
+        <ng-container>
+          Logout &nbsp;<img [src]="user.photoURL" width="25px">
+
+        </ng-container>
+      </button>
     </div>
+  </ng-template>
 
 </mat-toolbar>
