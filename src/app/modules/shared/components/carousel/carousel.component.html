@@ -9,7 +9,7 @@
 
           <ng-container *ngFor="let child of page">
             <img *ngIf="mode === carouselMode.img" [src]="child.src" class="image-item">
-            <img *ngIf="mode === carouselMode.icon" [src]="child.src" [alt]="child.title" class="image-icon">
+            <img *ngIf="mode === carouselMode.icon" [src]="child.src" [title]="child.title" [alt]="child.title" class="image-icon">
             <div *ngIf="mode === carouselMode.card" class="card">
               <app-leader-card [item]="child"></app-leader-card>
             </div>
