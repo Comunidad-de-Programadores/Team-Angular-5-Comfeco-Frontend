@@ -1,0 +1,48 @@
+<mat-card>
+  <div class="header-card">
+    <h2>Talleres</h2>
+    <span class="divider"></span>
+    <a class="more-link" [routerLink]="['/home/talleres']" >Ver más</a>
+  </div>
+  <div class="filter">
+    <mat-form-field appearance="fill">
+      <mat-label>Filtrar por Area</mat-label>
+      <mat-select [(ngModel)]="filterValue" name="Area">
+        <mat-option *ngFor="let area of areas" [value]="area.id">
+          {{area.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-card-content>
+    <div class="content-title">
+      <span class="autor-space"></span> Hoy
+    </div>
+    <div class="content-item">
+      <div class="status-item">
+        <mat-icon>done</mat-icon>
+      </div>
+      <div class="description-item">
+        <div class="title-item">State of Java Script</div>
+        <div class="subtitle-item">16:00 Hrs</div>
+        <div class="autor-item"> <b>By</b> <span class="autor-space"></span><a href="http://twitter.com" target="_blank" >Juan Pablo de la Torre</a></div>
+      </div>
+    </div>
+    <hr>
+
+    <div class="content-item">
+      <div class="status-item">
+        <mat-icon>more_horiz</mat-icon>
+      </div>
+      <div class="description-item">
+        <div class="title-item">IA con Python</div>
+        <div class="subtitle-item">22:00 Hrs</div>
+        <div class="autor-item"> <b>By</b> <span class="autor-space"></span><a href="http://twitter.com" target="_blank" >Yesi Days</a></div>
+      </div>
+    </div>
+    <hr>
+
+  </mat-card-content>
+
+</mat-card>
+
