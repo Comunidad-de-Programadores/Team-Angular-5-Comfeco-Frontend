@@ -11,10 +11,10 @@ import { HomeComponent } from './components/home/home.component';
 import { UiModule } from './modules/ui/ui.module';
 import { LoginModule } from './modules/login/login.module';
 import { RouterModule } from '@angular/router';
-import { PoliticsComponent } from './modules/login/politics/components/politics/politics.component';
-import { TermsServiceComponent } from './modules/login/politics/components/terms-service/terms-service.component';
+import { PoliticsComponent } from './components/politics/politics.component';
+import { TermsServiceComponent } from './components/terms-service/terms-service.component';
 import { SharedModule } from './modules/shared/shared.module';
-import { SeguridadModule } from './modules/seguridad/seguridad.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { TestComponent } from './components/test/test.component';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { TestComponent } from './components/test/test.component';
     HomeComponent,
     PoliticsComponent,
     TermsServiceComponent,
-    TestComponent
+    TestComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +36,7 @@ import { TestComponent } from './components/test/test.component';
     LoginModule,
     RouterModule,
     SharedModule,
-    SeguridadModule
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
