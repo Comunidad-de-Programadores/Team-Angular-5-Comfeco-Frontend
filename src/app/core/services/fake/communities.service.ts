@@ -12,7 +12,7 @@ export class CommunitiesService {
     {name:'El lenguaje de los programadores', url: 'https://www.facebook.com/lenguajeprogramador', img:'https://scontent.fmex28-1.fna.fbcdn.net/v/t1.0-9/55451604_2389303431088469_5227528833401356288_o.jpg?_nc_cat=104&ccb=3&_nc_sid=09cbfe&_nc_ohc=tPSRV222YAgAX_eIMQv&_nc_ht=scontent.fmex28-1.fna&oh=a94ce7a7663b00158b2de9cd0431e244&oe=605B314F'},
     {name:'Latam Dev', url: 'http://www.latamdev.org/', img:'https://pbs.twimg.com/profile_images/2419350924/fongw4dd7ha0odmckp69_400x400.jpeg'},
     {name:'Angular Hispano', url: 'http://angular.lat'},
-    {name:'ReAct Latinoamérica', url: 'http://reactlat.org', img:'https://reactlat.org/wp-content/uploads/2019/01/ReActLA-logo-180x60.png'},
+    {name:'Latino .Net', url: 'https://latinonet.online/', img:'https://latinonet.online/assets/img/latinonet/Logo%20Hexagono.png'},
   ];
 
   constructor() { }
