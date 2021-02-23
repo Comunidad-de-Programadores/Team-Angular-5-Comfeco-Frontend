@@ -12,9 +12,9 @@
         <a routerLink="/account/register" routerLinkActive="active-a"><span class="text-yellow">Regístrarse</span> </a>
       </mat-grid-tile>
     </mat-grid-list>
-    <mat-grid-list cols="1" rowHeight="3:1" class="header-form center" *ngIf="accion === 'recovery'">
-      <mat-grid-tile>
-        <span class="material-icons"> send</span> &nbsp; Recuperar Credenciales
+    <mat-grid-list cols="1" rowHeight="5:1" class="header-form center" *ngIf="accion === 'recovery'">
+      <mat-grid-tile >
+        <span class="material-icons" routerLink="/account/recovery" routerLinkActive="active-a"> send</span> &nbsp; Recuperar Credenciales
       </mat-grid-tile>
     </mat-grid-list>
 
@@ -29,6 +29,9 @@
       </div>
 
       <div class="input-style">
+        <small *ngIf="emailNotFound" style="color:red">
+          El correo electronico no existe.
+        </small>
         <input type="email" placeholder="Correo electronico" [class.no-valido]="emailNoValido" formControlName="email"
           [class.valido]="!emailNoValido">
         <small *ngIf="emailNoValido">
@@ -36,7 +39,7 @@
         </small>
       </div>
 
-      <div class="input-style" *ngIf="accion !== 'recovery' || 'login'">
+      <div class="input-style" *ngIf="accion !== 'recovery'">
         <input type="password" placeholder="Contraseña" [class.no-valido]="passwordNoValido" formControlName="password"
           [class.valido]="!passwordNoValido">
         <small *ngIf="passwordNoValido">
@@ -75,7 +78,7 @@
         </button>
       </div>
 
-      <div class="box-login-rrss">
+      <div class="box-login-rrss" *ngIf="accion !== 'recovery'">
         <p><span>Tambien puedes iniciar con tus redes</span></p>
         <div class="box-login-rrss_position">
           <div>

@@ -92,6 +92,12 @@ export class FormularioAutenticacionComponent implements OnInit {
     const pass2 = this.form.get('passwordConfirm').value;
     return pass1 === pass2 ? false : true;
   }
+
+  get emailNotFound() {
+    return this.errores[0]==="EMAIL_NOT_FOUND";
+  }
+
+
   obtenerMensajeErrorEmail() {
     var campo = this.form.get('email');
     if (campo.hasError('required')) {
