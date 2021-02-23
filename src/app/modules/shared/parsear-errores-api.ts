@@ -6,12 +6,10 @@ export function parsearErroresAPI(response: any): string[] {
   try {
     const resultado: string[] = [];
 
-    if (response.error) {
-      if (typeof response.error === 'string') {
-        resultado.push(response.error);
-      } else if (typeof response.error.error.message === 'string' ){
-        resultado.push(response.error.error.message)
-      }
+    if (response.code) {
+      if (typeof response.code === 'string') {
+        resultado.push(response.code);
+      } 
     } else if (typeof response === 'string') {
       resultado.push(response);
     }

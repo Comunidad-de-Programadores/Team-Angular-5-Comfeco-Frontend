@@ -1,0 +1,67 @@
+@import "src/styles.scss";
+
+body{
+	background-color:#E6E6E6;
+}
+h2.success{
+	font-size:22px;
+	color:	rgb(211, 72, 160);
+	padding:0px;
+	margin-bottom:5px;
+	margin-top: 15px;
+}
+h2.error{
+	font-size:22px;
+	color:#DD332E;
+	padding:0px;
+	margin-bottom:5px;
+	margin-top:15px;
+}
+p{
+	font-size:14px;
+	color:#666;
+	padding:0px;
+	margin:0px;line-height:16px;
+}
+.clear{clear:both;}
+.container{
+	width:629px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:10%;
+}
+.message-box{
+    background-color: #e7e4e4;
+	padding-top:40px;
+	padding-bottom:20px;
+	padding-left:20px;
+	padding-right:20px;
+	border-bottom-left-radius:7px;
+	border-bottom-right-radius:7px;
+	-moz-border-radius-bottomleft:7px;
+	-moz-border-radius-bottomright:7px;
+}
+.message-shadow{
+	background-color: rgb(202, 54, 153);
+	height:24px;
+	clear:both;
+}
+.message-icon{
+	float:left;
+	width:80px;
+	display:inline;
+	margin-right:25px;
+}
+.message-content{
+	float:left;
+	display:inline;
+	width:484px;
+}
+.logo{
+	width:131px;margin-left:auto;
+	margin-right:auto;
+	padding-bottom:35px;
+}
+.green{
+	color: #d39c00;
+}

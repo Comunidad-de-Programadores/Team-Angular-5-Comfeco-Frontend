@@ -9,11 +9,12 @@ import { SideCommunitiesComponent } from './communities/side-communities/side-co
 import { RouterModule } from '@angular/router';
 import { SideWorkshopComponent } from './components/workshops/side-workshop/side-workshop.component';
 import { FormsModule } from '@angular/forms';
+import { SuccessTemplateComponent } from './success-template/success-template.component';
 
 
 
 @NgModule({
-  declarations: [MostrarErroresComponent, CarouselComponent, LeaderCardComponent, SideCommunitiesComponent, SideWorkshopComponent],
+  declarations: [MostrarErroresComponent, CarouselComponent, LeaderCardComponent, SideCommunitiesComponent, SideWorkshopComponent, SuccessTemplateComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     LeaderCardComponent,
     SideCommunitiesComponent,
     SideWorkshopComponent,
+    SuccessTemplateComponent,
   ],
 })
 export class SharedModule { }

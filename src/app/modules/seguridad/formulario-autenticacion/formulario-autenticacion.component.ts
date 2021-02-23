@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { RegisterUser } from 'src/app/core/models/user_register';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-formulario-autenticacion',
@@ -9,7 +10,7 @@ import { RegisterUser } from 'src/app/core/models/user_register';
   styleUrls: ['./formulario-autenticacion.component.scss'],
 })
 export class FormularioAutenticacionComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, public _auth: AuthService) {}
   form: FormGroup;
 
   @Input()
@@ -18,6 +19,7 @@ export class FormularioAutenticacionComponent implements OnInit {
   accion: string;
   @Output()
   onSubmit: EventEmitter<RegisterUser> = new EventEmitter<RegisterUser>();
+  check:boolean=true;
 
   ngOnInit(): void {
     this.creacionDeFormulario();
@@ -26,10 +28,10 @@ export class FormularioAutenticacionComponent implements OnInit {
   }
   cargardata(){
     this.form.reset({
-      username:'geferasd',
-      email:'gegfe@asdas.com',
-      password: 'geferman',
-      passwordConfirm: 'geferman'
+      username:'iamrivard',
+      email:'erick.sgr10@gmail.com',
+      password: 'iamrivard',
+      passwordConfirm: 'iamrivard'
     })
   }
   crearListeners() {
@@ -92,6 +94,22 @@ export class FormularioAutenticacionComponent implements OnInit {
     const pass2 = this.form.get('passwordConfirm').value;
     return pass1 === pass2 ? false : true;
   }
+
+  get emailExits() {
+    return this._auth.errores[0]==="auth/email-already-in-use";
+  }
+  get authAccountExistsWithDifferentCredential(){
+    return this._auth.errores[0]==="auth/account-exists-with-different-credential";
+  }
+  get creditialIncorrect(){
+    return this._auth.errores[0]==="auth/wrong-password" || this._auth.errores[0]==="auth/user-not-found";
+  }
+  
+
+  get emailNotFound() {
+    return this.errores[0]==="EMAIL_NOT_FOUND";
+  }
+
   obtenerMensajeErrorEmail() {
     var campo = this.form.get('email');
     if (campo.hasError('required')) {
@@ -106,7 +124,7 @@ export class FormularioAutenticacionComponent implements OnInit {
   }
   checked(event: boolean) {
     this.form.get('check').setValue(event);
-    console.log(event);
+    localStorage.setItem("keep_session", event ? "1" : "0")
   }
   matchPasswords(pass1: string, pass2: string): (formGroup: FormGroup) => void {
     return (formGroup: FormGroup) => {

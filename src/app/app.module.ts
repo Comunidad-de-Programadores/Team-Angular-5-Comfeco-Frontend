@@ -17,7 +17,6 @@ import { SharedModule } from './modules/shared/shared.module';
 import { SeguridadModule } from './modules/seguridad/seguridad.module';
 import { TestComponent } from './components/test/test.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
