@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { InputItem } from 'src/app/core/models/carousel/Inputs';
 import { LeadsService } from 'src/app/core/services/fake/leads.service';
+import { CommunitiesService } from 'src/app/core/services/fake/communities.service';
+import { Community } from 'src/app/core/models/communities/communities';
 
 @Component({
   selector: 'app-test',
@@ -12,8 +14,9 @@ export class TestComponent implements OnInit {
 
   leads: InputItem[]=[];
   sponsors: InputItem[]=[];
+  communities: Community[]=[];
 
-  constructor(private ls: LeadsService) { }
+  constructor(private ls: LeadsService, private communitiesService: CommunitiesService) { }
 
   ngOnInit(): void {
     this.ls.getSponsors().subscribe(
@@ -21,6 +24,9 @@ export class TestComponent implements OnInit {
     );
     this.ls.getTeamLeaders().subscribe(
       result=> this.leads = result
+    );
+    this.communitiesService.getCommunities().subscribe(
+      result=>this.communities = result,
     );
   }
 
