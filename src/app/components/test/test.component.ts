@@ -14,9 +14,8 @@ export class TestComponent implements OnInit {
 
   leads: InputItem[]=[];
   sponsors: InputItem[]=[];
-  communities: Community[]=[];
 
-  constructor(private ls: LeadsService, private communitiesService: CommunitiesService) { }
+  constructor(private ls: LeadsService) { }
 
   ngOnInit(): void {
     this.ls.getSponsors().subscribe(
@@ -25,9 +24,7 @@ export class TestComponent implements OnInit {
     this.ls.getTeamLeaders().subscribe(
       result=> this.leads = result
     );
-    this.communitiesService.getCommunities().subscribe(
-      result=>this.communities = result,
-    );
+
   }
 
 }
