@@ -105,6 +105,10 @@ export class FormularioAutenticacionComponent implements OnInit {
   }
   
 
+  get emailNotFound() {
+    return this.errores[0]==="EMAIL_NOT_FOUND";
+  }
+
   obtenerMensajeErrorEmail() {
     var campo = this.form.get('email');
     if (campo.hasError('required')) {
