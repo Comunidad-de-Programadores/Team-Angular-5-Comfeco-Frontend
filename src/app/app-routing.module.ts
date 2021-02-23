@@ -20,7 +20,7 @@ const routes: Routes = [
     // canActivate: [AuthGuard]
    // TODO implementar seguridad
   },
-  {path:'test',component:TestComponent},
+  {path: 'test', component: TestComponent},
   {path:'account', loadChildren: ()=> import('./modules/login/login.module').then(m=> m.LoginModule)},
 
   { path: '**', redirectTo: 'app' },

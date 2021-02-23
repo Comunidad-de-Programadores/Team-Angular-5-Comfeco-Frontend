@@ -1,4 +1,25 @@
 <p>test works!</p>
+<div class="carousel">
+  <app-carousel [itemsIn]="leads"
+  mode="CARD"
+  [autoPlay]=true
+  [autoPlayTime]=6000
+  itemsPerPage=3
+  >
+</app-carousel>
+</div>
+
+<div class="carousel-icon">
+  <app-carousel [itemsIn]="sponsors"
+  mode="ICON"
+  itemsPerPage=6
+  >
+  </app-carousel>
+</div>
+<!--
+<div class="card">
+  <app-leader-card></app-leader-card>
+</div> -->
 
 <div class="workshops">
   <app-side-workshop></app-side-workshop>
