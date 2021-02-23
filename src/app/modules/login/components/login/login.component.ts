@@ -23,23 +23,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { }
 
 
-  public login(credencialesUsuario: LoginUser ): void {
-  
-    this.auth.login(credencialesUsuario).subscribe(
-      (respuesta) => {
-        console.log(respuesta);
-        this.router.navigateByUrl('/home');
-      },
-      (errores) => {
-        this.errores = parsearErroresAPI(errores);
-        if (
-          this.errores[0] === 'EMAIL_NOT_FOUND' ||
-          this.errores[0] === 'INVALID_PASSWORD'
-        ) {
-          this.errores[0] = 'Correo o contraseña incorrecta';
-        }
-      }
-    );
-
+  public login(user: LoginUser ): void {
+    this.auth.loginWithEmail(user.email, user.password);
   }
 }

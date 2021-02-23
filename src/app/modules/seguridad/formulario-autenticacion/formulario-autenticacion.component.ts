@@ -27,10 +27,10 @@ export class FormularioAutenticacionComponent implements OnInit {
   }
   cargardata(){
     this.form.reset({
-      username:'geferasd',
-      email:'gegfe@asdas.com',
-      password: 'geferman',
-      passwordConfirm: 'geferman'
+      username:'iamrivard',
+      email:'erick.sgr10@gmail.com',
+      password: 'iamrivard',
+      passwordConfirm: 'iamrivard'
     })
   }
   crearListeners() {
@@ -95,8 +95,16 @@ export class FormularioAutenticacionComponent implements OnInit {
   }
 
   get emailExits() {
-    return this.errores[0]==="EMAIL_EXISTS";
+    return this._auth.errores[0]==="auth/email-already-in-use";
   }
+  get authAccountExistsWithDifferentCredential(){
+    return this._auth.errores[0]==="auth/account-exists-with-different-credential";
+  }
+  get creditialIncorrect(){
+    return this._auth.errores[0]==="auth/wrong-password" || this._auth.errores[0]==="auth/user-not-found";
+  }
+  
+
   obtenerMensajeErrorEmail() {
     var campo = this.form.get('email');
     if (campo.hasError('required')) {

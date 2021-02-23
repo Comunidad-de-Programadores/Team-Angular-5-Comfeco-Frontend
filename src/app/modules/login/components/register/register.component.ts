@@ -30,16 +30,7 @@ export class RegisterComponent implements OnInit {
 
   register(usuario: RegisterUser) {
     
-    this._auth.register(usuario).subscribe(
-      (response) => {
-        this._auth.guardarToken(response['idToken']);
-        this._notification.openSnackBar("Te haz registrado correctamente", "",'',true)
-      },
-      (error) => {
-        this._notification.openSnackBar("Usuario Registrado", "Error")
-        this.errores = parsearErroresAPI(error);
-      }
-    )
+    this._auth.registerWithEmail(usuario.email,usuario.password);
   }
 
 

@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { parsearErroresAPI } from '../../shared/parsear-errores-api';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,8 +23,9 @@ export class AuthService {
   private urlRegister = environment.urlRegister;
   private urlForgot = environment.urlForgot;
   private userToken: string;
-  public errorAuthFB: boolean = false;
   user$: Observable<UserFirebase>;
+  errores: string[] = [];
+
   constructor(
     private http: HttpClient,
     private auth: AngularFireAuth,
@@ -112,6 +114,28 @@ export class AuthService {
     }
   }
 
+  async registerWithEmail(email: string, password: string) {
+    await this.auth.createUserWithEmailAndPassword(email, password).then(user => {
+      this._notification.openSnackBar("Usuario Registrado", "", "", true)
+      return this.updateUserData(user.user);
+    }).catch(error => {
+      this._notification.openSnackBar(`Tu correo ya se encuentra registrado.`, "Error",)
+      this.errores = parsearErroresAPI(error);
+    }
+    )
+  }
+
+  async loginWithEmail(email: string, password: string) {
+    await this.auth.signInWithEmailAndPassword(email, password).then(user => {
+      this._notification.openSnackBar("Session Iniciada", "", "", true)
+      return this.updateUserData(user.user);
+    }).catch(error => {
+      this._notification.openSnackBar(`Credenciales incorrectas!.`, "Error",)
+      this.errores = parsearErroresAPI(error);
+    }
+    )
+  }
+
   async registerWithGoogle() {
     const credential = await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     this._notification.openSnackBar("Session Iniciada", "", "", true)
@@ -123,8 +147,8 @@ export class AuthService {
       this._notification.openSnackBar("Session Iniciada", "", "", true)
       return this.updateUserData(user);
     }).catch(error => {
-      this.errorAuthFB = true;
-      this._notification.openSnackBar(`Tu correo ${error.email} ya se encuentra registrado.`, "Error", )
+      this._notification.openSnackBar(`Tu correo ${error.email} ya se encuentra registrado.`, "Error",)
+      this.errores = parsearErroresAPI(error);
     }
     )
 
@@ -133,20 +157,26 @@ export class AuthService {
   private updateUserData(user) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<UserFirebase> = this.afs.doc(`users/${user.uid}`);
-
-    const data = {
+    const PHOTO_URL_DEFAULT = "https://www.pngfind.com/pngs/m/470-4703547_icon-user-icon-hd-png-download.png";
+    let data = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL
     }
+    if (user.photoURL == null) {
+      data.photoURL = PHOTO_URL_DEFAULT;
+    }
+
 
     return userRef.set(data, { merge: true })
 
   }
   async signOut() {
     await this.auth.signOut();
-    this._notification.openSnackBar("Session Finalizanda", "Ingresa Nuevamente", "/account/login")
+    this._notification.openSnackBar("Session Finalizanda", "Ingresa Nuevamente", "/account/login");
+    this.errores = [];
+
   }
 
   public restablecerPassword(email: string): Observable<Object> {
