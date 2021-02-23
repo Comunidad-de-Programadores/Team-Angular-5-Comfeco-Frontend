@@ -15,6 +15,7 @@ import { PoliticsComponent } from './modules/login/politics/components/politics/
 import { TermsServiceComponent } from './modules/login/politics/components/terms-service/terms-service.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { SeguridadModule } from './modules/seguridad/seguridad.module';
+import { TestComponent } from './components/test/test.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { SeguridadModule } from './modules/seguridad/seguridad.module';
     AppComponent,
     HomeComponent,
     PoliticsComponent,
-    TermsServiceComponent
+    TermsServiceComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
