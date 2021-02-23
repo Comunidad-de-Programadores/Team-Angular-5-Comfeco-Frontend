@@ -54,7 +54,7 @@
         <section class="box-section-check" *ngIf="accion =='login'">
           <a routerLink="/account/recovery"><small><span class="recovery-text"> ¿Olvidaste tu
                 contraseña?</span></small></a>
-          <mat-checkbox (change)="checked($event.checked)" class="box-margin-check">Mantenerme conectado</mat-checkbox>
+          <mat-checkbox (change)="checked($event.checked)" class="box-margin-check" [checked]="check">Mantenerme conectado</mat-checkbox>
         </section>
 
       </div>

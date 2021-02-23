@@ -19,6 +19,7 @@ export class FormularioAutenticacionComponent implements OnInit {
   accion: string;
   @Output()
   onSubmit: EventEmitter<RegisterUser> = new EventEmitter<RegisterUser>();
+  check:boolean=true;
 
   ngOnInit(): void {
     this.creacionDeFormulario();
@@ -123,7 +124,7 @@ export class FormularioAutenticacionComponent implements OnInit {
   }
   checked(event: boolean) {
     this.form.get('check').setValue(event);
-    console.log(event);
+    localStorage.setItem("keep_session", event ? "1" : "0")
   }
   matchPasswords(pass1: string, pass2: string): (formGroup: FormGroup) => void {
     return (formGroup: FormGroup) => {
