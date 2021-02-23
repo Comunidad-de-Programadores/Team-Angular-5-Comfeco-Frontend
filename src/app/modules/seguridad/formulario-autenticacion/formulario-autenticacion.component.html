@@ -5,7 +5,7 @@
     <mat-grid-list cols="2" rowHeight="3:1" class="header-form center" *ngIf="accion !== 'recovery'">
       <mat-grid-tile routerLinkActive="active" color="warn">
         <span class="material-icons">login</span> &nbsp;
-        <a routerLink="/account/login" routerLinkActive="active-a" ><span class="text-yellow">Inicia sesión</span>  </a>
+        <a routerLink="/account/login" routerLinkActive="active-a"><span class="text-yellow">Inicia sesión</span> </a>
       </mat-grid-tile>
       <mat-grid-tile routerLinkActive="active">
         <span class="material-icons">app_registration</span> &nbsp;
@@ -19,7 +19,11 @@
     </mat-grid-list>
 
     <form (submit)="onSubmit.emit(form.value)" [formGroup]="form">
-
+      <div class="box-flex">
+        <ng-container *ngIf="creditialIncorrect">
+          Credenciales incorrectas.
+        </ng-container>
+      </div>
       <div class="input-style" *ngIf="accion === 'register'">
         <input type="text" placeholder="Nick" [class.no-valido]="usernameNoValido" [class.valido]="!usernameNoValido"
           formControlName="username">
@@ -27,7 +31,6 @@
           Tu nick debe poseer al menos 5 letras.
         </small>
       </div>
-
       <div class="input-style">
         <small *ngIf="emailNotFound" style="color:red">
           El correo electronico no existe.
@@ -36,6 +39,9 @@
           [class.valido]="!emailNoValido">
         <small *ngIf="emailNoValido">
           Tu correo electronico no es valido.
+        </small>
+        <small *ngIf="emailExits" style="color: red;">
+          Correo electronico ya ha sido registrado.
         </small>
       </div>
 
@@ -46,8 +52,9 @@
           Tu contraseña debe tener al menos 8 caracteres.
         </small>
         <section class="box-section-check" *ngIf="accion =='login'">
-          <a routerLink="/account/recovery"><small><span class="recovery-text"> ¿Olvidaste tu contraseña?</span></small></a>
-          <mat-checkbox  (change)="checked($event.checked)" class="box-margin-check">Mantenerme conectado</mat-checkbox>
+          <a routerLink="/account/recovery"><small><span class="recovery-text"> ¿Olvidaste tu
+                contraseña?</span></small></a>
+          <mat-checkbox (change)="checked($event.checked)" class="box-margin-check">Mantenerme conectado</mat-checkbox>
         </section>
 
       </div>
@@ -63,7 +70,12 @@
           Las contraseñas deben ser iguales.
         </small>
       </div>
-
+      <div class="box-flex">
+        <ng-container *ngIf="authAccountExistsWithDifferentCredential">
+          Ya tienes una cuenta vinculada con el correo. <br>
+          Intenta acceder con un proveedor diferente.
+        </ng-container>
+      </div>
       <div class="box-flex">
         <button mat-raised-button color="primary" class="button">
           <ng-container *ngIf="accion === 'login'">
@@ -82,20 +94,22 @@
         <p><span>Tambien puedes iniciar con tus redes</span></p>
         <div class="box-login-rrss_position">
           <div>
-            <button mat-raised-button color="primary">Ingresar con facebook</button>
+            <button mat-raised-button color="primary" (click)="_auth.registerWithFacebook()" type="button">Ingresar con
+              facebook</button>
           </div>
           <div class="espacio"></div>
           <div>
 
-            <button mat-raised-button color="primary">Ingresar con Google</button>
+            <button mat-raised-button color="primary" (click)="_auth.registerWithGoogle()" type="button">Ingresar con
+              Google</button>
           </div>
         </div>
       </div>
       <div class="input-style" style="text-transform: initial; text-align: justify;" *ngIf="accion === 'register'">
         <p>Al registrarte, estas aceptando los <strong>Términos y condiciones </strong>, y la <strong>Política
-                de privacidad y protección</strong>
-            de datos de COMFECO.</p>
-    </div>
+            de privacidad y protección</strong>
+          de datos de COMFECO.</p>
+      </div>
     </form>
 
   </div>

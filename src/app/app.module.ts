@@ -16,7 +16,6 @@ import { TermsServiceComponent } from './modules/login/politics/components/terms
 import { SharedModule } from './modules/shared/shared.module';
 import { SeguridadModule } from './modules/seguridad/seguridad.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
