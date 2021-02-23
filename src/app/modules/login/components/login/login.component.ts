@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 
 
 // import { credencialesUsuario } from 'src/app/core/models/user';
-import { LoginUser } from 'src/app/core/models/user_login';
-import { AuthService } from 'src/app/modules/seguridad/services/auth.service';
+import { LoginUser } from 'src/app/core/models/auth/user_login';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { parsearErroresAPI } from 'src/app/modules/shared/parsear-errores-api';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
 

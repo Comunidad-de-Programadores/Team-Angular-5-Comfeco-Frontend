@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup} from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterUser } from 'src/app/core/models/user_register';
+import { RegisterUser } from 'src/app/core/models/auth/user_register';
 import { NotificationService } from 'src/app/core/services/notification.service';
-import { AuthService } from 'src/app/modules/seguridad/services/auth.service';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { parsearErroresAPI } from 'src/app/modules/shared/parsear-errores-api';
 
 @Component({
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _auth: AuthService,
     private _router: Router,
-    private _notification: NotificationService) { 
+    private _notification: NotificationService) {
   }
 
 
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(usuario: RegisterUser) {
-    
+
     this._auth.registerWithEmail(usuario.email,usuario.password);
   }
 

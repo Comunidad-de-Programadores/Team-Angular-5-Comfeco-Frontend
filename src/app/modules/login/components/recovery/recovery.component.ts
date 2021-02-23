@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterUser } from 'src/app/core/models/user_register';
-import { AuthService } from 'src/app/modules/seguridad/services/auth.service';
+import { RegisterUser } from 'src/app/core/models/auth/user_register';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { parsearErroresAPI } from 'src/app/modules/shared/parsear-errores-api';
 
 @Component({
   selector: 'app-recovery',
   templateUrl: './recovery.component.html',
-  styleUrls: ['./recovery.component.css']
+  styleUrls: ['./recovery.component.scss']
 })
 export class RecoveryComponent implements OnInit {
 
