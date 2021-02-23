@@ -1,0 +1,42 @@
+<mat-card>
+  <div class="header-card">
+    <h2>Talleres</h2>
+    <span class="divider"></span>
+    <a class="more-link" [routerLink]="['/home/talleres']" >Ver más</a>
+  </div>
+  <div class="filter">
+    <mat-form-field appearance="fill">
+      <mat-label>Filtrar por Area</mat-label>
+      <mat-select name="Area" (selectionChange)="onSelectArea($event)" >
+        <mat-option *ngFor="let area of areas" [value]="area.id">
+          {{area.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-card-content>
+    <div class="content-title">
+      <span class="autor-space"></span> Hoy
+    </div>
+    <div class="items-container">
+      <ng-container *ngFor="let workshop of displayWorkshops">
+        <div class="content-item">
+          <div class="status-item">
+            <mat-icon>{{workshopStatus(workshop.date)}}</mat-icon>
+          </div>
+          <div class="description-item">
+            <div class="title-item">{{workshop.name}}</div>
+            <div class="subtitle-item">{{workshop.date | date:'hh:mm a'}}</div>
+            <div class="autor-item"> <b>By</b> <span class="autor-space"></span><a href="http://twitter.com" target="_blank" >{{workshop.by}}</a></div>
+          </div>
+        </div>
+        <hr>
+      </ng-container>
+    </div>
+
+
+
+  </mat-card-content>
+
+</mat-card>
+
