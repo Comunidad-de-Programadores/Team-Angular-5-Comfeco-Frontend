@@ -130,6 +130,7 @@ export class AuthService {
       this._notification.openSnackBar("Session Iniciada", "", "", true)
       return this.updateUserData(user.user);
     }).catch(error => {
+      console.log(error)
       this._notification.openSnackBar(`Credenciales incorrectas!.`, "Error",)
       this.errores = parsearErroresAPI(error);
     }
@@ -142,10 +143,9 @@ export class AuthService {
     return this.updateUserData(credential.user);
   }
   async registerWithFacebook() {
-
     await this.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(user => {
       this._notification.openSnackBar("Session Iniciada", "", "", true)
-      return this.updateUserData(user);
+      return this.updateUserData(user.user);
     }).catch(error => {
       this._notification.openSnackBar(`Tu correo ${error.email} ya se encuentra registrado.`, "Error",)
       this.errores = parsearErroresAPI(error);
