@@ -1,22 +1,22 @@
-<mat-card>
-  <div class="header-card">
+<div class="community-container">
+  <div class="header-community">
     <h2>Comunidades</h2>
-    <span class="divider"></span>
+    <!-- <span class="divider"></span> -->
     <a class="more-link" [routerLink]="['/comunidades']" >Ver más</a>
   </div>
 
-  <mat-card-content>
+  <div class="community-content">
 
-    <ng-container *ngFor="let community of communities">
+    <ng-container *ngFor="let community of communities, let i = index">
       <div class="content-item">
         <img [src]="community.img? community.img : 'assets/Logos-Comfeco/Logo-con-fondo.png'"  class="image-item">
         <div class="title-item"><h3>{{community.name}}</h3></div>
         <span class="divider"></span>
         <a class="join-link" [href]="community.url? community.url :'http://google.com'" target="_blank" rel="noopener noreferrer">Unirme</a>
       </div>
-      <hr>
+      <hr *ngIf="!(i === communities.length-1)">
     </ng-container>
 
-  </mat-card-content>
+  </div>
 
-</mat-card>
+</div>

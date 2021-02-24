@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { EventEmitter } from '@angular/core';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, OnChanges } from '@angular/core';
 import { interval, Observable } from 'rxjs';
 import { CarouselMode, InputItem } from 'src/app/core/models/carousel/Inputs';
 
@@ -88,9 +88,18 @@ export class CarouselComponent implements OnInit {
     } else {
       this.showItemsPerPage = false;
     }
-    console.log('mostrar elementos por pagina: ', this.showItemsPerPage)
+    // console.log('mostrar elementos por pagina: ', this.showItemsPerPage)
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.setInputElements();
+    // console.log({changes});
+    if(this.currentPage>this.items.length-1){
+      this.currentPage=this.items.length-1;
+    }
+
+
+  }
   previousPage() {
     this.animation = 'slideOutIn';
     const previous = --this.currentPage;
@@ -109,6 +118,7 @@ export class CarouselComponent implements OnInit {
   }
 
   setInputElements(){
+    this.items = [];
     if(this.itemsPerPage > 0){
       let count = 0;
       let arr = [];

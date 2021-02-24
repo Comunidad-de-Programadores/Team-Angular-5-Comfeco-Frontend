@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { InputItem } from 'src/app/core/models/carousel/Inputs';
+import { ScreenMediaSizes } from 'src/app/core/models/utils/screen-media-size';
+import { LeadsService } from 'src/app/core/services/fake/leads.service';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +10,74 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  leads: InputItem[]=[];
+  sponsors: InputItem[]=[];
+
+  itemsXPageLeads=4;
+  itemsXPageSponsors=6;
+
+
+  screenMediaSize:ScreenMediaSizes={lg:1600, xlg:1920};
+  isMobile = false;
+
+  constructor(private ls: LeadsService) { }
 
   ngOnInit(): void {
+    this.ls.getSponsors().subscribe(
+      result=> this.sponsors = result,
+      err=>{} // TODO: notificationService
+    );
+    this.ls.getTeamLeaders().subscribe(
+      result=> this.leads = result,
+      err=> {} // TODO: notificationService
+    );
+
+    this.onResize(window.innerWidth);
   }
 
-  refresh(){
-    window.location.reload();
+  public onResize(width){
+    let size = width;
+    if(size> this.screenMediaSize.lg){
+      this.itemsXPageLeads = 4;
+      this.itemsXPageSponsors = 6;
+      this.isMobile = false;
+    }
+
+    if(size < this.screenMediaSize.lg ){
+      this.itemsXPageLeads=3;
+      this.itemsXPageSponsors=4;
+      this.isMobile = false;
+    }
+
+
+    if(size> this.screenMediaSize.xlg){
+      this.itemsXPageLeads = 5;
+      this.isMobile = false
+    }
+
+    if(size < 1415){
+      this.itemsXPageLeads=2;
+      this.itemsXPageSponsors = 3;
+      this.isMobile = false;
+    }
+
+    if(size > 1200){
+      this.isMobile = false;
+    }
+
+    if(size < 1200){
+      this.itemsXPageLeads=1;
+      this.itemsXPageSponsors= 2;
+      this.isMobile = true;
+    }
+
+    if(size < 1080){
+      this.itemsXPageSponsors = 1;
+      this.isMobile = true;
+    }
+    console.log('tamaño de la pantalla', width)
+
   }
+
+
 }

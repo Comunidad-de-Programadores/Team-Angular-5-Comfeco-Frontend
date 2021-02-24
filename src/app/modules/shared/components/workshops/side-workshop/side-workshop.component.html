@@ -1,7 +1,7 @@
-<mat-card>
+<div class="workshops-container">
   <div class="header-card">
     <h2>Talleres</h2>
-    <span class="divider"></span>
+    <!-- <span class="divider"></span> -->
     <a class="more-link" [routerLink]="['/talleres']" >Ver más</a>
   </div>
   <div class="filter">
@@ -14,12 +14,12 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <mat-card-content>
+  <div class="workshops-content">
     <div class="content-title">
       <span class="autor-space"></span> Hoy
     </div>
     <div class="items-container">
-      <ng-container *ngFor="let workshop of displayWorkshops">
+      <ng-container *ngFor="let workshop of displayWorkshops, let i = index">
         <div class="content-item">
           <div class="status-item">
             <mat-icon>{{workshopStatus(workshop.date)}}</mat-icon>
@@ -30,13 +30,13 @@
             <div class="autor-item"> <b>By</b> <span class="autor-space"></span><a href="http://twitter.com" target="_blank" >{{workshop.by}}</a></div>
           </div>
         </div>
-        <hr>
+        <hr *ngIf="!(i === displayWorkshops.length-1)">
       </ng-container>
     </div>
 
 
 
-  </mat-card-content>
+  </div>
 
-</mat-card>
+</div>
 
