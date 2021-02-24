@@ -32,7 +32,7 @@ export class AuthService {
     private _notification: NotificationService,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router) {
+  ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         // Logged in
@@ -174,9 +174,8 @@ export class AuthService {
   }
   async signOut() {
     await this.auth.signOut();
-    this._notification.openSnackBar("Session Finalizanda", "Ingresa Nuevamente", "/account/login");
+    this._notification.openSnackBar("Session Finalizanda", "Ingresa Nuevamente", "/account/login",true);
     this.errores = [];
-
   }
 
   public restablecerPassword(email: string): Observable<Object> {
