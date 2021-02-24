@@ -88,12 +88,16 @@ export class CarouselComponent implements OnInit {
     } else {
       this.showItemsPerPage = false;
     }
-    console.log('mostrar elementos por pagina: ', this.showItemsPerPage)
+    // console.log('mostrar elementos por pagina: ', this.showItemsPerPage)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.setInputElements();
-    console.log({changes});
+    // console.log({changes});
+    if(this.currentPage>this.items.length-1){
+      this.currentPage=this.items.length-1;
+    }
+
 
   }
   previousPage() {
