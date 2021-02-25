@@ -10,11 +10,12 @@ import { RouterModule } from '@angular/router';
 import { SideWorkshopComponent } from './components/workshops/side-workshop/side-workshop.component';
 import { FormsModule } from '@angular/forms';
 import { SuccessTemplateComponent } from './components/success-template/success-template.component';
+import { CountdownTimerComponent } from './components/countdown-timer/countdown-timer.component';
 
 
 
 @NgModule({
-  declarations: [MostrarErroresComponent, CarouselComponent, LeaderCardComponent, SideCommunitiesComponent, SideWorkshopComponent, SuccessTemplateComponent],
+  declarations: [MostrarErroresComponent, CarouselComponent, LeaderCardComponent, SideCommunitiesComponent, SideWorkshopComponent, SuccessTemplateComponent, CountdownTimerComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -29,6 +30,7 @@ import { SuccessTemplateComponent } from './components/success-template/success-
     SideCommunitiesComponent,
     SideWorkshopComponent,
     SuccessTemplateComponent,
+    CountdownTimerComponent
   ],
 })
 export class SharedModule { }
