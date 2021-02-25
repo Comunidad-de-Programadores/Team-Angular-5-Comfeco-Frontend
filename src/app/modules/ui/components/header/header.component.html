@@ -3,6 +3,24 @@
   <div class="box-logo" routerLink="/">
   </div>
 
+  <div class="wrapper">
+    <div class="menu">
+      <ul>
+        <li>
+          <a routerLinkActive="active" routerLink="/app">Inicio</a>
+        </li>
+        <li>
+          <a routerLinkActive="active" routerLink="/comunidades">Comunidades</a>
+        </li>
+        <li>
+          <a routerLinkActive="active" routerLink="/talleres">Talleres</a>
+        </li>
+        <li>
+          <a routerLinkActive="active" routerLink="/creadores">Creadores</a>
+        </li>
+      </ul>
+    </div>
+  </div>
   <div class="espacio"></div>
 
   <div *ngIf="auth.user$ | async; then authenticated else guest">
@@ -28,13 +46,29 @@
   <!-- User logged in -->
   <ng-template #authenticated>
     <div *ngIf="auth.user$ | async as user">
-      <button mat-raised-button color="primary" class="button" (click)="auth.signOut()">
 
-        <ng-container>
-          Logout &nbsp;<img [src]="user.photoURL" width="25px">
-
-        </ng-container>
+      <button mat-button [matMenuTriggerFor]="menu"><img [src]=user.photoURL width="25px"> {{user.displayName}}
+        <span class="material-icons">
+          keyboard_arrow_down
+        </span>
       </button>
+      <mat-menu #menu="matMenu">
+        <mat-list role="list">
+          <mat-list-item role="listitem" class="list-menu">
+            <span class="material-icons">
+              build_circle
+            </span>&nbsp;Configuración
+          </mat-list-item>
+
+          <mat-list-item role="listitem" (click)="auth.signOut()" class="list-menu">
+            <span class="material-icons">
+              logout
+            </span>
+            &nbsp;Salir
+          </mat-list-item>
+        </mat-list>
+      </mat-menu>
+
     </div>
   </ng-template>
 
