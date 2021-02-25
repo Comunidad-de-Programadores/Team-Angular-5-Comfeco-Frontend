@@ -29,14 +29,11 @@
 
   <!-- User NOT logged in -->
   <ng-template #guest>
-    <button mat-raised-button color="primary" class="button" routerLink="/account/login">
+    <button mat-raised-button color="secondary" class="button" routerLink="/account/login">
       <ng-container>
-        Login
-      </ng-container>
-    </button>
-    <button mat-raised-button color="primary" class="button" routerLink="/account/register">
-      <ng-container>
-        Register
+        <span class="material-icons">
+          login
+          </span> Login
       </ng-container>
     </button>
 
