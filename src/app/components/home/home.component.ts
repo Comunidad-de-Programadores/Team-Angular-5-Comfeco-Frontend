@@ -67,15 +67,36 @@ export class HomeComponent implements OnInit {
     }
 
     if(size < 1200){
-      this.itemsXPageLeads=1;
-      this.itemsXPageSponsors= 2;
+      this.itemsXPageLeads=3;
+      this.itemsXPageSponsors= 4;
       this.isMobile = true;
     }
 
     if(size < 1080){
+      this.itemsXPageLeads=3;
       this.itemsXPageSponsors = 1;
       this.isMobile = true;
     }
+
+    if(size < 1080){
+      this.itemsXPageLeads=3;
+      this.itemsXPageSponsors = 4;
+      this.isMobile = true;
+    }
+
+    if(size < 800){
+      this.itemsXPageLeads=2;
+      this.itemsXPageSponsors = 3;
+      this.isMobile = true;
+    }
+
+    if(size < 600){
+      this.itemsXPageLeads=1;
+      this.itemsXPageSponsors = 2;
+      this.isMobile = true;
+    }
+
+
     console.log('tamaño de la pantalla', width)
 
   }
