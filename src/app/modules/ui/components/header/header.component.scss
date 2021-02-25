@@ -9,7 +9,7 @@ mat-toolbar {
   height: inherit;
   margin-left: 20px;
   width: 150px;
-  height: 45px;
+  height: 50px;
   background-image: url("/assets/Logos-Comfeco/logo1.png");
   background-repeat: no-repeat;
   background-size: contain;
@@ -31,3 +31,34 @@ mat-toolbar {
 img {
   border-radius: 50%;
 }
+.list-menu:hover{
+  cursor: pointer;
+  background-color: rgb(196, 189, 189);
+}
+.wrapper {
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.menu ul {
+  margin-left: 0;
+  list-style: none;
+  text-align: center;
+}
+.menu ul li {
+  display: inline-block;
+}
+.menu ul li a {
+  display: block;
+  padding: 14px 10px;
+  text-decoration: none;
+}
+.menu ul li a:hover {
+  background: rgb(187, 61, 236);
+  color: #FFF;
+}
+.active{
+  background: rgb(187, 61, 236);
+  color: #FFF;
+}
+

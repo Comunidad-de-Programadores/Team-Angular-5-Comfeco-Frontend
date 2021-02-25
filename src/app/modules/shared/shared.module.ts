@@ -10,12 +10,13 @@ import { RouterModule } from '@angular/router';
 import { SideWorkshopComponent } from './components/workshops/side-workshop/side-workshop.component';
 import { FormsModule } from '@angular/forms';
 import { SuccessTemplateComponent } from './components/success-template/success-template.component';
+import { NotificationComponent } from './notification/notification.component';
 import { CountdownTimerComponent } from './components/countdown-timer/countdown-timer.component';
 
 
 
 @NgModule({
-  declarations: [MostrarErroresComponent, CarouselComponent, LeaderCardComponent, SideCommunitiesComponent, SideWorkshopComponent, SuccessTemplateComponent, CountdownTimerComponent],
+  declarations: [MostrarErroresComponent, CarouselComponent, LeaderCardComponent, SideCommunitiesComponent, SideWorkshopComponent, SuccessTemplateComponent, NotificationComponent, CountdownTimerComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -30,7 +31,8 @@ import { CountdownTimerComponent } from './components/countdown-timer/countdown-
     SideCommunitiesComponent,
     SideWorkshopComponent,
     SuccessTemplateComponent,
-    CountdownTimerComponent
+    NotificationComponent,
+    CountdownTimerComponent,
   ],
 })
 export class SharedModule { }
