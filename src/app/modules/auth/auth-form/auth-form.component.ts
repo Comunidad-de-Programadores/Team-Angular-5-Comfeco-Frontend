@@ -104,10 +104,8 @@ export class AuthFormComponent implements OnInit {
   get creditialIncorrect(){
     return this._auth.errores[0]==="auth/wrong-password" || this._auth.errores[0]==="auth/user-not-found";
   }
-
-
   get emailNotFound() {
-    return this.errores[0]==="EMAIL_NOT_FOUND";
+    return this.errores[0]==="auth/user-not-found";
   }
 
   obtenerMensajeErrorEmail() {

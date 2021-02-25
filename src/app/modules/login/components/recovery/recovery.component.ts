@@ -13,20 +13,17 @@ export class RecoveryComponent implements OnInit {
 
   errores: string[] = [];
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private _router: Router) { }
 
   ngOnInit(): void {
   }
 
   recovery(usuario: RegisterUser) {
 
-    this.auth.restablecerPassword(usuario.email).subscribe(
-      (respuesta) => {
-        this.router.navigateByUrl('/account/recovery/success')
-      },
-      (errores) => {
-        this.errores = parsearErroresAPI(errores);
-      }
-    );
+    this.auth.recoveryPassword(usuario.email).then(response => {
+      this._router.navigateByUrl('/account/recovery/success')
+    }).catch(error => {
+      this.errores = parsearErroresAPI(error);
+    })
   }
 }
