@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   itemsXPageLeads=4;
   itemsXPageSponsors=6;
 
+  nextEventTimeTarget='04/02/2022 12:00 AM';
 
   screenMediaSize:ScreenMediaSizes={lg:1600, xlg:1920};
   isMobile = false;
@@ -66,15 +67,36 @@ export class HomeComponent implements OnInit {
     }
 
     if(size < 1200){
-      this.itemsXPageLeads=1;
-      this.itemsXPageSponsors= 2;
+      this.itemsXPageLeads=3;
+      this.itemsXPageSponsors= 4;
       this.isMobile = true;
     }
 
     if(size < 1080){
+      this.itemsXPageLeads=3;
       this.itemsXPageSponsors = 1;
       this.isMobile = true;
     }
+
+    if(size < 1080){
+      this.itemsXPageLeads=3;
+      this.itemsXPageSponsors = 4;
+      this.isMobile = true;
+    }
+
+    if(size < 800){
+      this.itemsXPageLeads=2;
+      this.itemsXPageSponsors = 3;
+      this.isMobile = true;
+    }
+
+    if(size < 600){
+      this.itemsXPageLeads=1;
+      this.itemsXPageSponsors = 2;
+      this.isMobile = true;
+    }
+
+
     console.log('tamaño de la pantalla', width)
 
   }

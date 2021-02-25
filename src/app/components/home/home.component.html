@@ -4,7 +4,7 @@
   </div>
   <div class="content">
     <div class="content-title">
-      <h1>Bienvenidos a Community Fest And Code</h1>
+      <h1 class="page-title">Bienvenidos a Community Fest And Code</h1>
       <h2>¡Conoce gente, aprende y gana!</h2>
     </div>
     <p style="text-align: center;">
@@ -37,24 +37,7 @@
       <h2>Preparate lo bueno esta por venir</h2>
     </div>
     <div class="countdown-timmer">
-      <div class="time">
-        <div class="format">
-          <div class="number">300</div>
-          <div class="subtitle" >Dias</div>
-        </div>
-        <div class="format">
-          <div class="number">14</div>
-          <div class="subtitle">Horas</div>
-        </div>
-        <div class="format">
-          <div class="number">59</div>
-          <div class="subtitle">Minutos</div>
-        </div>
-        <div class="format">
-          <div class="number">59</div>
-          <div class="subtitle">Segundos</div>
-        </div>
-      </div>
+     <app-countdown-timer [date]="nextEventTimeTarget"></app-countdown-timer>
     </div>
   </div>
   <div class="side-workshops" *ngIf="!isMobile">

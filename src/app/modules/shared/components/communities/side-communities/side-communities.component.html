@@ -10,7 +10,7 @@
     <ng-container *ngFor="let community of communities, let i = index">
       <div class="content-item">
         <img [src]="community.img? community.img : 'assets/Logos-Comfeco/Logo-con-fondo.png'"  class="image-item">
-        <div class="title-item"><h3>{{community.name}}</h3></div>
+        <div class="title-item">{{community.name}}</div>
         <span class="divider"></span>
         <a class="join-link" [href]="community.url? community.url :'http://google.com'" target="_blank" rel="noopener noreferrer">Unirme</a>
       </div>
