@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   itemsXPageLeads=4;
   itemsXPageSponsors=6;
 
+  nextEventTimeTarget='04/02/2022 12:00 AM';
 
   screenMediaSize:ScreenMediaSizes={lg:1600, xlg:1920};
   isMobile = false;
