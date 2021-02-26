@@ -1,7 +1,9 @@
+$text-color: #d42d65;
+$background-color: white;
 footer{
     // border-image-source:
     background-image: linear-gradient(to right, #743ad5, #d53a9d, #FFB703);;
-    height: 100px;
+    height: 70px;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
 }
@@ -10,7 +12,7 @@ footer {
   //  position:fixed;
   //   left:0px;
   //   bottom:0px;
-    height:100px;
+    height:70px;
     width:100%;
     // background:#69156A;
     border-top: 5px solid;
@@ -20,19 +22,19 @@ footer {
 
  mat-grid-tile{
   height: 100px;
-  background-color: white;
-  color: #5B0F5E;
+  background-color: $background-color;
+  color: $text-color;
   cursor: pointer;
   text-align: center;
-  font-size: large;
+  font-size: medium;
   font-weight: 400;
   font-family: 'roboto';
 }
 @media screen and (min-width: 1px) and (max-width: 767px) {
   mat-grid-tile{
     height: 100px;
-    background-color: white;
-    color: #5B0F5E;
+    background-color: $background-color;
+    color: $text-color;
     cursor: pointer;
     text-align: center;
     font-size: small;
@@ -63,6 +65,6 @@ footer {
 }
 a{
    text-decoration: none;
-   color: #5B0F5E;
+   color: $text-color;
 
 }
