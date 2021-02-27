@@ -1,5 +1,21 @@
-.body-container{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+.app-container{
+  display:flex;
+  flex-direction: column;
+  height: 100%;
 }
+
+.content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // border: solid blue;
+  flex-grow: 1;
+}
+
+// .footer{
+//   // border:solid red;
+// }
+
+// .nav{
+//   // border: solid red;
+// }
