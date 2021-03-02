@@ -1,15 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { RegisterUser } from 'src/app/core/models/user_register';
+import { RegisterUser } from 'src/app/core/models/auth/user_register';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-formulario-autenticacion',
-  templateUrl: './formulario-autenticacion.component.html',
-  styleUrls: ['./formulario-autenticacion.component.scss'],
+  selector: 'app-auth-form',
+  templateUrl: './auth-form.component.html',
+  styleUrls: ['./auth-form.component.scss'],
 })
-export class FormularioAutenticacionComponent implements OnInit {
+export class AuthFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, public _auth: AuthService) {}
   form: FormGroup;
 
@@ -104,10 +104,8 @@ export class FormularioAutenticacionComponent implements OnInit {
   get creditialIncorrect(){
     return this._auth.errores[0]==="auth/wrong-password" || this._auth.errores[0]==="auth/user-not-found";
   }
-  
-
   get emailNotFound() {
-    return this.errores[0]==="EMAIL_NOT_FOUND";
+    return this.errores[0]==="auth/user-not-found";
   }
 
   obtenerMensajeErrorEmail() {

@@ -1,21 +1,48 @@
+<div class="container" (window:resize)="onResize($event.target.innerWidth)">
+  <div class="side-communities" *ngIf="!isMobile">
+    <app-side-communities ></app-side-communities>
+  </div>
+  <div class="content">
+    <div class="content-title">
+      <h1 class="page-title">Bienvenidos a Community Fest And Code</h1>
+      <h2>¡Conoce gente, aprende y gana!</h2>
+    </div>
+    <p style="text-align: center;">
+      La próxima edición regresa el 2022, el cual se planea involucrar a todos los
+      programadores independientemente del area de conocimiento que se encuentre,
+      todo con un mismo proposito, aprender en comunidad.
+    </p>
+    <div class="leads-title">
+      <h2>Ellos ya creen en esta iniciativa</h2>
+    </div>
+    <div class="carousel-leads"  >
+      <app-carousel [itemsIn]="leads"
+        mode="CARD"
+        [autoPlay]=true
+        [autoPlayTime]=6000
+        [itemsPerPage]="itemsXPageLeads">
+      </app-carousel>
+    </div>
+    <div class="sponsors-title">
+      <h2>Sponsors</h2>
+    </div>
+    <div class="carousel-sponsors">
+      <app-carousel [itemsIn]="sponsors"
+      mode="ICON"
+      [itemsPerPage]="itemsXPageSponsors"
+      >
+      </app-carousel>
+    </div>
+    <div class="countdow-title">
+      <h2>Preparate lo bueno esta por venir</h2>
+    </div>
+    <div class="countdown-timmer">
+     <app-countdown-timer [date]="nextEventTimeTarget"></app-countdown-timer>
+    </div>
+  </div>
+  <div class="side-workshops" *ngIf="!isMobile">
+    <app-side-workshop></app-side-workshop>
 
-
-<div class="center">
-  <mat-card class="tarjeta">
-    <mat-card-header>
-      <mat-card-title>Página de inicio</mat-card-title>
-      <mat-card-subtitle>Probando Angular material</mat-card-subtitle>
-    </mat-card-header>
-    <img class="img-tarjeta" mat-card-image src="https://source.unsplash.com/random" alt="Foto del día">
-    <mat-card-content>
-      <p>
-       Esto solo es una prueba de angular material.
-       Cada que refresques la pagina encontrar'as una nueva imagen.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="refresh()">Actualizar</button>
-    </mat-card-actions>
-  </mat-card>
+  </div>
 </div>
 

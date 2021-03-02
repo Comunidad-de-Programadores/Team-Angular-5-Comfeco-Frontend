@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/modules/seguridad/services/auth.service';
+import { NotificationItem } from 'src/app/core/models/notification/notification';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,17 +9,37 @@ import { AuthService } from 'src/app/modules/seguridad/services/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  isActived: boolean = false;
+  hidden:boolean = false;
+
+  items: NotificationItem[] = [
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+    { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
+  ];
   constructor(
     private location: Location,
     public auth: AuthService) {
-    }
+  }
+
+
+  toggleBadgeVisibility() {
+    this.hidden = true;
+  }
 
   ngOnInit(): void {
-    const path = this.location.path();
-    if (path === '/login') {
-      this.isActived = true;
-    }
   }
 
 }

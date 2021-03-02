@@ -1,0 +1,11 @@
+<mat-list role="list" class="container-notification">
+    <div *ngFor="let item of items.slice(0, 10)" >
+        <mat-list-item role="listitem" class="list-menu" routerLink="item.redirect" >
+            <img [src]="item.img"
+                width="35px" height="35px">
+            &nbsp;  {{item.title}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </div>
+
+</mat-list>

@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { AuthService } from './modules/seguridad/services/auth.service';
+import { AuthService } from './modules/auth/services/auth.service';
 
 @Component({
   selector: 'app-root',

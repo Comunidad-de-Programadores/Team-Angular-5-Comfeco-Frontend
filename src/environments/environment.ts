@@ -4,10 +4,6 @@
 
 export const environment = {
   production: false,
-  apiKey: 'AIzaSyANUYP0O-08jqVTa94Qoxd2MECPfEYIeZs',
-  urlLogin: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
-  urlRegister: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
-  urlForgot: 'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=',
   firebaseConfig: {
     apiKey: "AIzaSyANUYP0O-08jqVTa94Qoxd2MECPfEYIeZs",
     authDomain: "primal-fulcrum-239414.firebaseapp.com",

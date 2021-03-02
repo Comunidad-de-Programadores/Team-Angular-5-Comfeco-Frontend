@@ -1,22 +1,51 @@
+$text-color: #d42d65;
+$background-color: white;
 footer{
-
-    background-color: red;
-    height: 100px;
+    // border-image-source:
+    background-image: linear-gradient(to right, #743ad5, #d53a9d, #FFB703);;
+    height: 70px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
 }
 
 footer {
-   position:fixed;
-    left:0px;
-    bottom:0px;
-    height:50px;
+  //  position:fixed;
+  //   left:0px;
+  //   bottom:0px;
+    height:70px;
     width:100%;
-    background:#999;
+    // background:#69156A;
+    border-top: 5px solid;
+    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+
  }
 
  mat-grid-tile{
-     background-color: #c4c4c4;
-     color: #1f66ff;
-     cursor: pointer;
+  height: 100px;
+  background-color: $background-color;
+  color: $text-color;
+  cursor: pointer;
+  text-align: center;
+  font-size: medium;
+  font-weight: 400;
+  font-family: 'roboto';
+}
+@media screen and (min-width: 1px) and (max-width: 767px) {
+  mat-grid-tile{
+    height: 100px;
+    background-color: $background-color;
+    color: $text-color;
+    cursor: pointer;
+    text-align: center;
+    font-size: small;
+    font-weight: 400;
+    font-family: 'roboto';
+  }
+
+  .bi{
+    margin-left: 16px;
+    margin-top: 10px;
+  }
 }
 
 .redes-sociales ul
@@ -31,10 +60,11 @@ footer {
 {
    list-style-type: none;
    display: inline;
-   padding-right: 5px;
+   padding-right: 0.625rem;
+   margin-top: 0.625 rem;
 }
 a{
    text-decoration: none;
-   color: #1f66ff;
+   color: $text-color;
 
 }

@@ -1,0 +1,22 @@
+<div class="community-container">
+  <div class="header-community">
+    <h2>Comunidades</h2>
+    <!-- <span class="divider"></span> -->
+    <a class="more-link" [routerLink]="['/comunidades']" >Ver más</a>
+  </div>
+
+  <div class="community-content">
+
+    <ng-container *ngFor="let community of communities, let i = index">
+      <div class="content-item">
+        <img [src]="community.img? community.img : 'assets/Logos-Comfeco/Logo-con-fondo.png'"  class="image-item">
+        <div class="title-item">{{community.name}}</div>
+        <span class="divider"></span>
+        <a class="join-link" [href]="community.url? community.url :'http://google.com'" target="_blank" rel="noopener noreferrer">Unirme</a>
+      </div>
+      <hr *ngIf="!(i === communities.length-1)">
+    </ng-container>
+
+  </div>
+
+</div>
