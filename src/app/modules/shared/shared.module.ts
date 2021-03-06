@@ -12,11 +12,12 @@ import { FormsModule } from '@angular/forms';
 import { SuccessTemplateComponent } from './components/success-template/success-template.component';
 import { NotificationComponent } from './notification/notification.component';
 import { CountdownTimerComponent } from './components/countdown-timer/countdown-timer.component';
+import { ProfileConfigComponent } from './components/profile-config/profile-config.component';
 
 
 
 @NgModule({
-  declarations: [MostrarErroresComponent, CarouselComponent, LeaderCardComponent, SideCommunitiesComponent, SideWorkshopComponent, SuccessTemplateComponent, NotificationComponent, CountdownTimerComponent],
+  declarations: [MostrarErroresComponent, CarouselComponent, LeaderCardComponent, SideCommunitiesComponent, SideWorkshopComponent, SuccessTemplateComponent, NotificationComponent, CountdownTimerComponent, ProfileConfigComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -33,6 +34,7 @@ import { CountdownTimerComponent } from './components/countdown-timer/countdown-
     SuccessTemplateComponent,
     NotificationComponent,
     CountdownTimerComponent,
+    ProfileConfigComponent
   ],
 })
 export class SharedModule { }

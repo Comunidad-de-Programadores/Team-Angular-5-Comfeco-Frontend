@@ -8,5 +8,9 @@ export interface UserFirebase {
   email: string;
   photoURL?: string;
   displayName?: string;
-  myCustomData?: string;
+  nickName?: string;
+  gender?: string;
+  dateBirth?: Date;
+  country?: string;
+  biography?: string;
 }

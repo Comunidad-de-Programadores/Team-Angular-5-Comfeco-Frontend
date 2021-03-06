@@ -23,7 +23,7 @@ import { TestComponent } from './components/test/test.component';
     HomeComponent,
     PoliticsComponent,
     TermsServiceComponent,
-    TestComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
