@@ -47,7 +47,7 @@
       <button mat-button [matMenuTriggerFor]="notification"  (click)="toggleBadgeVisibility()">
         <mat-icon matBadge="{{items.length}}" matBadgeColor="primary" [matBadgeHidden]="hidden">notification_important</mat-icon>
       </button>
-      <button mat-button [matMenuTriggerFor]="menu"><img [src]=user.photoURL width="25px"> {{user.displayName}}
+      <button mat-button [matMenuTriggerFor]="menu"><img [src]=user.photoURL width="25px"> {{user.fullName}}
         <span class="material-icons">
           keyboard_arrow_down
         </span>

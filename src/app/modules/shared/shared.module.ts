@@ -8,7 +8,7 @@ import { LeaderCardComponent } from './components/leader-card/leader-card.compon
 import { SideCommunitiesComponent } from './components/communities/side-communities/side-communities.component';
 import { RouterModule } from '@angular/router';
 import { SideWorkshopComponent } from './components/workshops/side-workshop/side-workshop.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SuccessTemplateComponent } from './components/success-template/success-template.component';
 import { NotificationComponent } from './notification/notification.component';
 import { CountdownTimerComponent } from './components/countdown-timer/countdown-timer.component';
@@ -22,8 +22,8 @@ import { ProfileConfigComponent } from './components/profile-config/profile-conf
     CommonModule,
     MaterialModule,
     RouterModule,
-    FormsModule
-
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
     MostrarErroresComponent,

@@ -80,21 +80,33 @@ export class AuthService {
 
   }
 
-  private updateUserData(user) {
+  public updateUserData(user) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<UserFirebase> = this.afs.doc(`users/${user.uid}`);
     const PHOTO_URL_DEFAULT = "https://www.pngfind.com/pngs/m/470-4703547_icon-user-icon-hd-png-download.png";
     let data = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL
+      userName: user.userName,
+      fullName: user.displayName || user.fullName,
+      photoURL: user.photoURL,
+      gender: user.gender || "",
+      dateBirth: user.dateBirth || "",
+      country: user.country || "",
+      biography: user.biography || "",
+      facebook: user.facebook || "",
+      github: user.github || "",
+      twitter: user.twitter || "",
+      linkedin: user.linkedin || "",
+      interests: user.interests || "",
     }
     if (user.photoURL == null) {
       data.photoURL = PHOTO_URL_DEFAULT;
     }
-
-
+    if (data.userName == null && data.fullName != null) {
+      data.userName = data.fullName.replace(/ /g, "").toLowerCase();
+    }
+    console.log(data)
     return userRef.set(data, { merge: true })
 
   }
@@ -104,6 +116,6 @@ export class AuthService {
   }
 
   async recoveryPassword(email: string) {
-   return await this.auth.sendPasswordResetEmail(email);
+    return await this.auth.sendPasswordResetEmail(email);
   }
 }

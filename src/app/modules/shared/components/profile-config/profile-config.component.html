@@ -1,16 +1,16 @@
 <div class="wrapper">
 
-    <div class="right">
+    <div class="right" *ngIf="_authService.user$ | async as user">
         <div>
-            <form action="index.html" method="post">
-                <h2>Profile Settings</h2>
+            <h2>Información de perfil</h2>
 
+            <form [formGroup]="form" (submit)="updateData(form.value)">
+                <input matInput formControlName="uid" style="display: none;">
+                <input matInput formControlName="photoURL" style="display: none;">
                 <mat-grid-list cols="1" rowHeight="100px">
                     <mat-grid-tile>
                         <div class="center-image">
-                            <img class="avatar" width="100px" height="100px"
-                                src="http://res.cloudinary.com/dikpupfzu/image/upload/v1525474876/profile_avatar.png"
-                                alt="">
+                            <img class="avatar" width="100px" height="100px" [src]="user.photoURL">
                         </div>
 
                     </mat-grid-tile>
@@ -18,48 +18,87 @@
 
                 <mat-grid-list cols="2" rowHeight="100px">
                     <mat-grid-tile>
-                        <div class="center-image">
-                            <div class="field">
-                                <label for="">Full Name</label>
-                                <input class="full_name" type="text" name="full-name" value="" />
-                            </div>
+                        <div class="field">
+                            <mat-form-field style="width:300px;">
+                                <mat-label>Nickname</mat-label>
+                                <input matInput formControlName="userName">
+                            </mat-form-field>
                         </div>
                     </mat-grid-tile>
                     <mat-grid-tile>
                         <div class="field">
-                            <label for="">Email</label>
-                            <input class="full_name" type="text" name="full-name" />
-                        </div>
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                        <div class="center-image">
-                            <div class="field">
-                                <label for="">Full Name</label>
-                                <input class="full_name" type="text" name="full-name" value="" />
-                            </div>
-                        </div>
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                        <div class="field">
-                            <label for="">Email</label>
-                            <input class="full_name" type="text" name="full-name" />
-                        </div>
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                        <div class="center-image">
-                            <div class="field">
-                                <label for="">Full Name</label>
-                                <input class="full_name" type="text" name="full-name" value="" />
-                            </div>
-                        </div>
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                        <div class="field">
-                            <label for="">Email</label>
-                            <input class="full_name" type="text" name="full-name" />
+                            <mat-form-field style="width:300px;">
+                                <mat-label>Correo</mat-label>
+                                <input matInput formControlName="email">
+                            </mat-form-field>
                         </div>
                     </mat-grid-tile>
                 </mat-grid-list>
+                <mat-grid-list cols="3" rowHeight="100px" style="margin: 0px 35px;">
+
+                    <mat-grid-tile>
+                        <div style="width:190px; margin: 0%; ">
+                            <mat-form-field style="width:190px;">
+                                <mat-label>Genero</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <div style="width:190px; margin: 0%; ">
+                            <mat-form-field>
+                                <mat-label>Fecha de nacimiento</mat-label>
+                                <input matInput [matDatepicker]="picker">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <div style="width:190px; margin: 0%; ">
+                            <div class="content-select">
+                                <label for="">Pais</label>
+                                <select formControlName="country" style="width:190px;">
+                                    <option value="{{item.name}}" *ngFor="let item of paises" selected="user.country">
+                                        {{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </mat-grid-tile>
+
+                </mat-grid-list>
+                <mat-grid-list cols="2" rowHeight="100px">
+
+                    <mat-grid-tile>
+                        <div class="field">
+                            <mat-form-field style="width:300px;">
+                                <mat-label>Full name</mat-label>
+                                <input matInput formControlName="fullName">
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <div class="field">
+                            <mat-form-field style="width:300px;">
+                                <mat-label>Repetir Contraseña</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <mat-grid-list cols="1" rowHeight="100px">
+                    <div class="field" style="text-align: center; ">
+                        <mat-form-field class="example-full-width" style="width: 90%;">
+                            <mat-label>Biografía.</mat-label>
+                            <input matInput #message maxlength="256" placeholder="Ex. I need help with...">
+                            <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
+                            <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                        </mat-form-field>
+                    </div>
+
+                </mat-grid-list>
+
+
 
                 <div class="bottom">
                     <a href="#"><button class="button_left" type="submit" name="button">Save Changes</button></a>
