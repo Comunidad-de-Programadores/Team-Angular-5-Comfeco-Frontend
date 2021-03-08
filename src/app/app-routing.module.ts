@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: 'politicas-privacidad', component: PoliticsComponent},
   {path: 'talleres', loadChildren: ()=> import('./modules/workshops/workshops.module').then(m=>m.WorkshopsModule), canActivate: [AuthGuard]},
   {path: 'comunidades', loadChildren: ()=> import('./modules/communities/communities.module').then(m=> m.CommunitiesModule), canActivate: [AuthGuard]},
+  {path: 'miperfil', loadChildren:()=>import('./modules/user-profile/user-profile.module').then(m=>m.UserProfileModule), canActivate:[AuthGuard]},
   {path: 'test', component: TestComponent},
   {path:'account', loadChildren: ()=> import('./modules/login/login.module').then(m=> m.LoginModule)},
 

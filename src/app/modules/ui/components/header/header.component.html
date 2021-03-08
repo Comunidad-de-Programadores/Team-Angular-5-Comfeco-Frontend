@@ -54,10 +54,10 @@
       </button>
       <mat-menu #menu="matMenu">
         <mat-list role="list">
-          <mat-list-item role="listitem" class="list-menu">
+          <mat-list-item role="listitem" class="list-menu" (click)="route.navigate(['/miperfil']);">
             <span class="material-icons">
-              build_circle
-            </span>&nbsp;Configuración
+              account_circle
+            </span>&nbsp;Mi Perfil
           </mat-list-item>
 
           <mat-list-item role="listitem" (click)="auth.signOut()" class="list-menu">
