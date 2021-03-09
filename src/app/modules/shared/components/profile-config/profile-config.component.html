@@ -40,7 +40,7 @@
                         <div style="width:190px; margin: 0%; ">
                             <mat-form-field style="width:190px;">
                                 <mat-label>Genero</mat-label>
-                                <input matInput>
+                                <input matInput formControlName="gender">
                             </mat-form-field>
                         </div>
                     </mat-grid-tile>
@@ -48,7 +48,7 @@
                         <div style="width:190px; margin: 0%; ">
                             <mat-form-field>
                                 <mat-label>Fecha de nacimiento</mat-label>
-                                <input matInput [matDatepicker]="picker">
+                                <input matInput [matDatepicker]="picker" formControlName="dateBirth">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
@@ -86,11 +86,50 @@
                         </div>
                     </mat-grid-tile>
                 </mat-grid-list>
+                <mat-grid-list cols="2" rowHeight="100px">
+
+                    <mat-grid-tile>
+                        <div class="field">
+                            <mat-form-field style="width:300px;">
+                                <mat-label>Github</mat-label>
+                                <input matInput formControlName="fullName">
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <div class="field">
+                            <mat-form-field style="width:300px;">
+                                <mat-label>Linkedin</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <mat-grid-list cols="2" rowHeight="100px">
+
+                    <mat-grid-tile>
+                        <div class="field">
+                            <mat-form-field style="width:300px;">
+                                <mat-label>Facebook</mat-label>
+                                <input matInput formControlName="fullName">
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <div class="field">
+                            <mat-form-field style="width:300px;">
+                                <mat-label>Twitter</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                </mat-grid-list>
                 <mat-grid-list cols="1" rowHeight="100px">
                     <div class="field" style="text-align: center; ">
                         <mat-form-field class="example-full-width" style="width: 90%;">
                             <mat-label>Biografía.</mat-label>
-                            <input matInput #message maxlength="256" placeholder="Ex. I need help with...">
+                            <input matInput #message maxlength="256" placeholder="Ex. I need help with..."
+                                formControlName="biography">
                             <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
                             <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
                         </mat-form-field>
