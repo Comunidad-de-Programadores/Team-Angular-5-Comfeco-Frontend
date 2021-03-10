@@ -5,6 +5,7 @@ import { UserFirebase } from 'src/app/core/models/auth/user';
 import { BaseService } from 'src/app/core/services/base.service';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -14,13 +15,18 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class ProfileConfigComponent implements OnInit {
+  public files: any[];
+  base64textString = [];
+  public updateImage: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private _BaseService: BaseService,
     public _authService: AuthService,
-    private datePipe: DatePipe) {
+    private datePipe: DatePipe,
+    private http: HttpClient) {
     _BaseService.get("all").subscribe(res => this.paises = res, error => console.log(error))
+    this.files = [];
   }
   form: FormGroup;
   paises: any[];
@@ -73,9 +79,31 @@ export class ProfileConfigComponent implements OnInit {
 
   updateData(user) {
     const datePipe = this.datePipe.transform(this.form.get('dateBirth').value, 'MM-dd-yyyy')
-    let userData: UserFirebase = { ...user, dateBirth: datePipe }
+    let userData: UserFirebase;
+    if (this.base64textString.length > 0) {
+      console.log(this.base64textString[0])
+      userData = { ...user, dateBirth: datePipe, photoURL: this.base64textString[0] }
+    } else {
+      userData = { ...user, dateBirth: datePipe }
+    }
     this._authService.updateUserData(userData)
     console.log(userData)
+  }
+
+
+  onUploadChange(evt: any) {
+    const file = evt.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = this.handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  handleReaderLoaded(e) {
+    this.base64textString.push('data:image/png;base64,' + btoa(e.target.result));
   }
 
 }
