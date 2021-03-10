@@ -62,10 +62,11 @@
 
 .social-network-action:hover{
   cursor: pointer;
+  background-color: rgb(73, 4, 119);
 }
 .social{
-  width: 70%;
-  height: 70%;
+  width: 60%;
+  height: 60%;
   filter: invert(1) sepia(1) saturate(1) hue-rotate(175deg);
 
 }

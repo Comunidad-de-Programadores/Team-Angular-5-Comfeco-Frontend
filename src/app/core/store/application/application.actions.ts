@@ -12,3 +12,8 @@ export class UpdateActiveUserId{
   static readonly type = '[APPLICATION] UpdateActiveUser';
   constructor(public payload:string){}
 }
+
+export class UpdateUserActive{
+  static readonly type = '[APPLICATION] Update Current User';
+  constructor(public payload:string){}
+}

@@ -5,7 +5,7 @@ import { AddUserActivity } from 'src/app/core/store/user-profile/user-profile.ac
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.css']
+  styleUrls: ['./groups.component.scss']
 })
 export class GroupsComponent implements OnInit {
 

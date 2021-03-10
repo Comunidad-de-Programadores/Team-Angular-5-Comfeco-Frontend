@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { UpdateIsDarkMode } from "./application.actions";
+import { UpdateActiveUserId, UpdateIsDarkMode } from "./application.actions";
 import { ApplicationStateModel } from "./application.model";
 
 
@@ -8,7 +8,7 @@ import { ApplicationStateModel } from "./application.model";
   name:'application',
   defaults:{
     isLoading:false,
-    activeUserId:'',
+    activeUserId:'usuario-test',
     isDarkMode:false,
   }
 })
@@ -37,6 +37,14 @@ export class ApplicationState{
     const state = getState();
     patchState({
       isLoading: !state.isLoading
+    });
+  }
+
+  @Action(UpdateActiveUserId)
+  updateActiveUserId({getState, patchState}:StateContext<ApplicationStateModel>,{payload}:UpdateActiveUserId){
+    const state = getState();
+    patchState({
+      activeUserId: payload
     });
   }
 }
