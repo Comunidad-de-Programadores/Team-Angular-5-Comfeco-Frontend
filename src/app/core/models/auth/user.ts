@@ -8,7 +8,7 @@ export interface UserFirebase extends User {
   photoURL?: string;
   fullName?: string;
   gender?: string;
-  dateBirth?: Date;
+  dateBirth?: string;
   country?: string;
   biography?: string;
   facebook?: string;

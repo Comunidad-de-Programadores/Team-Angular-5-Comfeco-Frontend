@@ -54,7 +54,8 @@ export class AuthService {
   async loginWithEmail(email: string, password: string) {
     await this.auth.signInWithEmailAndPassword(email, password).then(user => {
       this._notification.openSnackBar("Session Iniciada", "", "", true)
-      return this.updateUserData(user.user);
+    //  return this.updateUserData(user.user);
+    return;
     }).catch(error => {
       console.log(error)
       this._notification.openSnackBar(`Credenciales incorrectas!.`, "Error",)
@@ -88,7 +89,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       userName: user.userName,
-      fullName: user.displayName || user.fullName,
+      fullName: user.displayName || user.fullName || "",
       photoURL: user.photoURL,
       gender: user.gender || "",
       dateBirth: user.dateBirth || "",
@@ -117,5 +118,9 @@ export class AuthService {
 
   async recoveryPassword(email: string) {
     return await this.auth.sendPasswordResetEmail(email);
+  }
+
+  async changeEmail(email: string) {
+    return await (await this.auth.currentUser).updateEmail(email);
   }
 }
