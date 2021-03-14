@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./auth-form.component.scss'],
 })
 export class AuthFormComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder, public _auth: AuthService) {}
+  constructor(private formBuilder: FormBuilder, public _auth: AuthService) { }
   form: FormGroup;
 
   @Input()
@@ -19,17 +19,17 @@ export class AuthFormComponent implements OnInit {
   accion: string;
   @Output()
   onSubmit: EventEmitter<RegisterUser> = new EventEmitter<RegisterUser>();
-  check:boolean=true;
+  check: boolean = true;
 
   ngOnInit(): void {
     this.creacionDeFormulario();
     // this.crearListeners();
     this.cargardata()
   }
-  cargardata(){
+  cargardata() {
     this.form.reset({
-      username:'iamrivard',
-      email:'erick.sgr10@gmail.com',
+      username: 'iamrivard',
+      email: 'erick.sgr10@gmail.com',
       password: 'iamrivard',
       passwordConfirm: 'iamrivard'
     })
@@ -45,15 +45,15 @@ export class AuthFormComponent implements OnInit {
   creacionDeFormulario(): void {
     if (this.accion === 'register') {
       this.form = this.formBuilder.group({
-        username: ['', [Validators.required, Validators.minLength(5)]],
+        userName: ['', [Validators.required, Validators.minLength(5)]],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(8)]],
         passwordConfirm: ['', [Validators.required, Validators.minLength(8)]],
         check: [''],
       },
-      {
-        validators: this.matchPasswords('password', 'passwordConfirm'),
-      }
+        {
+          validators: this.matchPasswords('password', 'passwordConfirm'),
+        }
       );
     } else if (this.accion === 'login') {
       this.form = this.formBuilder.group({
@@ -70,7 +70,7 @@ export class AuthFormComponent implements OnInit {
 
   get usernameNoValido() {
     return (
-      this.form.get('username').invalid && this.form.get('username').touched
+      this.form.get('userName').invalid && this.form.get('userName').touched
     );
   }
   get emailNoValido() {
@@ -96,16 +96,16 @@ export class AuthFormComponent implements OnInit {
   }
 
   get emailExits() {
-    return this._auth.errores[0]==="auth/email-already-in-use";
+    return this._auth.errores[0] === "auth/email-already-in-use";
   }
-  get authAccountExistsWithDifferentCredential(){
-    return this._auth.errores[0]==="auth/account-exists-with-different-credential";
+  get authAccountExistsWithDifferentCredential() {
+    return this._auth.errores[0] === "auth/account-exists-with-different-credential";
   }
-  get creditialIncorrect(){
-    return this._auth.errores[0]==="auth/wrong-password" || this._auth.errores[0]==="auth/user-not-found";
+  get creditialIncorrect() {
+    return this._auth.errores[0] === "auth/wrong-password" || this._auth.errores[0] === "auth/user-not-found";
   }
   get emailNotFound() {
-    return this.errores[0]==="auth/user-not-found";
+    return this.errores[0] === "auth/user-not-found";
   }
 
   obtenerMensajeErrorEmail() {

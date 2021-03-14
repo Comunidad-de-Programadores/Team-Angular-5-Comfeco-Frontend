@@ -40,10 +40,16 @@ export class AuthService {
     )
   }
 
-  async registerWithEmail(email: string, password: string) {
-    await this.auth.createUserWithEmailAndPassword(email, password).then(user => {
+  async registerWithEmail(usuario) {
+    await this.auth.createUserWithEmailAndPassword(usuario.email, usuario.password).then(user => {
       this._notification.openSnackBar("Usuario Registrado", "", "", true)
-      return this.updateUserData(user.user);
+      console.log(user)
+      const userData = {
+        userName: usuario.userName,
+        email: usuario.email,
+        ...user.user
+      }
+      return this.updateUserData(userData);
     }).catch(error => {
       this._notification.openSnackBar(`Tu correo ya se encuentra registrado.`, "Error",)
       this.errores = parsearErroresAPI(error);

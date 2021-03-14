@@ -27,8 +27,8 @@
         </ng-container>
       </div>
       <div class="input-style" *ngIf="accion === 'register'">
-        <input type="text" placeholder="Nick" [class.no-valido]="usernameNoValido" [class.valido]="!usernameNoValido"
-          formControlName="username">
+        <input type="text" placeholder="Nick" [class.no-valido]="usernameNoValido" 
+        [class.valido]="!usernameNoValido" formControlName="userName">
         <small *ngIf="usernameNoValido">
           Tu nick debe poseer al menos 5 letras.
         </small>
@@ -81,7 +81,7 @@
         </ng-container>
       </div>
       <div class="box-flex">
-        <button mat-raised-button color="primary" class="button">
+        <button mat-raised-button color="primary" class="button" [disabled]="!form.valid">
           <ng-container *ngIf="accion === 'login'">
             Iniciar sesión
           </ng-container>
