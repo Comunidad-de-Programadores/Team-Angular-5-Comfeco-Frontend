@@ -54,8 +54,8 @@ export class AuthService {
   async loginWithEmail(email: string, password: string) {
     await this.auth.signInWithEmailAndPassword(email, password).then(user => {
       this._notification.openSnackBar("Session Iniciada", "", "", true)
-    //  return this.updateUserData(user.user);
-    return;
+      //  return this.updateUserData(user.user);
+      return;
     }).catch(error => {
       console.log(error)
       this._notification.openSnackBar(`Credenciales incorrectas!.`, "Error",)
@@ -67,12 +67,16 @@ export class AuthService {
   async registerWithGoogle() {
     const credential = await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     this._notification.openSnackBar("Session Iniciada", "", "", true)
-    return this.updateUserData(credential.user);
+    if (credential.additionalUserInfo.isNewUser) {
+      return this.updateUserData(credential.user);
+    }
   }
   async registerWithFacebook() {
     await this.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(user => {
       this._notification.openSnackBar("Session Iniciada", "", "", true)
-      return this.updateUserData(user.user);
+      if (user.additionalUserInfo.isNewUser) {
+        return this.updateUserData(user.user);
+      }
     }).catch(error => {
       this._notification.openSnackBar(`Tu correo ${error.email} ya se encuentra registrado.`, "Error",)
       this.errores = parsearErroresAPI(error);
@@ -84,6 +88,7 @@ export class AuthService {
   public updateUserData(user) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<UserFirebase> = this.afs.doc(`users/${user.uid}`);
+    console.log(userRef)
     const PHOTO_URL_DEFAULT = "https://www.pngfind.com/pngs/m/470-4703547_icon-user-icon-hd-png-download.png";
     let data = {
       uid: user.uid,
@@ -122,5 +127,8 @@ export class AuthService {
 
   async changeEmail(email: string) {
     return await (await this.auth.currentUser).updateEmail(email);
+  }
+  async changePassword(password: string) {
+    return await (await this.auth.currentUser).updatePassword(password);
   }
 }

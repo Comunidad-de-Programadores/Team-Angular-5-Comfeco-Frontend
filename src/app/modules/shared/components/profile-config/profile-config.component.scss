@@ -274,7 +274,6 @@ button:focus {
   align-items: flex-start !important;
 }
 .container:hover {
-  opacity: 0.5;
   transition-duration: 1s;
   display: block;
 }
@@ -285,8 +284,13 @@ button:focus {
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
-.container .avatar:hover img {
-  width: 350px;
+.avatar:hover {
+  opacity: 0.5;
+}
+.container:hover .imgB1{
+  width: 80px;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 .overlay {
   position: absolute;
@@ -312,3 +316,14 @@ button:focus {
 .alert-text {
   color: red;
 }
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+

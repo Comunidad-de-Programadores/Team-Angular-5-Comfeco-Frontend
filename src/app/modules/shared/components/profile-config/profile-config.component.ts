@@ -78,7 +78,7 @@ export class ProfileConfigComponent implements OnInit {
           }
         }
       }
-      this.porcent = (100/totalPropertiesForm) * totalCompleted;
+      this.porcent = (100 / totalPropertiesForm) * totalCompleted;
       console.log(this.porcent)
     });
 
@@ -167,7 +167,27 @@ export class ProfileConfigComponent implements OnInit {
     })
   }
 
-  changePasswordUpdate(credendials) {
+  async changePasswordUpdate(credendials) {
+    if (this.formChangePassword.valid) {
+      await this._authService.changeEmail(this.form.get('email').value)
+        .then(res => {
+          this.error = {
+            code: "UPDATE-PASSWORD",
+            message: "Tu contraseña fue modificada con éxito.",
+            type: "alert-info",
+            title: "Info!"
+          }
+        })
+        .catch(er => {
+          this.error = {
+            code: er.code,
+            message: er.message,
+            type: "alert-danger",
+            title: "Alerta!"
+          }
+          return;
+        })
+    }
     console.log(credendials)
   }
 
@@ -213,12 +233,21 @@ export class ProfileConfigComponent implements OnInit {
     }
     if (this.form.valid) {
       this._authService.updateUserData(userData)
-      this.error = {
-        code: "UPDATE-DATA",
-        message: "Todos los campos han sido actualizados con éxito",
-        type: "alert-success",
-        title: "Success!"
-      }
+        .then(sucess => {
+          this.error = {
+            code: "UPDATE-DATA",
+            message: "Todos los campos han sido actualizados con éxito",
+            type: "alert-success",
+            title: "Success!"
+          }
+        }).catch(badError => {
+          this.error = {
+            code: "FATAL-ERROR",
+            message: "Estamos teniendo problemas para actualizar tu información, intenta más tarde.",
+            type: "alert-danger",
+            title: "Error!"
+          }
+        })
       this.form.markAsPristine()
     } else {
       this.error = {
