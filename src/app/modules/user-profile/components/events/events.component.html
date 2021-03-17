@@ -1,3 +1,28 @@
-<p>events works!</p>
+<div class="events-container">
+  <div class="page-title">Eventos</div>
+  <div class="events">
+    <ng-container *ngFor="let event of eventsLists$|async">
+      <div class="card-container">
+        <div class="custom-card">
+          <div class="img-header">
+            <img [src]="event.img_url" alt="" class="image">
+          </div>
+          <div class="custom-card-header">
+            <div class="custom-card-title center pt-1">{{event.name}}</div>
+          </div>
+          <div class="custom-card-content full">
+            <div class="center pt-1">{{event.description}}</div>
+          </div>
+          <div class="custom-card-actions">
+            <div class="more"><a href="#">Más información</a></div>
+            <div class="button"> <button mat-raised-button>Participar</button> </div>
+          </div>
+        </div>
+
+      </div>
+    </ng-container>
+  </div>
+</div>
 
 <button mat-raised-button (click)="addUserActivity()" >Registrarse al evento</button>
+<!-- <pre>{{eventsLists$|async|json}}</pre> -->
