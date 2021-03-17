@@ -15,6 +15,7 @@ export const environment = {
   },
   endpoindsUris:{
     backend: 'https://comfecoapi.odprz.dev/',
+    // TODO: @erick add uri countries
   }
 };
 

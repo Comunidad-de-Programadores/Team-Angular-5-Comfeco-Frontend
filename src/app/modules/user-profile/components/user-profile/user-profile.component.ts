@@ -23,6 +23,7 @@ export class UserProfileComponent implements OnInit {
   appState$:Observable<ApplicationStateModel>;
   userBadges$:Observable<Badge[]>;
   countLoad:number =0;
+  dashboardRoutes = ProfileDashboardRoutes;
   // isUserEarnBadge:Observer<boolean>;
 
   @Select(UserProfileState.areCurrentUserLoaded) areCurrentUserLoaded$:Observable<boolean>;
@@ -67,6 +68,10 @@ export class UserProfileComponent implements OnInit {
   isUserEarnBadge(badge:Badge):boolean{
     let result=this.currentUser.user.badges?.find(b=>b.id_badge==badge.id_badge);
     return result?true:false;
+  }
+
+  onEditProfile(){
+    this.store.dispatch(new SetCurrentPage(this.dashboardRoutes.editProfile));
   }
 
 }

@@ -21,7 +21,7 @@ export class ProfileConfigComponent implements OnInit {
   public updateImage: boolean = false;
   porcent: Number = 0;
   interestsList: string[] = ['Front End', 'Back End', 'Angular', 'ReactJs', 'DevOps'];
-
+  baseUrl ='https://restcountries.eu/rest/v2/'; // TODO: @erick agregar a variables de entorno
 
   constructor(
     private formBuilder: FormBuilder,
@@ -61,7 +61,8 @@ export class ProfileConfigComponent implements OnInit {
         })
 
       });
-    this._BaseService.get("all").subscribe(res => this.paises = res, error => console.log(error))
+      // TODO: @erick crear un servicio que implemente el baseService y no utilizar baseService de manera directa
+    this._BaseService.get(this.baseUrl,"all").subscribe(res => this.paises = res, error => console.log(error))
     this.onChanges();
 
   }

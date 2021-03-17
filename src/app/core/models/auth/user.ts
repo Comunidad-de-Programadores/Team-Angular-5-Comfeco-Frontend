@@ -15,5 +15,5 @@ export interface UserFirebase extends User {
   github?: string;
   twitter?: string;
   linkedin?: string;
-  interests?: string;
+  interests?: string[];
 }
