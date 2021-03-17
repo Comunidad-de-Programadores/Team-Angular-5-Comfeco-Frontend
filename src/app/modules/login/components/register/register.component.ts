@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterUser } from 'src/app/core/models/auth/user_register';
 import { NotificationService } from 'src/app/core/services/notification.service';
@@ -28,9 +28,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  register(usuario: RegisterUser) {
-
-    this._auth.registerWithEmail(usuario.email,usuario.password);
+  register(usuario) {
+    console.log(usuario)
+    this._auth.registerWithEmail(usuario);
   }
 
 
