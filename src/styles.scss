@@ -154,7 +154,7 @@ body{
   flex-direction: column;
 }
 
-.custom-card-header .custom-card-title{
+.custom-card .custom-card-title{
   margin-bottom: 12px;
   font-size: 20px;
   display: block;
@@ -162,7 +162,7 @@ body{
 }
 
 
-.custom-card-header .custom-card-subtitle{
+.custom-card .custom-card-subtitle{
   margin-top: -8px;
   display: block;
   margin-bottom: 16px;
@@ -175,6 +175,31 @@ body{
   font-size: 14px;
 }
 
+.custom-card .custom-card-actions{
+  margin-top: 0.5rem;
+  display: flex;
+  width: 100%;
+}
+
+.custom-card-actions.right{
+  justify-content: flex-end;
+}
+
+.custom-card-actions.left{
+  justify-content: flex-start;
+}
+
+.custom-card-actions.center{
+  justify-content: center;
+}
+
+.custom-card-actions.between{
+  justify-content: space-between;
+}
+
+.custom-card-actions.around{
+  justify-content: space-around;
+}
 // Custom Scroll bar
 // Añade la definicion para añadir un scrollbar
 // A un contenedor con altura definida
@@ -196,4 +221,24 @@ body{
 .custom-scrollbar:hover::-webkit-scrollbar-thumb{
   background: #8A178C;
   border-radius: 8px;
+}
+
+.center{
+  text-align: center;
+}
+
+.pt-1{
+  padding-top: 1rem;
+}
+
+.pb-1{
+  padding-bottom: 1rem;
+}
+
+.page-title{
+  width: 100%;
+  text-align: center;
+  font-size: xx-large;
+  font-weight: 500;
+  padding: 1rem 0 1rem 0;
 }
