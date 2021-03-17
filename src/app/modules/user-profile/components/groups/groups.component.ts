@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, zip } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Group } from 'src/app/core/models/user/user.models';
-import { AddUserActivity, GetAllGroups } from 'src/app/core/store/user-profile/user-profile.actions';
+import { Group, GroupMembers } from 'src/app/core/models/user/user.models';
+import { ApplicationState } from 'src/app/core/store/application/application.state';
+import { AddUserActivity, GetAllGroups, LoadGroupMembers } from 'src/app/core/store/user-profile/user-profile.actions';
 import { UserProfileState } from 'src/app/core/store/user-profile/user-profile.state';
 
 @Component({
@@ -14,18 +15,27 @@ import { UserProfileState } from 'src/app/core/store/user-profile/user-profile.s
 export class GroupsComponent implements OnInit {
 
   @Select(UserProfileState.getGroupsList) groups$: Observable<Group[]>;
-
   @Select(UserProfileState.areGroupsLoaded) areGroupsLoaded$: Observable<boolean>;
-
-  areGroupsLoadedSub: Subscription;
+  @Select(UserProfileState.isUserOnAGroup) isUserOnAgroup$:Observable<boolean>;
+  @Select(UserProfileState.areUserGroupLoaded) areUserGroupLoaded$:Observable<boolean>;
+  @Select(UserProfileState.getUserGroupMembers) userGroupMembers$:Observable<GroupMembers>;
+  @Select(ApplicationState.getActiveUserId) activeUserId$:Observable<string>;
+  @Select(UserProfileState.getCurrentUserProfile) userProfile$:Observable<any>;
+  areInfoLoaded: Subscription;
 
   constructor(private store:Store) { }
 
   ngOnInit(): void {
-    this.areGroupsLoadedSub = this.areGroupsLoaded$.pipe(
-      tap((areGroupsLoaded)=>{
+    this.areInfoLoaded = zip(this.activeUserId$,this.userProfile$,this.areGroupsLoaded$, this.isUserOnAgroup$,this.areUserGroupLoaded$).pipe(
+      tap(([activeUserId,userProfile,areGroupsLoaded,isUserOnAgroup, areUserGroupLoaded])=>{
+        console.log({activeUserId})
         if(!areGroupsLoaded){
           this.store.dispatch(new GetAllGroups());
+        }
+        if(isUserOnAgroup){
+          if(!areUserGroupLoaded){
+            this.store.dispatch(new LoadGroupMembers({userId:activeUserId,groupMembersId:userProfile?.group_member}));
+          }
         }
       })
     ).subscribe(value=>{
@@ -34,7 +44,7 @@ export class GroupsComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.areGroupsLoadedSub.unsubscribe();
+    this.areInfoLoaded.unsubscribe();
   }
 
 

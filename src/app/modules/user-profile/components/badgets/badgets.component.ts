@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { Badge } from 'src/app/core/models/user/user.models';
+import { UserProfileStateModel } from 'src/app/core/store/user-profile/user-profile.model';
+import { UserProfileState } from 'src/app/core/store/user-profile/user-profile.state';
 
 @Component({
   selector: 'app-badgets',
@@ -7,7 +12,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BadgetsComponent implements OnInit {
 
-  constructor() { }
+  @Select(UserProfileState.getBadges) badges$:Observable<Badge[]>;
+
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
   }

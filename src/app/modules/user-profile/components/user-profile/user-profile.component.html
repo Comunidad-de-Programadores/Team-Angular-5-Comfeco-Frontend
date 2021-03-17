@@ -43,11 +43,17 @@
         <div class="custom-card-title">Insignias</div>
       </div>
       <div class="card-badges">
-        <div class="badge badge-disable"><img class="badge-disable" src="/assets/badge-icons/010-fireworks.svg"></div>
-        <div class="badge badge-disable"><img class="badge-disable" src="/assets/badge-icons/016-cactus.svg"></div>
-        <div class="badge"><img class="badge-enable" src="/assets/badge-icons/006-parade-5.svg"></div>
-        <div class="badge"><img class="badge-enable" src="/assets/badge-icons/008-flag.svg"></div>
-        <div class="badge"><img class="badge-enable" src="/assets/badge-icons/017-king.svg"></div>
+        <ng-container *ngIf="(profileUserInfo$|async)?.badges?.length == 0">
+          <div class="badge badge-disable"></div>
+          <div class="badge badge-disable"></div>
+          <div class="badge badge-disable"></div>
+          <div class="badge badge-disable"></div>
+          <div class="badge badge-disable"></div>
+        </ng-container>
+        <ng-container *ngFor="let badge of (profileUserInfo$|async)?.badges">
+          <div [ngClass]="isUserEarnBadge(badge)?'badge':'badge badge-disable'">
+            <img [ngClass]="isUserEarnBadge(badge)?'badge-enable':'badge-disable'" [src]="badge.img_url"></div>
+        </ng-container>
       </div>
     </div>
   </div>
@@ -77,6 +83,7 @@
         <a (click)="onViewMoreEventsClick()">Ver más</a>
       </div>
       <div class="events-content custom-scrollbar">
+        <div class="empty-events" *ngIf="(profileUserInfo$|async).user?.active_events?.length == 0">Aún no te registras a un evento</div>
         <ng-container *ngFor="let event of (profileUserInfo$|async).user?.active_events">
           <div class="item-image-cover">
             <img class="img-bg" [src]="event.img_url">
@@ -88,5 +95,3 @@
   </div>
 </div>
 </div>
-
-<pre>{{profileUserInfo$|async|json}}</pre>
