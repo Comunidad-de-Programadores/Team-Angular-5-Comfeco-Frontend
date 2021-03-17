@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Badge, Event, Group, UserDetail } from 'src/app/core/models/user/user.models';
+import { Badge, Event, Group, GroupMembers, UserDetail } from 'src/app/core/models/user/user.models';
 import { environment } from 'src/environments/environment';
 import { BaseService } from '../../base.service';
 
@@ -46,6 +46,8 @@ export class UserService {
     return this.baseService.post(this.baseUrl,this.requestUrl+userId+'/activities',message);
   }
 
-
+  getGroupMembersUserById(userId:string,groupId:string):Observable<GroupMembers[]>{
+    return this.baseService.get<GroupMembers[]>(this.baseUrl,this.requestUrl+userId+'/group-members/'+groupId);
+  }
 
 }
