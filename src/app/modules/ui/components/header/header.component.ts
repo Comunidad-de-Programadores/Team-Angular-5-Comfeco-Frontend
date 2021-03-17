@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NotificationItem } from 'src/app/core/models/notification/notification';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
@@ -31,7 +32,8 @@ export class HeaderComponent implements OnInit {
   ];
   constructor(
     private location: Location,
-    public auth: AuthService) {
+    public auth: AuthService,
+    public route: Router ) {
   }
 
 

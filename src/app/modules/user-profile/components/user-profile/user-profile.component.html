@@ -1,0 +1,90 @@
+<div class="profile-area">
+<div class="left-area">
+  <div class="custom-card">
+    <div class="profile">
+      <img src="{{(profileUserInfo$|async)?.user?.imgProfile}}" class="profile-image">
+      <a class="edit-button" routerLink="/miperfil/editar" >Editar</a>
+    </div>
+    <div class="custom-card-header profile-header">
+      <div class="custom-card-title">{{((profileUserInfo$ | async)?.user?.nick |titlecase)}}</div>
+      <div class="custom-card-subtitle">
+        <ng-container *ngFor="let area of (profileUserInfo$|async)?.areas, let i = index">
+          {{area}} <span *ngIf="(profileUserInfo$|async)?.areas?.length-1 > i">/</span>
+        </ng-container>
+      </div>
+    </div>
+    <div class="custom-card-content">
+     <div class="content-text">
+       {{(profileUserInfo$|async)?.user?.biografia}}
+     </div>
+    </div>
+    <hr>
+    <div class="profile-actions">
+      <div class="social-network-action">
+        <img class="social" src="/assets/socialmedia/facebook.svg" alt="">
+      </div>
+      <div class="social-network-action">
+        <img  class="social" src="/assets/socialmedia/twitter.svg" alt="">
+      </div>
+      <div class="social-network-action">
+        <img class="social" src="/assets/socialmedia/linkedin.svg" alt="">
+
+      </div>
+      <div class="social-network-action">
+        <img class="social" src="/assets/socialmedia/github.svg" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="center-area">
+  <div class="badges-area">
+    <div class="custom-card">
+      <div class="custom-card-header">
+        <div class="custom-card-title">Insignias</div>
+      </div>
+      <div class="card-badges">
+        <div class="badge badge-disable"><img class="badge-disable" src="/assets/badge-icons/010-fireworks.svg"></div>
+        <div class="badge badge-disable"><img class="badge-disable" src="/assets/badge-icons/016-cactus.svg"></div>
+        <div class="badge"><img class="badge-enable" src="/assets/badge-icons/006-parade-5.svg"></div>
+        <div class="badge"><img class="badge-enable" src="/assets/badge-icons/008-flag.svg"></div>
+        <div class="badge"><img class="badge-enable" src="/assets/badge-icons/017-king.svg"></div>
+      </div>
+    </div>
+  </div>
+  <div class="activity-area">
+    <div class="custom-card">
+      <div class="custom-card-header">
+        <div class="custom-card-title">Actividad reciente</div>
+      </div>
+      <div class="card-activity">
+        <div *ngIf="(userActivity$|async)?.length == 0">
+          No tienes actividad reciente.
+        </div>
+          <ul>
+            <li *ngFor="let actiivity of userActivity$|async">
+              {{actiivity}}
+            </li>
+          </ul>
+          <!-- <img class="activity-background" src="assets/calendar.svg"> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="right-area">
+  <div class="custom-card events">
+      <div class="card-title-action">
+        <div style="flex-grow: 1;">Eventos de tu interes</div>
+        <a (click)="onViewMoreEventsClick()">Ver más</a>
+      </div>
+      <div class="events-content custom-scrollbar">
+        <ng-container *ngFor="let event of events">
+          <div class="item-image-cover">
+            <img class="img-bg" [src]="event.img">
+            <div class="item-image-title">{{event.name}}</div>
+            <div class="item-image-button"><button mat-raised-button>Más información</button></div>
+          </div>
+        </ng-container>
+      </div>
+  </div>
+</div>
+</div>

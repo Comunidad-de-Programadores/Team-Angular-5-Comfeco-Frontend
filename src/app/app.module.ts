@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +19,8 @@ import { TermsServiceComponent } from './components/terms-service/terms-service.
 import { SharedModule } from './modules/shared/shared.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { TestComponent } from './components/test/test.component';
+import { ApplicationState } from './core/store/application/application.state';
+import { UserProfileModule } from './modules/user-profile/user-profile.module';
 
 @NgModule({
   declarations: [
@@ -33,10 +38,12 @@ import { TestComponent } from './components/test/test.component';
     ReactiveFormsModule,
     HttpClientModule,
     UiModule,
-    LoginModule,
     RouterModule,
     SharedModule,
     AuthModule,
+    NgxsModule.forRoot([ApplicationState],{developmentMode:true}), // !environment.production
+    NgxsReduxDevtoolsPluginModule.forRoot({disabled: false}), // environment.production
+    NgxsLoggerPluginModule.forRoot({disabled: false}) //environment.production
   ],
   providers: [],
   bootstrap: [AppComponent]
