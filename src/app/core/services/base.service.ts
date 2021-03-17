@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class BaseService {
 private headers: HttpHeaders;
-private config = {baseUrl:''};
+private config = {baseUrl:'https://restcountries.eu/rest/v2/'};
   constructor(private httpClient: HttpClient ) {
     this.headers = new HttpHeaders();
     this.headers.set('Content-Type','application/json');

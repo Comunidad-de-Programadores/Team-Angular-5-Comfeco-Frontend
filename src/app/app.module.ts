@@ -28,7 +28,7 @@ import { UserProfileModule } from './modules/user-profile/user-profile.module';
     HomeComponent,
     PoliticsComponent,
     TermsServiceComponent,
-    TestComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
