@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { parsearErroresAPI } from '../../shared/parsear-errores-api';
+import { Store } from '@ngxs/store';
+import { UpdateActiveUserId } from 'src/app/core/store/application/application.actions';
 @Injectable({
   providedIn: 'root',
 })
@@ -26,24 +28,33 @@ export class AuthService {
     private _notification: NotificationService,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
+    private store: Store
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         // Logged in
         if (user) {
+          this.store.dispatch(new UpdateActiveUserId(user.uid))
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           // Logged out
+          this.store.dispatch(new UpdateActiveUserId(''))
           return of(null);
         }
       })
     )
   }
 
-  async registerWithEmail(email: string, password: string) {
-    await this.auth.createUserWithEmailAndPassword(email, password).then(user => {
+  async registerWithEmail(usuario) {
+    await this.auth.createUserWithEmailAndPassword(usuario.email, usuario.password).then(user => {
       this._notification.openSnackBar("Usuario Registrado", "", "", true)
-      return this.updateUserData(user.user);
+      console.log(user)
+      const userData = {
+        userName: usuario.userName,
+        email: usuario.email,
+        ...user.user
+      }
+      return this.updateUserData(userData);
     }).catch(error => {
       this._notification.openSnackBar(`Tu correo ya se encuentra registrado.`, "Error",)
       this.errores = parsearErroresAPI(error);
@@ -54,7 +65,8 @@ export class AuthService {
   async loginWithEmail(email: string, password: string) {
     await this.auth.signInWithEmailAndPassword(email, password).then(user => {
       this._notification.openSnackBar("Session Iniciada", "", "", true)
-      return this.updateUserData(user.user);
+      //  return this.updateUserData(user.user);
+      return;
     }).catch(error => {
       console.log(error)
       this._notification.openSnackBar(`Credenciales incorrectas!.`, "Error",)
@@ -66,12 +78,16 @@ export class AuthService {
   async registerWithGoogle() {
     const credential = await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     this._notification.openSnackBar("Session Iniciada", "", "", true)
-    return this.updateUserData(credential.user);
+    if (credential.additionalUserInfo.isNewUser) {
+      return this.updateUserData(credential.user);
+    }
   }
   async registerWithFacebook() {
     await this.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(user => {
       this._notification.openSnackBar("Session Iniciada", "", "", true)
-      return this.updateUserData(user.user);
+      if (user.additionalUserInfo.isNewUser) {
+        return this.updateUserData(user.user);
+      }
     }).catch(error => {
       this._notification.openSnackBar(`Tu correo ${error.email} ya se encuentra registrado.`, "Error",)
       this.errores = parsearErroresAPI(error);
@@ -80,21 +96,34 @@ export class AuthService {
 
   }
 
-  private updateUserData(user) {
+  public updateUserData(user) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<UserFirebase> = this.afs.doc(`users/${user.uid}`);
+    console.log(userRef)
     const PHOTO_URL_DEFAULT = "https://www.pngfind.com/pngs/m/470-4703547_icon-user-icon-hd-png-download.png";
     let data = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL
+      userName: user.userName,
+      fullName: user.displayName || user.fullName || "",
+      photoURL: user.photoURL,
+      gender: user.gender || "",
+      dateBirth: user.dateBirth || "",
+      country: user.country || "",
+      biography: user.biography || "",
+      facebook: user.facebook || "",
+      github: user.github || "",
+      twitter: user.twitter || "",
+      linkedin: user.linkedin || "",
+      interests: user.interests || "",
     }
     if (user.photoURL == null) {
       data.photoURL = PHOTO_URL_DEFAULT;
     }
-
-
+    if (data.userName == null && data.fullName != null) {
+      data.userName = data.fullName.replace(/ /g, "").toLowerCase();
+    }
+    console.log(data)
     return userRef.set(data, { merge: true })
 
   }
@@ -104,6 +133,13 @@ export class AuthService {
   }
 
   async recoveryPassword(email: string) {
-   return await this.auth.sendPasswordResetEmail(email);
+    return await this.auth.sendPasswordResetEmail(email);
+  }
+
+  async changeEmail(email: string) {
+    return await (await this.auth.currentUser).updateEmail(email);
+  }
+  async changePassword(password: string) {
+    return await (await this.auth.currentUser).updatePassword(password);
   }
 }

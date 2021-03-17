@@ -1,8 +1,8 @@
-import { Activity, Badge, Event, Group, GroupMembers } from "../../models/user/user.models";
+import { Activity, Badge, Event, Group, GroupMembers, UserProfile } from "../../models/user/user.models";
 
 export class UserProfileStateModel{
   currentPage:string;
-  user:any; // TODO: Cambiar tipo a interface usuario cuando este definida
+  user:UserProfile; // TODO: Cambiar tipo a interface usuario cuando este definida
   groups: Group[];
   badges: Badge[];
   activities: Activity[];

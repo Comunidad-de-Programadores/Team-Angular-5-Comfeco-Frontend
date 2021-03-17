@@ -1,3 +1,5 @@
+import { UserFirebase } from "../auth/user";
+
 export interface UserDetail {
   user_id: string;
   group_member?:string;
@@ -6,6 +8,13 @@ export interface UserDetail {
   active_events?:Event[];
   ban_events?:Event[];
   activities:Activity[]
+}
+
+export interface UserProfile extends UserFirebase,UserDetail{
+  areas:string[]; // TODO: @odprz remove when the logic has been updated
+  nick:string; // TODO: @odprz remove when the logic has been updated
+  biografia:string; // TODO: @odprz remove when the logic has been updated
+  imgProfile:string; // TODO: @odprz remove when the logic has been updated
 }
 
 
