@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { parsearErroresAPI } from '../../shared/parsear-errores-api';
+import { Store } from '@ngxs/store';
+import { UpdateActiveUserId } from 'src/app/core/store/application/application.actions';
 @Injectable({
   providedIn: 'root',
 })
@@ -26,14 +28,17 @@ export class AuthService {
     private _notification: NotificationService,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
+    private store: Store
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         // Logged in
         if (user) {
+          this.store.dispatch(new UpdateActiveUserId(user.uid))
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           // Logged out
+          this.store.dispatch(new UpdateActiveUserId(''))
           return of(null);
         }
       })

@@ -8,8 +8,7 @@ import { ApplicationStateModel } from "./application.model";
   name:'application',
   defaults:{
     isLoading:false,
-    // activeUserId:'usuario-test',
-    activeUserId:'user-from-api',
+    activeUserId:'',
     isDarkMode:false,
   }
 })
