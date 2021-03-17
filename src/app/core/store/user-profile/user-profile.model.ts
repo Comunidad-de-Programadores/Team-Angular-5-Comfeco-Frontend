@@ -1,4 +1,4 @@
-import { Activity, Badge, Event, Group } from "../../models/user/user.models";
+import { Activity, Badge, Event, Group, GroupMembers } from "../../models/user/user.models";
 
 export class UserProfileStateModel{
   currentPage:string;
@@ -7,6 +7,8 @@ export class UserProfileStateModel{
   badges: Badge[];
   activities: Activity[];
   events:Event[];
+  userGroupMembers:GroupMembers[];
+  areUserGroupLoade:boolean;
   areGroupsLoaded:boolean;
   areEventsLoaded:boolean;
   areUserProfileLoaded:boolean;

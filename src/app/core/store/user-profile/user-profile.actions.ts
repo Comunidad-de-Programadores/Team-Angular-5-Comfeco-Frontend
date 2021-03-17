@@ -43,3 +43,8 @@ export class GetAllEvents{
   static readonly type = '[USER PROFILE] Get All Events';
   constructor(){}
 }
+
+export class LoadGroupMembers{
+  static readonly type = '[USER PROFILE] Get Group Members';
+  constructor(public payload:{userId:string, groupMembersId:string}){}
+}
