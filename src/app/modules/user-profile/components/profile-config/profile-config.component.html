@@ -184,10 +184,11 @@
                         </div>
 
                     </mat-grid-list>
-
-
+                    <section style="margin-left: 50px;">
+                        <mat-checkbox (click)="changePasswordForm()" *ngIf="!changePassword" [disabled]="form.dirty">
+                            Cambiar contraseña</mat-checkbox>
+                    </section>
                 </div>
-
                 <div class="bottom" *ngIf="!changePassword">
                     <button [disabled]="!form.dirty">Save Changes</button>
                     <button type="button" (click)="changePasswordForm()" [disabled]="form.dirty"
@@ -205,7 +206,7 @@
                         <div class="field">
                             <mat-form-field style="width:300px;">
                                 <mat-label>Nueva contraseña</mat-label>
-                                <input type="password"  matInput formControlName="password">
+                                <input type="password" matInput formControlName="password">
                                 <small *ngIf="passwordNoValido">
                                     Tu contraseña debe tener al menos 8 caracteres.
                                 </small>
@@ -225,11 +226,12 @@
                     </mat-grid-tile>
                 </mat-grid-list>
                 <div style="text-align: center; color: red;">
-                    <small *ngIf="equalsPasswords" >Asegurate que las contraseñas sean las iguales.</small>
+                    <small *ngIf="equalsPasswords">Asegurate que las contraseñas sean las iguales.</small>
                 </div>
 
                 <div class="bottom" *ngIf="changePassword">
-                    <button class="button_left" type="submit" name="button" [disabled]="!formChangePassword.dirty">Cambiar contraseña</button>
+                    <button class="button_left" type="submit" name="button"
+                        [disabled]="!formChangePassword.dirty">Cambiar contraseña</button>
                     <button class="button_right" type="button" (click)="changePassword= !changePassword">Cancel</button>
                 </div>
 

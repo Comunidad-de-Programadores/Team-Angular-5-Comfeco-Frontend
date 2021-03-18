@@ -12,10 +12,11 @@ import { GroupsComponent } from './components/groups/groups.component';
 import { EventsComponent } from './components/events/events.component';
 import { RouterModule } from '@angular/router';
 import { FrameworkChipColorPipe } from './utils/pipes/framework-chip-color.pipe';
+import { ProfileConfigComponent } from './components/profile-config/profile-config.component';
 
 
 @NgModule({
-  declarations: [ProfileDashboardComponent, UserProfileComponent, BadgetsComponent, GroupsComponent, EventsComponent, FrameworkChipColorPipe],
+  declarations: [ProfileDashboardComponent, UserProfileComponent, BadgetsComponent, GroupsComponent, EventsComponent, FrameworkChipColorPipe,ProfileConfigComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,

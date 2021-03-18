@@ -16,6 +16,8 @@ import { switchMap } from 'rxjs/operators';
 import { parsearErroresAPI } from '../../shared/parsear-errores-api';
 import { Store } from '@ngxs/store';
 import { UpdateActiveUserId } from 'src/app/core/store/application/application.actions';
+import { UserService } from 'src/app/core/services/api/user/user.service';
+import { UserDetail } from 'src/app/core/models/user/user.models';
 @Injectable({
   providedIn: 'root',
 })
@@ -28,7 +30,8 @@ export class AuthService {
     private _notification: NotificationService,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private store: Store
+    private store: Store,
+    private _userService: UserService
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -46,15 +49,21 @@ export class AuthService {
   }
 
   async registerWithEmail(usuario) {
-    await this.auth.createUserWithEmailAndPassword(usuario.email, usuario.password).then(user => {
+    await this.auth.createUserWithEmailAndPassword(usuario.email, usuario.password).then((user) => {
       this._notification.openSnackBar("Usuario Registrado", "", "", true)
       console.log(user)
-      const userData = {
+      const userData: UserFirebase = {
         userName: usuario.userName,
         email: usuario.email,
         ...user.user
       }
-      return this.updateUserData(userData);
+      const userDetail: UserDetail = {
+        user_id: userData.uid
+      }
+      this._userService.addNewUser(userDetail).subscribe(res => {
+        return this.updateUserData(userData);
+      }, err => { // TO-DO Implementar en caso que falle esta petición.
+      })
     }).catch(error => {
       this._notification.openSnackBar(`Tu correo ya se encuentra registrado.`, "Error",)
       this.errores = parsearErroresAPI(error);
@@ -79,13 +88,26 @@ export class AuthService {
     const credential = await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     this._notification.openSnackBar("Session Iniciada", "", "", true)
     if (credential.additionalUserInfo.isNewUser) {
-      return this.updateUserData(credential.user);
+      const userDetail: UserDetail = {
+        user_id: credential.user.uid
+      }
+      this._userService.addNewUser(userDetail).subscribe(res => {
+        return this.updateUserData(credential.user);
+      }, err => { // TO-DO Implementar en caso que falle esta petición.
+      })
     }
   }
   async registerWithFacebook() {
     await this.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(user => {
       this._notification.openSnackBar("Session Iniciada", "", "", true)
       if (user.additionalUserInfo.isNewUser) {
+        const userDetail: UserDetail = {
+          user_id: user.user.uid
+        }
+        this._userService.addNewUser(userDetail).subscribe(res => {
+          return this.updateUserData(user);
+        }, err => { // TO-DO Implementar en caso que falle esta petición.
+        })
         return this.updateUserData(user.user);
       }
     }).catch(error => {
