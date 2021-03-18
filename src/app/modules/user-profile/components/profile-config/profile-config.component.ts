@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { CountriesService } from 'src/app/core/services/api/countries/countries.service';
 
 
 @Component({
@@ -25,11 +26,10 @@ export class ProfileConfigComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private _BaseService: BaseService,
     private _notificationService: NotificationService,
     public _authService: AuthService,
     private datePipe: DatePipe,
-    private http: HttpClient) {
+    private countryService: CountriesService) {
     this.files = [];
   }
   form: FormGroup;
@@ -43,6 +43,7 @@ export class ProfileConfigComponent implements OnInit {
     this.creacionDeFormulario();
     this._authService.user$.pipe(
       take(1)).subscribe(user => {
+        console.log(user)
         this.form.reset({
           userName: user.userName,
           email: user.email,
@@ -62,7 +63,7 @@ export class ProfileConfigComponent implements OnInit {
 
       });
       // TODO: @erick crear un servicio que implemente el baseService y no utilizar baseService de manera directa
-    this._BaseService.get(this.baseUrl,"all").subscribe(res => this.paises = res, error => console.log(error))
+    this.countryService.getCountries().subscribe(res => this.paises = res, error => console.log(error))
     this.onChanges();
 
   }

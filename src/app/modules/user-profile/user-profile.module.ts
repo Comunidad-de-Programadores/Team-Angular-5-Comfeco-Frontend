@@ -13,6 +13,7 @@ import { EventsComponent } from './components/events/events.component';
 import { RouterModule } from '@angular/router';
 import { FrameworkChipColorPipe } from './utils/pipes/framework-chip-color.pipe';
 import { ProfileConfigComponent } from './components/profile-config/profile-config.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,6 +23,8 @@ import { ProfileConfigComponent } from './components/profile-config/profile-conf
     UserProfileRoutingModule,
     MaterialModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgxsModule.forFeature([UserProfileState])
   ]
 })
