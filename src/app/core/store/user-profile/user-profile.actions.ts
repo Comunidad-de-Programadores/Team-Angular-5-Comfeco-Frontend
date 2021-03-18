@@ -1,3 +1,4 @@
+import { UserFirebase } from "../../models/auth/user";
 import { Activity, Event } from "../../models/user/user.models";
 
 export class SetCurrentPage{
@@ -15,6 +16,13 @@ export class AddUserActivity{
   static readonly type = '[USER PROFILE] Add User Activity';
   constructor(public payload: Activity){}
 }
+
+export class UpdateUserProfile{
+  static readonly type = '[USER PROFILE] Update User Profile';
+  constructor(public payload: UserFirebase){}
+}
+
+
 
 
 
@@ -37,6 +45,11 @@ export class GetCurrentUserProfile{
 export class GetAllBadges{
   static readonly type = '[USER PROFILE] Get All Badges';
   constructor(){}
+}
+
+export class AddBadgesToUser{
+  static readonly type = '[USER PROFILE] Add Badge to User';
+  constructor(public payload:{userId:string, badgeId:string}){}
 }
 
 export class GetAllEvents{

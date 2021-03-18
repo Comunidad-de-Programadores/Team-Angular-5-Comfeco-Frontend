@@ -1,5 +1,4 @@
-<div class="wrapper" [class.wrapper-0]="verifyWrapper(0)" [class.wrapper-50]="verifyWrapper(50)"
-    [class.wrapper-100]="verifyWrapper(100)">
+<div class="wrapper" >
 
     <div class="right" *ngIf="_authService.user$ | async as user">
         <div>
@@ -25,7 +24,6 @@
                                         <img class="imgB1 imgContainer fade-in"
                                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Google_Camera_Icon.svg/1024px-Google_Camera_Icon.svg.png"
                                             width="25px">
-
                                         <img class="avatar imgA1 imgContainer" style="border-radius: 50%;" width="100px"
                                             height="100px" *ngIf="!base64textString" (click)="updateImage=!updateImage"
                                             [src]="user.photoURL">
@@ -188,6 +186,13 @@
                         <mat-checkbox (click)="changePasswordForm()" *ngIf="!changePassword" [disabled]="form.dirty">
                             Cambiar contraseña</mat-checkbox>
                     </section>
+                    <br />
+                    <p style="text-align: center;">
+                  <!--      <progress style="width: 70%; height: 0px;" max="100;" [value]="porcent" [class.wrapper-0]="verifyWrapper(0)" [class.wrapper-50]="verifyWrapper(50)"
+                        [class.wrapper-100]="verifyWrapper(100)"></progress>-->
+                         {{porcent | number: '1.0-0'}}% completado
+                    </p>
+
                 </div>
                 <div class="bottom" *ngIf="!changePassword">
                     <button [disabled]="!form.dirty">Save Changes</button>
@@ -197,6 +202,8 @@
                     </button>
                 </div>
             </form>
+
+
             <form [formGroup]="formChangePassword" class="fade-in"
                 (submit)="changePasswordUpdate(formChangePassword.value)" *ngIf="changePassword">
                 <h2 style="margin-top: 0px;">Cambiar credenciales</h2>

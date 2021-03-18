@@ -5,9 +5,11 @@ import { BadgesService } from "../../services/api/badges/badges.service";
 import { EventsService } from "../../services/api/events/events.service";
 import { GroupsService } from "../../services/api/groups/groups.service";
 import { UserService } from "../../services/api/user/user.service";
-import { SetCurrentPage, AddAreaToUser, AddUserActivity, AddUserEvent, GetAllGroups, GetCurrentUserProfile, GetAllBadges, GetAllEvents, LoadGroupMembers } from "./user-profile.actions";
+import { SetCurrentPage, AddAreaToUser, AddUserActivity, AddUserEvent, GetAllGroups, GetCurrentUserProfile, GetAllBadges, GetAllEvents, LoadGroupMembers, AddBadgesToUser, UpdateUserProfile } from "./user-profile.actions";
 import { UserProfileStateModel } from "./user-profile.model";
-
+import { ApplicationState } from '../application/application.state'
+import { UpdateUserActive } from "../application/application.actions";
+import { UserFirebase } from "../../models/auth/user";
 @State({
   name: 'userProfile',
   defaults: {
@@ -63,7 +65,8 @@ export class UserProfileState{
   constructor(private groupService: GroupsService,
     private userService: UserService,
     private badgesService: BadgesService,
-    private eventsService: EventsService) {
+    private eventsService: EventsService,
+    private applicationState: ApplicationState) {
   }
 
   @Selector()
@@ -200,6 +203,34 @@ export class UserProfileState{
       }),
         // TODO: implementar dispatch para manejar errores en el estado
     );
+  }
+
+  @Action(AddBadgesToUser)
+  addBadges({getState, patchState}:StateContext<UserProfileStateModel>, {payload}:any){
+    const state = getState();
+  
+    return this.userService.addBadgeToUser(payload.userId,payload.badge).pipe(
+      tap(result=>{
+        patchState({
+          badges:result.badges,
+          areBadgesLoaded:true
+        });
+      }),
+        // TODO: implementar dispatch para manejar errores en el estado
+    );
+  }
+
+  @Action(UpdateUserProfile)
+  UpdateUserProfile({getState, patchState}:StateContext<UserProfileStateModel>, {payload}:UpdateUserProfile){
+    const state = getState();
+    //TODO: @Erick implementar cuando se tengan el modelo de usuario definitivo  
+    /*
+    return  patchState({
+          user:payload,
+        });
+
+        // TODO: implementar dispatch para manejar errores en el estado
+ */
   }
 
   @Action(GetAllEvents)
