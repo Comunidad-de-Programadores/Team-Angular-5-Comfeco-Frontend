@@ -1,3 +1,6 @@
+<div class="div" style="margin-top: 10px;">
+    <button mat-raised-button color=warns (click)="onSelectCurrentPage('nav-profile')"><mat-icon>keyboard_backspace</mat-icon>Regresar</button>
+</div>
 <div class="wrapper" >
 
     <div class="right" *ngIf="_authService.user$ | async as user">

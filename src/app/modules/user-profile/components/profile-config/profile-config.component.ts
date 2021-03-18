@@ -7,7 +7,7 @@ import { DatePipe } from '@angular/common';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { CountriesService } from 'src/app/core/services/api/countries/countries.service';
 import { Select, Store } from '@ngxs/store';
-import { AddBadgesToUser, UpdateUserProfile } from 'src/app/core/store/user-profile/user-profile.actions';
+import { AddBadgesToUser, SetCurrentPage, UpdateUserProfile } from 'src/app/core/store/user-profile/user-profile.actions';
 import { Observable, Subscription, zip } from 'rxjs';
 import { ApplicationState } from 'src/app/core/store/application/application.state';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -296,6 +296,9 @@ export class ProfileConfigComponent implements OnInit {
     }
     return false;
 
+  }
+  onSelectCurrentPage(page: string) {
+    this.store.dispatch(new SetCurrentPage(page));
   }
 
 }
