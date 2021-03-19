@@ -1,12 +1,15 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { UserFirebase } from 'src/app/core/models/auth/user';
-import { BaseService } from 'src/app/core/services/base.service';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { CountriesService } from 'src/app/core/services/api/countries/countries.service';
+import { Store } from '@ngxs/store';
+import { AddBadgesToUser, SetCurrentPage, UpdateUserProfile } from 'src/app/core/store/user-profile/user-profile.actions';
+import { Country } from 'src/app/core/models/countries/Countries';
+import { ErrorItem } from 'src/app/core/models/notification/error';
 
 
 @Component({
@@ -16,33 +19,35 @@ import { NotificationService } from 'src/app/core/services/notification.service'
   providers: [DatePipe]
 })
 export class ProfileConfigComponent implements OnInit {
-  public files: any[];
+  files: any[];
   base64textString: string;
-  public updateImage: boolean = false;
+  updateImage: boolean = false;
   porcent: Number = 0;
   interestsList: string[] = ['Front End', 'Back End', 'Angular', 'ReactJs', 'DevOps'];
-  baseUrl ='https://restcountries.eu/rest/v2/'; // TODO: @erick agregar a variables de entorno
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private _BaseService: BaseService,
-    private _notificationService: NotificationService,
-    public _authService: AuthService,
-    private datePipe: DatePipe,
-    private http: HttpClient) {
-    this.files = [];
-  }
+  genreList: string[] = ['Indefinido', 'Mujer', 'Hombre'];
   form: FormGroup;
   formChangePassword: FormGroup;
   changePassword: boolean = false;
-  paises: any[];
-  error: any;
+  paises: Country[];
+  error: ErrorItem;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private _notificationService: NotificationService,
+    public _authService: AuthService,
+    private datePipe: DatePipe,
+    private store: Store,
+    private countryService: CountriesService,) {
+    this.files = [];
+  }
+
 
 
   ngOnInit(): void {
     this.creacionDeFormulario();
     this._authService.user$.pipe(
       take(1)).subscribe(user => {
+        console.log(user)
         this.form.reset({
           userName: user.userName,
           email: user.email,
@@ -61,8 +66,8 @@ export class ProfileConfigComponent implements OnInit {
         })
 
       });
-      // TODO: @erick crear un servicio que implemente el baseService y no utilizar baseService de manera directa
-    this._BaseService.get(this.baseUrl,"all").subscribe(res => this.paises = res, error => console.log(error))
+    // TODO: @erick crear un servicio que implemente el baseService y no utilizar baseService de manera directa
+    this.countryService.getCountries().subscribe(res => this.paises = res, error => console.log(error))
     this.onChanges();
 
   }
@@ -84,6 +89,7 @@ export class ProfileConfigComponent implements OnInit {
     });
 
   }
+
 
   creacionDeFormulario(): void {
     this.form = this.formBuilder.group({
@@ -211,28 +217,29 @@ export class ProfileConfigComponent implements OnInit {
 
   }
 
-  updateProfile(user) {
-
-    let userData: UserFirebase;
-    userData = { ...user }
-    let datePipe = "";
-    if (this.form.get('dateBirth').value != "") {
-      datePipe = this.datePipe.transform(this.form.get('dateBirth').value, 'MM-dd-yyyy')
-    } else {
-      datePipe = null;
-    }
+  async updateProfile(user: UserFirebase) {
 
 
-    if (this.base64textString) {
-      console.log(this.base64textString)
-      userData.dateBirth = datePipe;
-      userData.photoURL = this.base64textString;
-    }
-
-    if (datePipe != null) {
-      userData.dateBirth = datePipe;
-    }
     if (this.form.valid) {
+      let userData: UserFirebase;
+      userData = { ...user }
+      let datePipe = "";
+      if (this.form.get('dateBirth').value != "") {
+        datePipe = this.datePipe.transform(this.form.get('dateBirth').value, 'MM-dd-yyyy')
+      } else {
+        datePipe = null;
+      }
+
+
+      if (this.base64textString) {
+        console.log(this.base64textString)
+        userData.dateBirth = datePipe;
+        userData.photoURL = this.base64textString;
+      }
+
+      if (datePipe != null) {
+        userData.dateBirth = datePipe;
+      }
       this._authService.updateUserData(userData)
         .then(sucess => {
           this.error = {
@@ -240,6 +247,12 @@ export class ProfileConfigComponent implements OnInit {
             message: "Todos los campos han sido actualizados con éxito",
             type: "alert-success",
             title: "Success!"
+          }
+
+
+          this.store.dispatch(new UpdateUserProfile(userData))
+          if (this.porcent == 100) {
+            this.store.dispatch(new AddBadgesToUser({ userId: userData.uid, id: '60458045e1d6810bb831563c' }))
           }
         }).catch(badError => {
           this.error = {
@@ -259,6 +272,8 @@ export class ProfileConfigComponent implements OnInit {
       }
     }
   }
+
+
   verifyWrapper(typeWrapper: Number) {
     if (typeWrapper === 0) {
       if (this.porcent <= 0 && this.porcent < 50) {
@@ -278,6 +293,9 @@ export class ProfileConfigComponent implements OnInit {
     }
     return false;
 
+  }
+  onSelectCurrentPage(page: string) {
+    this.store.dispatch(new SetCurrentPage(page));
   }
 
 }

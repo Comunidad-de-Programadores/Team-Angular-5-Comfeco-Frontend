@@ -8,9 +8,11 @@ import { BadgesService } from "../../services/api/badges/badges.service";
 import { EventsService } from "../../services/api/events/events.service";
 import { GroupsService } from "../../services/api/groups/groups.service";
 import { UserService } from "../../services/api/user/user.service";
-import { SetCurrentPage, AddAreaToUser, AddUserActivity, AddUserEvent, GetAllGroups, GetCurrentUserProfile, GetAllBadges, GetAllEvents, LoadGroupMembers, ResetUserProfile } from "./user-profile.actions";
+import { SetCurrentPage, AddAreaToUser, AddUserActivity, AddUserEvent, GetAllGroups, GetCurrentUserProfile, GetAllBadges, GetAllEvents, LoadGroupMembers, AddBadgesToUser, UpdateUserProfile, ResetUserProfile } from "./user-profile.actions";
 import { UserProfileStateModel } from "./user-profile.model";
-
+import { ApplicationState } from '../application/application.state'
+import { UpdateUserActive } from "../application/application.actions";
+import { NotificationService } from "../../services/notification.service";
 @State({
   name: 'userProfile',
   defaults: {
@@ -29,7 +31,13 @@ import { UserProfileStateModel } from "./user-profile.model";
       linkedin:'',
       interests:'',
       userName:'',
-      email:''
+      email:'',
+      activities:[],
+      badges:[],
+      ban_events:[],
+      active_events:[],
+      team_rol:null,
+      group_member:''
     },
     groups: [],
     badges: [],
@@ -50,7 +58,8 @@ export class UserProfileState{
     private userService: UserService,
     private badgesService: BadgesService,
     private eventsService: EventsService,
-    private afs:AngularFirestore) {
+    private afs:AngularFirestore,
+    private ntfService: NotificationService) {
   }
 
   @Selector()
@@ -205,6 +214,58 @@ export class UserProfileState{
     );
   }
 
+  @Action(AddBadgesToUser)
+  addBadges({getState, patchState}:StateContext<UserProfileStateModel>, {payload}:any){
+    const state = getState();
+    let result= state.user.badges.find(b=>b.id==payload.id);
+    if (result?true:false) {
+      return;
+
+  }else {
+    return this.userService.addBadgeToUser(payload.userId,{id: payload.id}).pipe(
+      tap(result=>{
+        patchState({
+          user:{...state.user,
+            badges:result.badges
+          },
+          areBadgesLoaded:true
+        });
+        this.ntfService.openSnackBar("¡Felicidades, te haz ganado una Insignia!", "BADGE!")
+
+      }),
+        // TODO: implementar dispatch para manejar errores en el estado
+    );
+  };
+  }
+
+  @Action(UpdateUserProfile)
+  UpdateUserProfile({getState, patchState}:StateContext<UserProfileStateModel>, {payload}:UpdateUserProfile){
+    const state = getState();
+
+    return  patchState({
+          user:{ ...state.user,
+            user_id: payload.uid,
+            uid: payload.uid,
+            photoURL:payload.photoURL,
+            fullName: payload.fullName,
+            gender: payload.gender,
+            dateBirth: payload.dateBirth,
+            country: payload.country,
+            biography: payload.biography,
+            facebook: payload.facebook,
+            github: payload.github,
+            twitter: payload.twitter,
+            linkedin: payload.linkedin,
+            interests:payload.interests,
+            userName: payload.userName,
+            email:payload.email
+          },
+        });
+
+        // TODO: implementar dispatch para manejar errores en el estado
+
+  }
+
   @Action(GetAllEvents)
   getAllEvents({getState, patchState}:StateContext<UserProfileStateModel>){
     return this.eventsService.getEvents().pipe(
@@ -242,6 +303,11 @@ export class UserProfileState{
       user: {
         user_id:'',
         activities:[],
+        badges:[],
+        ban_events:[],
+        active_events:[],
+        team_rol:null,
+        group_member:'',
         uid:'',
         photoURL:'',
         fullName:'',
@@ -255,7 +321,7 @@ export class UserProfileState{
         linkedin:'',
         interests:[],
         userName:'',
-        email:''
+        email:'',
       } ,
       groups: [],
       badges: [],
