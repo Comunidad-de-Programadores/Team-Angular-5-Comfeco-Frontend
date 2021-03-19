@@ -8,15 +8,10 @@ import { BadgesService } from "../../services/api/badges/badges.service";
 import { EventsService } from "../../services/api/events/events.service";
 import { GroupsService } from "../../services/api/groups/groups.service";
 import { UserService } from "../../services/api/user/user.service";
-<<<<<<< HEAD
-import { SetCurrentPage, AddAreaToUser, AddUserActivity, AddUserEvent, GetAllGroups, GetCurrentUserProfile, GetAllBadges, GetAllEvents, LoadGroupMembers, AddBadgesToUser, UpdateUserProfile } from "./user-profile.actions";
-=======
-import { SetCurrentPage, AddAreaToUser, AddUserActivity, AddUserEvent, GetAllGroups, GetCurrentUserProfile, GetAllBadges, GetAllEvents, LoadGroupMembers, ResetUserProfile } from "./user-profile.actions";
->>>>>>> develop
+import { SetCurrentPage, AddAreaToUser, AddUserActivity, AddUserEvent, GetAllGroups, GetCurrentUserProfile, GetAllBadges, GetAllEvents, LoadGroupMembers, AddBadgesToUser, UpdateUserProfile, ResetUserProfile } from "./user-profile.actions";
 import { UserProfileStateModel } from "./user-profile.model";
 import { ApplicationState } from '../application/application.state'
 import { UpdateUserActive } from "../application/application.actions";
-import { UserFirebase } from "../../models/auth/user";
 @State({
   name: 'userProfile',
   defaults: {
@@ -56,11 +51,8 @@ export class UserProfileState{
     private userService: UserService,
     private badgesService: BadgesService,
     private eventsService: EventsService,
-<<<<<<< HEAD
+    private afs:AngularFirestore,
     private applicationState: ApplicationState) {
-=======
-    private afs:AngularFirestore) {
->>>>>>> develop
   }
 
   @Selector()
