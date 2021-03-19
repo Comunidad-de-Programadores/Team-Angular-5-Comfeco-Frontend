@@ -1,7 +1,7 @@
 import { UserFirebase } from "../auth/user";
 
 export interface UserDetail {
-  user_id: string;
+  user_id?: string;
   group_member?:string;
   team_rol?:TeamRol;
   badges?:Badge[];

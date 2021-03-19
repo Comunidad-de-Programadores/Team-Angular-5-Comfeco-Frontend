@@ -232,14 +232,13 @@ export class UserProfileState{
   @Action(UpdateUserProfile)
   UpdateUserProfile({getState, patchState}:StateContext<UserProfileStateModel>, {payload}:UpdateUserProfile){
     const state = getState();
-    //TODO: @Erick implementar cuando se tengan el modelo de usuario definitivo  
-    /*
+
     return  patchState({
           user:payload,
         });
 
         // TODO: implementar dispatch para manejar errores en el estado
- */
+ 
   }
 
   @Action(GetAllEvents)
