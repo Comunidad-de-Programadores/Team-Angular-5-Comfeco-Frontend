@@ -11,10 +11,6 @@ export interface UserDetail {
 }
 
 export interface UserProfile extends UserFirebase,UserDetail{
-  areas:string[]; // TODO: @odprz remove when the logic has been updated
-  nick:string; // TODO: @odprz remove when the logic has been updated
-  biografia:string; // TODO: @odprz remove when the logic has been updated
-  imgProfile:string; // TODO: @odprz remove when the logic has been updated
 }
 
 
@@ -46,7 +42,7 @@ export interface Group{
 
 export interface GroupMembers{
   group:Group;
-  members:UserDetail[];
+  members:UserProfile[];
 }
 
 export interface Activity{
