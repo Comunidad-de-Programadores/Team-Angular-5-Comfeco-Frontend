@@ -16,6 +16,8 @@ import { switchMap } from 'rxjs/operators';
 import { parsearErroresAPI } from '../../shared/parsear-errores-api';
 import { Store } from '@ngxs/store';
 import { UpdateActiveUserId } from 'src/app/core/store/application/application.actions';
+import { UserProfileState } from 'src/app/core/store/user-profile/user-profile.state';
+import { ResetUserProfile } from 'src/app/core/store/user-profile/user-profile.actions';
 @Injectable({
   providedIn: 'root',
 })
@@ -38,7 +40,9 @@ export class AuthService {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           // Logged out
-          this.store.dispatch(new UpdateActiveUserId(''))
+          this.store.dispatch(new UpdateActiveUserId(''));
+          //TODO: @odprz Verify why on logout, getAllbadgets action is Called
+          this.store.dispatch( new ResetUserProfile());
           return of(null);
         }
       })
