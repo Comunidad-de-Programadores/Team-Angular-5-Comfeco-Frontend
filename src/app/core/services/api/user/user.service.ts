@@ -24,7 +24,7 @@ export class UserService {
   }
 
   addBadgeToUser(userId: string, badge: Badge): Observable<UserDetail> {
-    return this.baseService.post<Badge>(this.baseUrl, this.requestUrl + userId + '/badges', badge);
+    return this.baseService.post<UserDetail>(this.baseUrl, this.requestUrl + userId + '/badges', badge);
   }
 
   addGroupToUser(userId: string, group: Group): Observable<UserDetail> {

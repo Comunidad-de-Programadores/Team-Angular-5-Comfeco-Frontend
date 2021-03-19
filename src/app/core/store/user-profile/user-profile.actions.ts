@@ -49,7 +49,7 @@ export class GetAllBadges{
 
 export class AddBadgesToUser{
   static readonly type = '[USER PROFILE] Add Badge to User';
-  constructor(public payload:{userId:string, badgeId:string}){}
+  constructor(public payload:{userId:string, id:string}){}
 }
 
 export class GetAllEvents{

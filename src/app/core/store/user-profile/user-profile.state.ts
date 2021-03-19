@@ -208,16 +208,23 @@ export class UserProfileState{
   @Action(AddBadgesToUser)
   addBadges({getState, patchState}:StateContext<UserProfileStateModel>, {payload}:any){
     const state = getState();
-  
-    return this.userService.addBadgeToUser(payload.userId,payload.badge).pipe(
+    let result= state.user.badges.find(b=>b.id==payload.id);
+    if (result?true:false) {
+      return;
+ 
+  }else {
+    return this.userService.addBadgeToUser(payload.userId,{id: payload.id}).pipe(
       tap(result=>{
         patchState({
-          badges:result.badges,
+          user:{...state.user,
+            badges:result.badges
+          },
           areBadgesLoaded:true
         });
       }),
         // TODO: implementar dispatch para manejar errores en el estado
     );
+  };
   }
 
   @Action(UpdateUserProfile)

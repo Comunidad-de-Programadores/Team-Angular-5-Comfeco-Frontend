@@ -26,6 +26,8 @@ export class ProfileConfigComponent implements OnInit {
   public updateImage: boolean = false;
   porcent: Number = 0;
   interestsList: string[] = ['Front End', 'Back End', 'Angular', 'ReactJs', 'DevOps'];
+  genreList: string[] = ['Indefinido', 'Mujer', 'Hombre'];
+
   @Select(ApplicationState.getActiveUserId) activeUserId$: Observable<string>;
   areUserInfoLoad: Subscription;
 
@@ -255,7 +257,7 @@ export class ProfileConfigComponent implements OnInit {
 
           this.store.dispatch(new UpdateUserProfile(userData))
           if (this.porcent == 100) {
-            this.store.dispatch(new AddBadgesToUser({ userId: userData.uid, badgeId: '60458045e1d6810bb831563c' }))
+            this.store.dispatch(new AddBadgesToUser({ userId: userData.uid, id: '60458045e1d6810bb831563c' }))
           }
         }).catch(badError => {
           this.error = {

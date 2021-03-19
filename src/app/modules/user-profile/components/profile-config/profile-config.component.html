@@ -1,4 +1,4 @@
-<div class="div" style="margin-top: 10px;">
+<div class="div" style="margin-top: 100px; position: absolute;">
     <button mat-raised-button color=warns (click)="onSelectCurrentPage('nav-profile')"><mat-icon>keyboard_backspace</mat-icon>Regresar</button>
 </div>
 <div class="wrapper" >
@@ -64,9 +64,14 @@
 
                         <mat-grid-tile>
                             <div style="width:190px; margin: 0%; ">
-                                <mat-form-field style="width:190px;">
+                                <mat-form-field appearance="fill" style="width:190px;">
                                     <mat-label>Genero</mat-label>
-                                    <input matInput formControlName="gender">
+                                    <mat-select [(value)]="selected" formControlName="gender">
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let item of genreList" [value]="item">{{item}}
+                                        </mat-option>
+    
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -199,10 +204,7 @@
                 </div>
                 <div class="bottom" *ngIf="!changePassword">
                     <button [disabled]="!form.dirty">Save Changes</button>
-                    <button type="button" (click)="changePasswordForm()" [disabled]="form.dirty"
-                        *ngIf="!changePassword">
-                        Cambiar Contraseña
-                    </button>
+
                 </div>
             </form>
 
