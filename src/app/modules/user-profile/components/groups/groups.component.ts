@@ -14,6 +14,11 @@ import { UserProfileState } from 'src/app/core/store/user-profile/user-profile.s
 })
 export class GroupsComponent implements OnInit {
 
+  originalGroupList:Group[];
+  groupList:Group[];
+  filterGroupValue = '';
+  searchGroupTextValue = '';
+
   @Select(UserProfileState.getGroupsList) groups$: Observable<Group[]>;
   @Select(UserProfileState.areGroupsLoaded) areGroupsLoaded$: Observable<boolean>;
   @Select(UserProfileState.isUserOnAGroup) isUserOnAgroup$:Observable<boolean>;
@@ -38,9 +43,14 @@ export class GroupsComponent implements OnInit {
           }
         }
       })
-    ).subscribe(value=>{
-      console.log(value);
-    });
+    ).subscribe();
+
+    this.groups$.subscribe(
+      result=>{
+        this.originalGroupList=result;
+        this.setGroupListFiltered();
+      },()=>{});
+
   }
 
   ngOnDestroy(): void {
@@ -53,5 +63,20 @@ export class GroupsComponent implements OnInit {
     this.store.dispatch(new AddUserActivity({description:`Te has unido al grupo "Front Coders"  registro: ${Date.now()}`}));
   }
 
+  onSearchChange(textForSearch:string){
+    this.searchGroupTextValue = textForSearch;
+    this.setGroupListFiltered();
+  }
+
+  onFilterGroupChange(groupFilterValue:string){
+    this.filterGroupValue = groupFilterValue;
+    this.setGroupListFiltered();
+  }
+
+  setGroupListFiltered(){
+    this.groupList=this.originalGroupList
+      .filter(group=>group.name.toLowerCase().includes(this.searchGroupTextValue.toLowerCase()))
+      .filter(group=>group.framework.name.toLowerCase().includes(this.filterGroupValue.toLowerCase()));
+  }
 
 }
