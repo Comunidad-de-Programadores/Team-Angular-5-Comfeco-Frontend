@@ -41,21 +41,34 @@
       <div class="groups-header">
         <div class="filter">
           <mat-form-field>
-            <mat-select placeholder="Filtrar por framework" name="item">
+            <mat-select placeholder="Filtrar por framework" name="item" (selectionChange)="onFilterGroupChange($event.value)">
               <mat-option value="">
+                Todos
+              </mat-option>
+              <mat-option value="Vue Js">
+                Vue Js
+              </mat-option>
+              <mat-option value="Svelte">
+                Svelte
+              </mat-option>
+              <mat-option value="Angular">
                 Angular
               </mat-option>
+              <mat-option value="React">
+                React
+              </mat-option>
+              <!-- TODO: @erick recuperar lista de frameworks desde el estado de la aplicacion -->
             </mat-select>
           </mat-form-field>
         </div>
         <div class="search">
           <mat-form-field>
-            <input matInput placeholder="Buscar grupo" >
+            <input #textSearch (keyup)="onSearchChange(textSearch.value)" matInput placeholder="Buscar grupo" >
           </mat-form-field>
         </div>
       </div>
       <div class="groups-content">
-        <ng-container *ngFor="let group of groups$|async">
+        <ng-container *ngFor="let group of groupList">
           <div class="card-container">
             <div class="custom-card">
               <div class="card-relative">
