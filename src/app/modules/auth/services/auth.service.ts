@@ -18,6 +18,9 @@ import { Store } from '@ngxs/store';
 import { UpdateActiveUserId } from 'src/app/core/store/application/application.actions';
 import { UserService } from 'src/app/core/services/api/user/user.service';
 import { UserDetail } from 'src/app/core/models/user/user.models';
+
+import { UserProfileState } from 'src/app/core/store/user-profile/user-profile.state';
+import { ResetUserProfile } from 'src/app/core/store/user-profile/user-profile.actions';
 @Injectable({
   providedIn: 'root',
 })
@@ -41,7 +44,9 @@ export class AuthService {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           // Logged out
-          this.store.dispatch(new UpdateActiveUserId(''))
+          this.store.dispatch(new UpdateActiveUserId(''));
+          //TODO: @odprz Verify why on logout, getAllbadgets action is Called
+          this.store.dispatch( new ResetUserProfile());
           return of(null);
         }
       })
