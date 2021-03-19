@@ -7,7 +7,7 @@ export interface UserDetail {
   badges?:Badge[];
   active_events?:Event[];
   ban_events?:Event[];
-  activities?:Activity[]
+  activities?:Activity[];
 }
 
 export interface UserProfile extends UserFirebase,UserDetail{

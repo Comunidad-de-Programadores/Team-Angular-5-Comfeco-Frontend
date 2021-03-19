@@ -142,7 +142,7 @@ export class AuthService {
       github: user.github || "",
       twitter: user.twitter || "",
       linkedin: user.linkedin || "",
-      interests: user.interests || "",
+      interests: user.interests || [],
     }
     if (user.photoURL == null) {
       data.photoURL = PHOTO_URL_DEFAULT;

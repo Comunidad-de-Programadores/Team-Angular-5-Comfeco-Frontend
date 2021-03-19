@@ -31,7 +31,13 @@ import { NotificationService } from "../../services/notification.service";
       linkedin:'',
       interests:'',
       userName:'',
-      email:''
+      email:'',
+      activities:[],
+      badges:[],
+      ban_events:[],
+      active_events:[],
+      team_rol:null,
+      group_member:''
     },
     groups: [],
     badges: [],
@@ -214,7 +220,7 @@ export class UserProfileState{
     let result= state.user.badges.find(b=>b.id==payload.id);
     if (result?true:false) {
       return;
- 
+
   }else {
     return this.userService.addBadgeToUser(payload.userId,{id: payload.id}).pipe(
       tap(result=>{
@@ -257,7 +263,7 @@ export class UserProfileState{
         });
 
         // TODO: implementar dispatch para manejar errores en el estado
- 
+
   }
 
   @Action(GetAllEvents)
@@ -297,6 +303,11 @@ export class UserProfileState{
       user: {
         user_id:'',
         activities:[],
+        badges:[],
+        ban_events:[],
+        active_events:[],
+        team_rol:null,
+        group_member:'',
         uid:'',
         photoURL:'',
         fullName:'',
@@ -310,7 +321,7 @@ export class UserProfileState{
         linkedin:'',
         interests:[],
         userName:'',
-        email:''
+        email:'',
       } ,
       groups: [],
       badges: [],

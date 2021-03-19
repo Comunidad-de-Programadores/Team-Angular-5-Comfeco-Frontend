@@ -2,8 +2,8 @@
 <div class="left-area">
   <div class="custom-card">
     <div class="profile">
-      <img src="{{(profileUserInfo$|async)?.user?.imgProfile}}" class="profile-image">
-      <a class="edit-button" (click)="onSelectCurrentPage('nav-edit-profile')">Editar</a>
+      <img src="{{(profileUserInfo$|async)?.user?.photoURL}}" class="profile-image">
+      <a class="edit-button" (click)="onEditProfile()">Editar</a>
     </div>
     <div class="custom-card-header profile-header">
       <div class="custom-card-title">{{((profileUserInfo$ | async)?.user?.userName |titlecase)}}</div>
