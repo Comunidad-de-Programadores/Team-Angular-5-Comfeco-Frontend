@@ -1,17 +1,15 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { map, take, tap } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { take } from 'rxjs/operators';
 import { UserFirebase } from 'src/app/core/models/auth/user';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { DatePipe } from '@angular/common';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { CountriesService } from 'src/app/core/services/api/countries/countries.service';
-import { Select, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { AddBadgesToUser, SetCurrentPage, UpdateUserProfile } from 'src/app/core/store/user-profile/user-profile.actions';
-import { Observable, Subscription, zip } from 'rxjs';
-import { ApplicationState } from 'src/app/core/store/application/application.state';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { UserService } from 'src/app/core/services/api/user/user.service';
+import { Country } from 'src/app/core/models/countries/Countries';
+import { ErrorItem } from 'src/app/core/models/notification/error';
 
 
 @Component({
@@ -21,15 +19,17 @@ import { UserService } from 'src/app/core/services/api/user/user.service';
   providers: [DatePipe]
 })
 export class ProfileConfigComponent implements OnInit {
-  public files: any[];
+  files: any[];
   base64textString: string;
-  public updateImage: boolean = false;
+  updateImage: boolean = false;
   porcent: Number = 0;
   interestsList: string[] = ['Front End', 'Back End', 'Angular', 'ReactJs', 'DevOps'];
   genreList: string[] = ['Indefinido', 'Mujer', 'Hombre'];
-
-  @Select(ApplicationState.getActiveUserId) activeUserId$: Observable<string>;
-  areUserInfoLoad: Subscription;
+  form: FormGroup;
+  formChangePassword: FormGroup;
+  changePassword: boolean = false;
+  paises: Country[];
+  error: ErrorItem;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,15 +37,10 @@ export class ProfileConfigComponent implements OnInit {
     public _authService: AuthService,
     private datePipe: DatePipe,
     private store: Store,
-    private countryService: CountriesService,
-    private userService: UserService) {
+    private countryService: CountriesService,) {
     this.files = [];
   }
-  form: FormGroup;
-  formChangePassword: FormGroup;
-  changePassword: boolean = false;
-  paises: any[];
-  error: any;
+
 
 
   ngOnInit(): void {

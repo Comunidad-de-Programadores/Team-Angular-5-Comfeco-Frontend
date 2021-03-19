@@ -12,6 +12,7 @@ import { SetCurrentPage, AddAreaToUser, AddUserActivity, AddUserEvent, GetAllGro
 import { UserProfileStateModel } from "./user-profile.model";
 import { ApplicationState } from '../application/application.state'
 import { UpdateUserActive } from "../application/application.actions";
+import { NotificationService } from "../../services/notification.service";
 @State({
   name: 'userProfile',
   defaults: {
@@ -52,7 +53,7 @@ export class UserProfileState{
     private badgesService: BadgesService,
     private eventsService: EventsService,
     private afs:AngularFirestore,
-    private applicationState: ApplicationState) {
+    private ntfService: NotificationService) {
   }
 
   @Selector()
@@ -223,6 +224,8 @@ export class UserProfileState{
           },
           areBadgesLoaded:true
         });
+        this.ntfService.openSnackBar("¡Felicidades, te haz ganado una Insignia!", "BADGE!")
+
       }),
         // TODO: implementar dispatch para manejar errores en el estado
     );
@@ -234,7 +237,23 @@ export class UserProfileState{
     const state = getState();
 
     return  patchState({
-          user:payload,
+          user:{ ...state.user,
+            user_id: payload.uid,
+            uid: payload.uid,
+            photoURL:payload.photoURL,
+            fullName: payload.fullName,
+            gender: payload.gender,
+            dateBirth: payload.dateBirth,
+            country: payload.country,
+            biography: payload.biography,
+            facebook: payload.facebook,
+            github: payload.github,
+            twitter: payload.twitter,
+            linkedin: payload.linkedin,
+            interests:payload.interests,
+            userName: payload.userName,
+            email:payload.email
+          },
         });
 
         // TODO: implementar dispatch para manejar errores en el estado
