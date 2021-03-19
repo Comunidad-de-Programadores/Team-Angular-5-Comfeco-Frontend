@@ -12,6 +12,6 @@
     <app-badgets *ngIf="currentPage === dashboardRoutes.badges"></app-badgets>
     <app-groups *ngIf="currentPage === dashboardRoutes.groups"></app-groups>
     <app-events *ngIf="currentPage === dashboardRoutes.events"></app-events>
-    <!-- TODO: @erick agregar componente editProfile aqui validando la ruta-->
+    <app-profile-config *ngIf="currentPage === dashboardRoutes.editProfile"></app-profile-config>
   </div>
 </div>

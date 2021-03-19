@@ -1,5 +1,7 @@
-<div class="wrapper" [class.wrapper-0]="verifyWrapper(0)" [class.wrapper-50]="verifyWrapper(50)"
-    [class.wrapper-100]="verifyWrapper(100)">
+<div class="div" style="margin-top: 100px; position: absolute;">
+    <button mat-raised-button color=warns (click)="onSelectCurrentPage('nav-profile')"><mat-icon>keyboard_backspace</mat-icon>Regresar</button>
+</div>
+<div class="wrapper" >
 
     <div class="right" *ngIf="_authService.user$ | async as user">
         <div>
@@ -25,7 +27,6 @@
                                         <img class="imgB1 imgContainer fade-in"
                                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Google_Camera_Icon.svg/1024px-Google_Camera_Icon.svg.png"
                                             width="25px">
-
                                         <img class="avatar imgA1 imgContainer" style="border-radius: 50%;" width="100px"
                                             height="100px" *ngIf="!base64textString" (click)="updateImage=!updateImage"
                                             [src]="user.photoURL">
@@ -63,9 +64,14 @@
 
                         <mat-grid-tile>
                             <div style="width:190px; margin: 0%; ">
-                                <mat-form-field style="width:190px;">
+                                <mat-form-field appearance="fill" style="width:190px;">
                                     <mat-label>Genero</mat-label>
-                                    <input matInput formControlName="gender">
+                                    <mat-select [(value)]="selected" formControlName="gender">
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let item of genreList" [value]="item">{{item}}
+                                        </mat-option>
+    
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -184,18 +190,25 @@
                         </div>
 
                     </mat-grid-list>
-
+                    <section style="margin-left: 50px;">
+                        <mat-checkbox (click)="changePasswordForm()" *ngIf="!changePassword" [disabled]="form.dirty">
+                            Cambiar contraseña</mat-checkbox>
+                    </section>
+                    <br />
+                    <p style="text-align: center;">
+                  <!--      <progress style="width: 70%; height: 0px;" max="100;" [value]="porcent" [class.wrapper-0]="verifyWrapper(0)" [class.wrapper-50]="verifyWrapper(50)"
+                        [class.wrapper-100]="verifyWrapper(100)"></progress>-->
+                         {{porcent | number: '1.0-0'}}% completado
+                    </p>
 
                 </div>
-
                 <div class="bottom" *ngIf="!changePassword">
                     <button [disabled]="!form.dirty">Save Changes</button>
-                    <button type="button" (click)="changePasswordForm()" [disabled]="form.dirty"
-                        *ngIf="!changePassword">
-                        Cambiar Contraseña
-                    </button>
+
                 </div>
             </form>
+
+
             <form [formGroup]="formChangePassword" class="fade-in"
                 (submit)="changePasswordUpdate(formChangePassword.value)" *ngIf="changePassword">
                 <h2 style="margin-top: 0px;">Cambiar credenciales</h2>
@@ -205,7 +218,7 @@
                         <div class="field">
                             <mat-form-field style="width:300px;">
                                 <mat-label>Nueva contraseña</mat-label>
-                                <input type="password"  matInput formControlName="password">
+                                <input type="password" matInput formControlName="password">
                                 <small *ngIf="passwordNoValido">
                                     Tu contraseña debe tener al menos 8 caracteres.
                                 </small>
@@ -225,11 +238,12 @@
                     </mat-grid-tile>
                 </mat-grid-list>
                 <div style="text-align: center; color: red;">
-                    <small *ngIf="equalsPasswords" >Asegurate que las contraseñas sean las iguales.</small>
+                    <small *ngIf="equalsPasswords">Asegurate que las contraseñas sean las iguales.</small>
                 </div>
 
                 <div class="bottom" *ngIf="changePassword">
-                    <button class="button_left" type="submit" name="button" [disabled]="!formChangePassword.dirty">Cambiar contraseña</button>
+                    <button class="button_left" type="submit" name="button"
+                        [disabled]="!formChangePassword.dirty">Cambiar contraseña</button>
                     <button class="button_right" type="button" (click)="changePassword= !changePassword">Cancel</button>
                 </div>
 

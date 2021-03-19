@@ -74,4 +74,8 @@ export class UserProfileComponent implements OnInit {
     this.store.dispatch(new SetCurrentPage(this.dashboardRoutes.editProfile));
   }
 
+  onSelectCurrentPage(page:string){
+    this.store.dispatch(new SetCurrentPage(page));
+  }
+
 }

@@ -1,3 +1,5 @@
+import { Activity } from "../user/user.models";
+
 export interface User{
   userName?:string;
   email?:string;
