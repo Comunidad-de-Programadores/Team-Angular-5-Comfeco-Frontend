@@ -2,20 +2,20 @@
 <div class="left-area">
   <div class="custom-card">
     <div class="profile">
-      <img src="{{(profileUserInfo$|async)?.user?.imgProfile}}" class="profile-image">
+      <img src="{{(profileUserInfo$|async)?.user?.photoURL}}" class="profile-image">
       <a class="edit-button" (click)="onEditProfile()">Editar</a>
     </div>
     <div class="custom-card-header profile-header">
-      <div class="custom-card-title">{{((profileUserInfo$ | async)?.user?.nick |titlecase)}}</div>
+      <div class="custom-card-title">{{((profileUserInfo$ | async)?.user?.userName |titlecase)}}</div>
       <div class="custom-card-subtitle">
-        <ng-container *ngFor="let area of (profileUserInfo$|async)?.user?.areas, let i = index">
-          {{area}} <span *ngIf="(profileUserInfo$|async)?.user?.areas?.length-1 > i">/</span>
+        <ng-container *ngFor="let area of (profileUserInfo$|async)?.user?.interests, let i = index">
+          {{area}} <span *ngIf="(profileUserInfo$|async)?.user?.interests?.length-1 > i">/</span>
         </ng-container>
       </div>
     </div>
     <div class="custom-card-content">
      <div class="content-text">
-       {{(profileUserInfo$|async)?.user?.biografia}}
+       {{(profileUserInfo$|async)?.user?.biography}}
      </div>
     </div>
     <hr>

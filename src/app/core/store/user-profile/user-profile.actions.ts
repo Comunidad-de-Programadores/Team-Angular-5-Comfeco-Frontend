@@ -48,3 +48,7 @@ export class LoadGroupMembers{
   static readonly type = '[USER PROFILE] Get Group Members';
   constructor(public payload:{userId:string, groupMembersId:string}){}
 }
+
+export class ResetUserProfile{
+  static readonly type = '[USER PROFILE] Reset User Profile Default Values'
+}
