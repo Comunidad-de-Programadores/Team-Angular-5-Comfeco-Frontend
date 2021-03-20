@@ -7,7 +7,7 @@ export class UserProfileStateModel{
   badges: Badge[];
   activities: Activity[];
   events:Event[];
-  userGroupMembers:GroupMembers[];
+  userGroupMembers:GroupMembers;
   areUserGroupLoaded:boolean;
   areGroupsLoaded:boolean;
   areEventsLoaded:boolean;

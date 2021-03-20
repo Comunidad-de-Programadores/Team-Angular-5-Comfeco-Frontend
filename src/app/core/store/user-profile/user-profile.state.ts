@@ -1,18 +1,19 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { zip } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { combineLatest, zip } from "rxjs";
+import { catchError, map, mergeMap, take, tap } from "rxjs/operators";
 import { User, UserFirebase } from "../../models/auth/user";
 import { BadgesService } from "../../services/api/badges/badges.service";
 import { EventsService } from "../../services/api/events/events.service";
 import { GroupsService } from "../../services/api/groups/groups.service";
 import { UserService } from "../../services/api/user/user.service";
-import { SetCurrentPage, AddAreaToUser, AddUserActivity, AddUserEvent, GetAllGroups, GetCurrentUserProfile, GetAllBadges, GetAllEvents, LoadGroupMembers, AddBadgesToUser, UpdateUserProfile, ResetUserProfile } from "./user-profile.actions";
+import { SetCurrentPage, AddAreaToUser, AddUserActivity, AddUserEvent, GetAllGroups, GetCurrentUserProfile, GetAllBadges, GetAllEvents, LoadGroupMembers, AddBadgesToUser, UpdateUserProfile, ResetUserProfile, AddUserToGroup, RemoveUserOfGroup } from "./user-profile.actions";
 import { UserProfileStateModel } from "./user-profile.model";
 import { ApplicationState } from '../application/application.state'
 import { UpdateUserActive } from "../application/application.actions";
 import { NotificationService } from "../../services/notification.service";
+import { Activity, Group, GroupMembers, UserDetail, UserProfile } from "../../models/user/user.models";
 @State({
   name: 'userProfile',
   defaults: {
@@ -127,11 +128,17 @@ export class UserProfileState{
   @Action(AddUserActivity)
   addUserActivity({getState,patchState}:StateContext<UserProfileStateModel>,{payload}:AddUserActivity){
     const state = getState();
-    patchState({
-      user:{...state.user,
-        activities:[...state.user.activities,payload]
-      }
-    });
+    return this.userService.postUserActivity(payload.userId,payload.activity).pipe(
+      tap(result=>{
+        const activity:Activity = result;
+        patchState({...state,
+          user:{...state.user,
+            activities:[...state.user.activities,activity]
+          }
+        });
+      }),
+    );
+
   }
 
   // TODO: implementar conforme a las reglas de negocio
@@ -281,18 +288,63 @@ export class UserProfileState{
   }
 
   @Action(LoadGroupMembers)
-  loadGroupMembers({getState,patchState}:StateContext<UserProfileStateModel>, {payload}:any){
+  loadGroupMembers({getState,patchState}:StateContext<UserProfileStateModel>, {payload}:LoadGroupMembers){
     console.log('userid: ',payload.userId)
+    let membersProfile:UserProfile[]=[];
+    let groupMembers:GroupMembers;
     return this.userService.getGroupMembersUserById(payload.userId,payload.groupMembersId).pipe(
-      tap(
-        result=>{
+      // tap(
+      //   result=>{
+
+      //     const state = getState();
+      //     patchState({
+      //       ...state,
+      //       userGroupMembers:result,
+      //       areUserGroupLoaded:true,
+      //     });
+      // }),)
+
+      // mergeMap(groupMembers=>combineLatest(groupMembers.members.map(member=>this.afs.doc<UserFirebase>(`users/${member.user_id}`).valueChanges()))
+      //   .pipe(
+      //     tap(usersFirebase=>{
+      //       console.log({usersFirebase,groupMembers});
+      //       const state = getState();
+      //       let membersProfile:UserProfile[]=[];
+      //       groupMembers.members.map((member,i)=>{
+      //         const m = {...member,...usersFirebase[i]};
+      //         membersProfile.push(m);
+      //       });
+      //       console.log({groupMembers})
+      //       console.log({membersProfile})
+
+      //       patchState({
+      //         ...state,
+      //         userGroupMembers:{...groupMembers,members:membersProfile},
+      //         areUserGroupLoaded:true,
+      //       });
+      //     })
+      //   ))
+
+      mergeMap(gm=>combineLatest(gm.members.map(member=>this.afs.doc<UserFirebase>(`users/${member.user_id}`).valueChanges()))
+        .pipe(
+          map(usersFirebase=>{
+            gm.members.map((member,i)=>{
+              const m = {...member,...usersFirebase[i]};
+              membersProfile.push(m);
+            });
+            groupMembers={group:gm.group,members:membersProfile};
+           return groupMembers;
+          })
+        )),
+        tap(result=>{
+          // console.log({result});
           const state = getState();
           patchState({
             ...state,
             userGroupMembers:result,
             areUserGroupLoaded:true,
           });
-      }),
+        })
     );
   }
 
@@ -334,5 +386,57 @@ export class UserProfileState{
       areEventsLoaded:false,
       areBadgesLoaded:false,
     })
+  }
+
+  @Action(AddUserToGroup)
+  addUserToGroup({getState,patchState}:StateContext<UserProfileStateModel>,{payload}:AddUserToGroup){
+    const state = getState();
+    let response: {user?:UserDetail,groupMembers?:GroupMembers} = {};
+    return this.userService.addGroupToUser(payload.userId, payload.group).pipe(
+      tap(userDetail=>{
+        response.user= userDetail;
+      }
+      ),
+      mergeMap(userDetail=>this.userService.getGroupMembersUserById(userDetail.user_id,userDetail.group_member)
+        .pipe(
+          tap(groupMembers=>{
+            response.groupMembers = groupMembers;
+          }),
+        )
+      ),
+      mergeMap(groupMembers=>this.userService.postUserActivity(response.user.user_id,{description:`Se unio al grupo "${payload.group.name}".`})
+      .pipe(
+        tap(activity=>{
+          patchState({...state,
+            user:{...state.user,
+              group_member: response.user.group_member,
+              team_rol: response.user.team_rol,
+              activities:[...state.user.activities,activity]
+            },
+            userGroupMembers:response.groupMembers,
+            areUserGroupLoaded:true,
+          });
+          this.ntfService.openSnackBar(`Se unio correctamente al grupo ${payload.group.name}`, "Aceptar");
+        }),
+      )),
+    );
+  }
+
+  @Action(RemoveUserOfGroup)
+  removeUserOfGroup({getState,patchState}:StateContext<UserProfileStateModel>,{payload}:RemoveUserOfGroup){
+    const state = getState();
+    return this.userService.removeGroupToUser(payload.userId,payload.group).pipe(
+      mergeMap(userDetail=> this.userService.postUserActivity(payload.userId,{description:`Ha abandonado el grupo "${payload.group.name}"`}).pipe(
+        tap(activity=>{
+          patchState({...state,
+            user:{...state.user,
+              activities:[...state.user.activities,activity],
+              group_member:null,
+              team_rol:null,
+            }
+          });
+        })
+      ))
+    );
   }
 }

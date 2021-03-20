@@ -34,6 +34,6 @@ export class EventsComponent implements OnInit {
   }
 
   addUserActivity(){
-    this.store.dispatch(new AddUserActivity({description:`Te has registrado al evento "Ng Conf Salt Lake City"  registro: ${Date.now()}`}));
+    this.store.dispatch(new AddUserActivity({userId:'',activity:{description:`Te has registrado al evento "Ng Conf Salt Lake City"  registro: ${Date.now()}`}}));
   }
 }
