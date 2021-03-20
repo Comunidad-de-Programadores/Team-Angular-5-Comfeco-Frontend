@@ -2,13 +2,13 @@ import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { combineLatest, zip } from "rxjs";
-import { catchError, map, mergeMap, take, tap } from "rxjs/operators";
+import { catchError, concatMap, map, mergeMap, take, tap } from "rxjs/operators";
 import { User, UserFirebase } from "../../models/auth/user";
 import { BadgesService } from "../../services/api/badges/badges.service";
 import { EventsService } from "../../services/api/events/events.service";
 import { GroupsService } from "../../services/api/groups/groups.service";
 import { UserService } from "../../services/api/user/user.service";
-import { SetCurrentPage, AddAreaToUser, AddUserActivity, AddUserEvent, GetAllGroups, GetCurrentUserProfile, GetAllBadges, GetAllEvents, LoadGroupMembers, AddBadgesToUser, UpdateUserProfile, ResetUserProfile, AddUserToGroup, RemoveUserOfGroup } from "./user-profile.actions";
+import { SetCurrentPage, AddAreaToUser, AddUserActivity, AddUserEvent, GetAllGroups, GetCurrentUserProfile, GetAllBadges, GetAllEvents, LoadGroupMembers, AddBadgesToUser, UpdateUserProfile, ResetUserProfile, AddUserToGroup, RemoveUserOfGroup, AddEventToUser, RemoveUserOfEvent } from "./user-profile.actions";
 import { UserProfileStateModel } from "./user-profile.model";
 import { ApplicationState } from '../application/application.state'
 import { UpdateUserActive } from "../application/application.actions";
@@ -103,6 +103,16 @@ export class UserProfileState{
 
   @Selector()
   static getBadges(state:UserProfileStateModel){return state.badges}
+
+  @Selector()
+  static getAllEventsWithUserOrWithout(state:UserProfileStateModel){
+    let result= state.events.map(eventInPrincipalList=>{
+      const event = state.user.active_events.find(active=>active.name===eventInPrincipalList.name);
+      return (event)?{...eventInPrincipalList,isUserJoined:true}:{...eventInPrincipalList,isUserJoined:false}
+    });
+    // console.log('lista mapeada: ',result);
+    return result;
+  }
 
   @Action(SetCurrentPage)
   setCurrentPage({getState,patchState}:StateContext<UserProfileStateModel>,{payload}:SetCurrentPage){
@@ -392,6 +402,8 @@ export class UserProfileState{
   addUserToGroup({getState,patchState}:StateContext<UserProfileStateModel>,{payload}:AddUserToGroup){
     const state = getState();
     let response: {user?:UserDetail,groupMembers?:GroupMembers} = {};
+    let groupMembers: GroupMembers;
+    let membersProfile: UserProfile[]=[];
     return this.userService.addGroupToUser(payload.userId, payload.group).pipe(
       tap(userDetail=>{
         response.user= userDetail;
@@ -404,6 +416,17 @@ export class UserProfileState{
           }),
         )
       ),
+      mergeMap(gm=>combineLatest(gm.members.map(member=>this.afs.doc<UserFirebase>(`users/${member.user_id}`).valueChanges()))
+        .pipe(
+          map(usersFirebase=>{
+            gm.members.map((member,i)=>{
+              const m = {...member,...usersFirebase[i]};
+              membersProfile.push(m);
+            });
+            groupMembers={group:gm.group,members:membersProfile};
+           return groupMembers;
+          })
+        )),
       mergeMap(groupMembers=>this.userService.postUserActivity(response.user.user_id,{description:`Se unio al grupo "${payload.group.name}".`})
       .pipe(
         tap(activity=>{
@@ -413,7 +436,7 @@ export class UserProfileState{
               team_rol: response.user.team_rol,
               activities:[...state.user.activities,activity]
             },
-            userGroupMembers:response.groupMembers,
+            userGroupMembers:groupMembers,
             areUserGroupLoaded:true,
           });
           this.ntfService.openSnackBar(`Se unio correctamente al grupo ${payload.group.name}`, "Aceptar");
@@ -435,8 +458,56 @@ export class UserProfileState{
               team_rol:null,
             }
           });
+          this.ntfService.openSnackBar('Abandonó el grupo de manera satisfactoria.','Aceptar');
         })
       ))
     );
+  }
+
+  @Action(AddEventToUser)
+  addEventToUser({getState,patchState}:StateContext<UserProfileStateModel>,{payload}:AddEventToUser){
+    const state = getState();
+    let userDetail:UserDetail;
+    return this.userService.addEventToUser(payload.userId,payload.event).pipe(
+      tap(userDet=>userDetail=userDet),
+      concatMap(()=>this.userService.postUserActivity(payload.userId,{description:`Se ha registrado al evento "${payload.event.name}".`})),
+      tap(activity=>{
+        patchState({...state,
+          user:{...state.user,
+            active_events:userDetail.active_events,
+            activities:[...state.user.activities, activity]
+          }
+        }),
+        this.ntfService.openSnackBar('Te registraste correctamente al evento','Aceptar');
+      }),
+      catchError((err)=>{
+        console.log({err})
+        throw 'Ocurrio un error al realizar la operación';
+      })
+    )
+  }
+
+  @Action(RemoveUserOfEvent)
+  removeUserOfEvent({getState,patchState}:StateContext<UserProfileStateModel>,{payload}:RemoveUserOfEvent){
+    const state= getState();
+    let userDetail : UserDetail;
+    return this.userService.removeEventToUser(payload.userId,payload.event).pipe(
+      tap(res=>userDetail=res),
+      concatMap(userDetail=>this.userService.postUserActivity(payload.userId,{description:`Ha salido del evento "${payload.event}".`})),
+      tap(activity=>{
+        patchState({...state,
+          user:{...state.user,
+            ban_events:userDetail.ban_events,
+            active_events:userDetail.active_events,
+            activities:[...state.user.activities,activity]
+          }
+        })
+      }),
+      catchError((err)=>{
+        console.log({err});
+        throw "Ocurrio un error al realizar la operación";
+      })
+    )
+
   }
 }

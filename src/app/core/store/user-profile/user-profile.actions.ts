@@ -74,6 +74,16 @@ export class AddUserToGroup{
 
 
 export class RemoveUserOfGroup{
-  static readonly type ='[USER PROFILE] Remove User of Group'
+  static readonly type ='[USER PROFILE] Remove User of Group';
   constructor(public payload:{userId:string, group:Group}){}
+}
+
+export class AddEventToUser{
+  static readonly type = '[USER PROFILE] Add Event to User';
+  constructor(public payload:{userId:string, event:Event}){}
+}
+
+export class RemoveUserOfEvent{
+  static readonly type ='[USER PROFILE] Remove User Of Event';
+  constructor(public payload:{userId:string, event:Event}){}
 }
