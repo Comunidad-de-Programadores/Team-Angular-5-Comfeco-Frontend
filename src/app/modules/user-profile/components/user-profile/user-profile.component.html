@@ -1,37 +1,36 @@
-<div class="profile-area">
+<div class="profile-area" *ngIf="profileUserInfo$ |async as profileUserInfo" >
 <div class="left-area">
   <div class="custom-card">
-    <div class="profile">
-      <img src="{{(profileUserInfo$|async)?.user?.photoURL}}" class="profile-image">
+    <div class="profile" >
+      <img src="{{profileUserInfo?.user?.photoURL}}" class="profile-image">
       <a class="edit-button" (click)="onEditProfile()">Editar</a>
     </div>
     <div class="custom-card-header profile-header">
-      <div class="custom-card-title">{{((profileUserInfo$ | async)?.user?.userName |titlecase)}}</div>
+      <div class="custom-card-title">{{(profileUserInfo?.user?.userName |titlecase)}}</div>
       <div class="custom-card-subtitle">
-        <ng-container *ngFor="let area of (profileUserInfo$|async)?.user?.interests, let i = index">
-          {{area}} <span *ngIf="(profileUserInfo$|async)?.user?.interests?.length-1 > i">/</span>
+        <ng-container *ngFor="let area of profileUserInfo?.user?.interests, let i = index">
+          {{area}} <span *ngIf="profileUserInfo?.user?.interests?.length-1 > i">/</span>
         </ng-container>
       </div>
     </div>
     <div class="custom-card-content">
      <div class="content-text">
-       {{(profileUserInfo$|async)?.user?.biography}}
+       {{profileUserInfo?.user?.biography}}
      </div>
     </div>
     <hr>
     <div class="profile-actions">
       <div class="social-network-action">
-        <img class="social" src="/assets/socialmedia/facebook.svg" alt="">
+        <a *ngIf="profileUserInfo.user.facebook" class="social-network-action" [href]="profileUserInfo.user.facebook" target="_blank" ><img class="social" src="/assets/socialmedia/facebook.svg" alt=""></a>
       </div>
       <div class="social-network-action">
-        <img  class="social" src="/assets/socialmedia/twitter.svg" alt="">
+        <a *ngIf="profileUserInfo.user.twitter" class="social-network-action" [href]="profileUserInfo.user.twitter" target="_blank" ><img  class="social" src="/assets/socialmedia/twitter.svg" alt=""></a>
       </div>
       <div class="social-network-action">
-        <img class="social" src="/assets/socialmedia/linkedin.svg" alt="">
-
+        <a *ngIf="profileUserInfo.user.linkedin" class="social-network-action" [href]="profileUserInfo.user.linkedin" target="_blank" ><img class="social" src="/assets/socialmedia/linkedin.svg" alt=""></a>
       </div>
       <div class="social-network-action">
-        <img class="social" src="/assets/socialmedia/github.svg" alt="">
+        <a  *ngIf="profileUserInfo.user.github" class="social-network-action" [href]="profileUserInfo.user.github" target="_blank" ><img class="social" src="/assets/socialmedia/github.svg" alt=""></a>
       </div>
     </div>
   </div>
@@ -43,14 +42,14 @@
         <div class="custom-card-title">Insignias</div>
       </div>
       <div class="card-badges">
-        <ng-container *ngIf="(profileUserInfo$|async)?.badges?.length == 0">
+        <ng-container *ngIf="profileUserInfo?.badges?.length == 0">
           <div class="badge badge-disable"></div>
           <div class="badge badge-disable"></div>
           <div class="badge badge-disable"></div>
           <div class="badge badge-disable"></div>
           <div class="badge badge-disable"></div>
         </ng-container>
-        <ng-container *ngFor="let badge of (profileUserInfo$|async)?.badges">
+        <ng-container *ngFor="let badge of profileUserInfo?.badges">
           <div [ngClass]="isUserEarnBadge(badge)?'badge':'badge badge-disable'">
             <img [ngClass]="isUserEarnBadge(badge)?'badge-enable':'badge-disable'" [src]="badge.img_url"></div>
         </ng-container>
@@ -62,12 +61,12 @@
       <div class="custom-card-header">
         <div class="custom-card-title">Actividad reciente</div>
       </div>
-      <div class="card-activity">
-        <div *ngIf="(userActivity$|async)?.length == 0">
+      <div *ngIf="userActivity$|async as userActivity" class="card-activity">
+        <div *ngIf="userActivity?.length == 0">
           No tienes actividad reciente.
         </div>
           <ul>
-            <li *ngFor="let actiivity of userActivity$|async">
+            <li *ngFor="let actiivity of userActivity">
               {{actiivity.description}}
             </li>
           </ul>
@@ -83,12 +82,15 @@
         <a (click)="onViewMoreEventsClick()">Ver más</a>
       </div>
       <div class="events-content custom-scrollbar">
-        <div class="empty-events" *ngIf="(profileUserInfo$|async).user?.active_events?.length == 0">Aún no te registras a un evento</div>
-        <ng-container *ngFor="let event of (profileUserInfo$|async).user?.active_events">
+        <div class="empty-events" *ngIf="profileUserInfo.user?.active_events?.length == 0">Aún no te registras a un evento</div>
+        <ng-container *ngFor="let event of profileUserInfo.user?.active_events">
           <div class="item-image-cover">
             <img class="img-bg" [src]="event.img_url">
             <div class="item-image-title">{{event.name}}</div>
-            <div class="item-image-button"><button mat-raised-button>Más información</button></div>
+            <div class="item-image-button">
+              <button color="primary" mat-raised-button>Más información</button>
+              <button color="warn" mat-raised-button (click)="onLeaveClick(event)">Abandonar</button>
+            </div>
           </div>
         </ng-container>
       </div>
