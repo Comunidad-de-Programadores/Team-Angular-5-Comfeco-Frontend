@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FrameworkChipColorPipe implements PipeTransform {
 
   transform(value: unknown, ...args: unknown[]): unknown {
-    console.log('pipe value: ',value);
+    // console.log('pipe value: ',value);
 
     switch (value) {
       case '605136f35218e11f9ca5c239':

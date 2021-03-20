@@ -1,0 +1,8 @@
+<div class="modal center">
+  <h2>{{data.title}}</h2>
+  <p>{{data.description}}</p>
+  <div class="actions pt-1">
+    <button *ngIf="data.actionButtons.accept" mat-button mat-raised-button [color]="data.actionButtons.cancel?'warn':'primary'" (click)="onAcceptClick()">{{data.actionButtons.accept}}</button>
+    <button *ngIf="data.actionButtons.cancel" mat-button mat-raised-button color="primary" (click)="onCancelClick()">{{data.actionButtons.cancel}}</button>
+  </div>
+</div>
