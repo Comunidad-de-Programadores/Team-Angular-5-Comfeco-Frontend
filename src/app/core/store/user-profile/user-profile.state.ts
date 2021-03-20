@@ -16,7 +16,7 @@ import { NotificationService } from "../../services/notification.service";
 @State({
   name: 'userProfile',
   defaults: {
-    currentPage: 'nav-profile',
+    currentPage: 'nav-edit-profile',
     user: {
       uid:'',
       photoURL:'',

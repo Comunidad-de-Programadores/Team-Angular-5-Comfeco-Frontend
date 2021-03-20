@@ -30,6 +30,9 @@ export class ProfileConfigComponent implements OnInit {
   changePassword: boolean = false;
   paises: Country[];
   error: ErrorItem;
+  breakpoint: Number;
+  breakpointInput3: Number;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,8 +43,6 @@ export class ProfileConfigComponent implements OnInit {
     private countryService: CountriesService,) {
     this.files = [];
   }
-
-
 
   ngOnInit(): void {
     this.creacionDeFormulario();
@@ -68,7 +69,12 @@ export class ProfileConfigComponent implements OnInit {
       });
     // TODO: @erick crear un servicio que implemente el baseService y no utilizar baseService de manera directa
     this.countryService.getCountries().subscribe(res => this.paises = res, error => console.log(error))
+    this.changePasswordForm();
     this.onChanges();
+    this.breakpoint = (window.innerWidth <= 1000) ? 1 : 2;
+    this.breakpointInput3 = (window.innerWidth <= 1200) ? 1 : 3;
+
+    
 
   }
 
@@ -90,6 +96,14 @@ export class ProfileConfigComponent implements OnInit {
 
   }
 
+  onSelectCurrentPage(page: string) {
+    this.store.dispatch(new SetCurrentPage(page));
+  }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 1000) ? 1 : 2;
+    this.breakpointInput3 = (window.innerWidth <= 1200) ? 1 : 3;
+  }
 
   creacionDeFormulario(): void {
     this.form = this.formBuilder.group({
@@ -106,7 +120,8 @@ export class ProfileConfigComponent implements OnInit {
       dateBirth: ['', [Validators.minLength(2)]],
       interests: ['', [Validators.minLength(1)]],
       facebook: ['', [Validators.minLength(2)]],
-      uid: ['',]
+      uid: ['',],
+      check: [''],
     });
 
   }
@@ -139,17 +154,6 @@ export class ProfileConfigComponent implements OnInit {
     return pass1 === pass2 ? false : true;
   }
 
-  updateData(user) {
-
-    //Update Email
-    if (this.form.get('email').dirty) {
-      this.updateEmail(user);
-    } else {
-      this.updateProfile(user);
-    }
-  }
-
-
   onUploadChange(evt: any) {
     const file = evt.target.files[0];
 
@@ -160,19 +164,21 @@ export class ProfileConfigComponent implements OnInit {
       reader.readAsBinaryString(file);
     }
   }
+  updateData(user) {
+
+    //Update Email
+    if (this.form.get('email').dirty) {
+      this.updateEmail(user);
+    } else {
+      this.updateProfile(user);
+    }
+  }
 
   handleReaderLoaded(e) {
     this.base64textString = 'data:image/png;base64,' + btoa(e.target.result);
     this.form.markAsDirty();
   }
 
-  changePasswordForm() {
-    this.changePassword = true;
-    this.formChangePassword = this.formBuilder.group({
-      password: ['', [Validators.required, Validators.minLength(5)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(5)]],
-    })
-  }
 
   async changePasswordUpdate(credendials) {
     if (this.formChangePassword.valid) {
@@ -195,7 +201,6 @@ export class ProfileConfigComponent implements OnInit {
           return;
         })
     }
-    console.log(credendials)
   }
 
   async updateEmail(user) {
@@ -219,7 +224,6 @@ export class ProfileConfigComponent implements OnInit {
 
   async updateProfile(user: UserFirebase) {
 
-
     if (this.form.valid) {
       let userData: UserFirebase;
       userData = { ...user }
@@ -229,7 +233,6 @@ export class ProfileConfigComponent implements OnInit {
       } else {
         datePipe = null;
       }
-
 
       if (this.base64textString) {
         console.log(this.base64textString)
@@ -248,7 +251,6 @@ export class ProfileConfigComponent implements OnInit {
             type: "alert-success",
             title: "Success!"
           }
-
 
           this.store.dispatch(new UpdateUserProfile(userData))
           if (this.porcent == 100) {
@@ -294,8 +296,15 @@ export class ProfileConfigComponent implements OnInit {
     return false;
 
   }
-  onSelectCurrentPage(page: string) {
-    this.store.dispatch(new SetCurrentPage(page));
+
+  changePasswordForm() {
+    this.formChangePassword = this.formBuilder.group({
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(5)]],
+    })
+  }
+  checked(event: boolean) {
+   this.changePassword = event;
   }
 
 }

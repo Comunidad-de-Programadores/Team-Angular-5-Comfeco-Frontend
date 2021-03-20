@@ -1,9 +1,12 @@
 <div class="div" style="margin-top: 100px; position: absolute;">
-    <button mat-raised-button color=warns (click)="onSelectCurrentPage('nav-profile')"><mat-icon>keyboard_backspace</mat-icon>Regresar</button>
 </div>
 <div class="wrapper" >
-
+   
     <div class="right" *ngIf="_authService.user$ | async as user">
+        <button mat color=warns (click)="onSelectCurrentPage('nav-profile')" style="float: right;">
+            <mat-icon>keyboard_backspace</mat-icon>
+        </button>
+
         <div>
             <h2>Información de perfil</h2>
             <div class="{{error.type}} fade-in" *ngIf="error != null">
@@ -42,29 +45,29 @@
 
                     </mat-grid-list>
 
-                    <mat-grid-list cols="2" rowHeight="100px">
+                    <mat-grid-list [cols]="breakpoint" rowHeight="10em" (window:resize)="onResize($event)">
                         <mat-grid-tile>
                             <div class="field">
-                                <mat-form-field style="width:300px;">
-                                    <mat-label>Nickname</mat-label>
+                                <mat-form-field class="input-mat">
+                                    <mat-label>Usuario</mat-label>
                                     <input matInput formControlName="userName">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile>
                             <div class="field">
-                                <mat-form-field style="width:300px;">
+                                <mat-form-field class="input-mat">
                                     <mat-label>Correo</mat-label>
                                     <input matInput formControlName="email">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <mat-grid-list cols="3" rowHeight="100px" style="margin: 0px 35px;">
+                    <mat-grid-list  [cols]="breakpointInput3" rowHeight="10em" (window:resize)="onResize($event)" >
 
                         <mat-grid-tile>
-                            <div style="width:190px; margin: 0%; ">
-                                <mat-form-field appearance="fill" style="width:190px;">
+                            <div >
+                                <mat-form-field class="input-3-mat">
                                     <mat-label>Genero</mat-label>
                                     <mat-select [(value)]="selected" formControlName="gender">
                                         <mat-option>None</mat-option>
@@ -76,18 +79,7 @@
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile>
-                            <div style="width:190px; margin: 0%; ">
-                                <mat-form-field>
-                                    <mat-label>Fecha de nacimiento</mat-label>
-                                    <input matInput [matDatepicker]="picker" formControlName="dateBirth">
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
-                                    <small *ngIf="dateIsValid" class="alert-text">Debes ingresar una fecha.</small>
-                                </mat-form-field>
-                            </div>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                            <mat-form-field appearance="fill" style="width:190px;">
+                            <mat-form-field  class="input-3-mat">
                                 <mat-label>Selecciona un pais</mat-label>
                                 <mat-select [(value)]="selected" formControlName="country">
                                     <mat-option>None</mat-option>
@@ -97,20 +89,32 @@
                                 </mat-select>
                             </mat-form-field>
                         </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div >
+                                <mat-form-field class="input-3-mat">
+                                    <mat-label>Fecha de nacimiento</mat-label>
+                                    <input matInput [matDatepicker]="picker" formControlName="dateBirth">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                    <small *ngIf="dateIsValid" class="alert-text">Debes ingresar una fecha.</small>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+
 
                     </mat-grid-list>
-                    <mat-grid-list cols="2" rowHeight="100px">
+                    <mat-grid-list [cols]="breakpoint" rowHeight="10em" (window:resize)="onResize($event)">
 
                         <mat-grid-tile>
                             <div class="field">
-                                <mat-form-field style="width:300px;">
-                                    <mat-label>Full name</mat-label>
+                                <mat-form-field  class="input-mat">
+                                    <mat-label>Nombre completo</mat-label>
                                     <input matInput formControlName="fullName">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile>
-                            <mat-form-field appearance="fill" style="width:300px;">
+                            <mat-form-field appearance="fill" class="input-mat-field">
                                 <mat-label>Intereses</mat-label>
                                 <mat-select formControlName="interests" multiple>
                                     <mat-option *ngFor="let interest of interestsList" [value]="interest">{{interest}}
@@ -119,11 +123,11 @@
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <mat-grid-list cols="2" rowHeight="100px">
+                    <mat-grid-list  [cols]="breakpoint" rowHeight="10em" (window:resize)="onResize($event)">
 
                         <mat-grid-tile>
                             <div class="field">
-                                <mat-form-field style="width:300px;">
+                                <mat-form-field  class="input-mat">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-github" viewBox="0 0 16 16">
                                         <path
@@ -135,7 +139,7 @@
                         </mat-grid-tile>
                         <mat-grid-tile>
                             <div class="field">
-                                <mat-form-field style="width:300px;">
+                                <mat-form-field  class="input-mat">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-linkedin" viewBox="0 0 16 16">
                                         <path
@@ -146,11 +150,11 @@
                             </div>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <mat-grid-list cols="2" rowHeight="100px">
+                    <mat-grid-list  [cols]="breakpoint" rowHeight="10em" (window:resize)="onResize($event)">
 
                         <mat-grid-tile>
                             <div class="field">
-                                <mat-form-field style="width:300px;">
+                                <mat-form-field  class="input-mat">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-facebook" viewBox="0 0 16 16">
                                         <path
@@ -162,7 +166,7 @@
                         </mat-grid-tile>
                         <mat-grid-tile>
                             <div class="field">
-                                <mat-form-field style="width:300px;">
+                                <mat-form-field  class="input-mat">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-twitter" viewBox="0 0 16 16">
                                         <path
@@ -173,12 +177,12 @@
                             </div>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <mat-grid-list cols="1" rowHeight="100px">
+                    <mat-grid-list cols="1"rowHeight="10em">
                         <div class="field" style="text-align: center; ">
                             <mat-form-field class="example-full-width" style="width: 90%;">
                                 <mat-label>Biografía.</mat-label>
-                                <input matInput #message maxlength="256" placeholder="Ex. I'am Software Development"
-                                    formControlName="biography">
+                                <textarea matInput #message maxlength="256" placeholder="Ejemplo, soy un programador web front-end."
+                                    formControlName="biography"></textarea>
                                 <mat-hint align="start">
                                     <strong *ngIf="!biographyisValid">Nunca ingreses información personal.</strong>
                                     <strong *ngIf="biographyisValid">Debes ingresar mínimo 25 carácteres.</strong>
@@ -190,9 +194,9 @@
                         </div>
 
                     </mat-grid-list>
+                    
                     <section style="margin-left: 50px;">
-                        <mat-checkbox (click)="changePasswordForm()" *ngIf="!changePassword" [disabled]="form.dirty">
-                            Cambiar contraseña</mat-checkbox>
+                        <mat-checkbox (change)="checked($event.checked)" class="box-margin-check" [checked]="changePassword">Cambiar contraseña</mat-checkbox>
                     </section>
                     <br />
                     <p style="text-align: center;">
@@ -200,11 +204,9 @@
                         [class.wrapper-100]="verifyWrapper(100)"></progress>-->
                          {{porcent | number: '1.0-0'}}% completado
                     </p>
-
                 </div>
                 <div class="bottom" *ngIf="!changePassword">
-                    <button [disabled]="!form.dirty">Save Changes</button>
-
+                    <button [disabled]="!form.dirty">Guardar</button>
                 </div>
             </form>
 
@@ -213,10 +215,10 @@
                 (submit)="changePasswordUpdate(formChangePassword.value)" *ngIf="changePassword">
                 <h2 style="margin-top: 0px;">Cambiar credenciales</h2>
 
-                <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-list [cols]="breakpoint" rowHeight="10em" (window:resize)="onResize($event)">
                     <mat-grid-tile style="padding: 10px;">
                         <div class="field">
-                            <mat-form-field style="width:300px;">
+                            <mat-form-field class="input-mat">
                                 <mat-label>Nueva contraseña</mat-label>
                                 <input type="password" matInput formControlName="password">
                                 <small *ngIf="passwordNoValido">
@@ -227,7 +229,7 @@
                     </mat-grid-tile>
                     <mat-grid-tile style="padding: 10px;">
                         <div class="field">
-                            <mat-form-field style="width:300px;">
+                            <mat-form-field class="input-mat">
                                 <mat-label>Confirmar Contraseña</mat-label>
                                 <input type="password" matInput formControlName="confirmPassword">
                                 <small *ngIf="passwordNoValido">
@@ -244,9 +246,7 @@
                 <div class="bottom" *ngIf="changePassword">
                     <button class="button_left" type="submit" name="button"
                         [disabled]="!formChangePassword.dirty">Cambiar contraseña</button>
-                    <button class="button_right" type="button" (click)="changePassword= !changePassword">Cancel</button>
                 </div>
-
             </form>
 
         </div>
