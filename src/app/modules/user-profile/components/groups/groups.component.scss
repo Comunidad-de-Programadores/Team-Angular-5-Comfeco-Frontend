@@ -135,9 +135,12 @@
   display:flex;
   width: 100%;
   align-items: center;
+  // max-width: 267px;
 }
 
 .img-profile{
+  min-width: 45px;
+  min-height: 45px;
   width: 45px;
   height: 45px;
   background-color: grey;
@@ -146,7 +149,12 @@
 
 .user-name{
   padding: 0 0 0 .5rem;
+  word-wrap: normal;
   flex-grow: 1;
+}
+
+.full-width{
+  width: 100%;
 }
 
 .user-group-rol{
@@ -178,3 +186,12 @@
   color: white;
 }
 
+
+.no-group{
+  display:flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+
+}
