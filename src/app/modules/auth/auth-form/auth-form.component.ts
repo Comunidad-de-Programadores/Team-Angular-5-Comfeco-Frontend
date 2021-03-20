@@ -20,11 +20,14 @@ export class AuthFormComponent implements OnInit {
   @Output()
   onSubmit: EventEmitter<RegisterUser> = new EventEmitter<RegisterUser>();
   check: boolean = true;
+  breakpoint: Number;
 
   ngOnInit(): void {
     this.creacionDeFormulario();
     // this.crearListeners();
     this.cargardata()
+    this.breakpoint = (window.innerWidth <= 1000) ? 1 : 2;
+
   }
   cargardata() {
     this.form.reset({
@@ -41,6 +44,9 @@ export class AuthFormComponent implements OnInit {
     this.form.statusChanges.subscribe((valor) => {
       console.log(valor);
     });
+  }
+    onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 1000) ? 1 : 2;
   }
   creacionDeFormulario(): void {
     if (this.accion === 'register') {

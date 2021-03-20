@@ -2,7 +2,7 @@
 
   <div class="box-form-item">
 
-    <mat-grid-list cols="2" rowHeight="100px" class="header-form center fade-in" *ngIf="accion !== 'recovery'">
+    <mat-grid-list cols="2" rowHeight="5em" class="header-form center fade-in" *ngIf="accion !== 'recovery'">
       <mat-grid-tile routerLinkActive="active" routerLinkActive="active-a" class="card-bg" routerLink="/account/login">
         <span class="material-icons ">login</span> &nbsp;
         <span> Inicia sesión</span>
@@ -13,7 +13,7 @@
         <span>Regístrarse</span>
       </mat-grid-tile>
     </mat-grid-list>
-    <mat-grid-list cols="1" rowHeight="100px" class="header-form center fade-in" *ngIf="accion === 'recovery'">
+    <mat-grid-list cols="1" rowHeight="5em" class="header-form center fade-in" *ngIf="accion === 'recovery'">
       <mat-grid-tile>
         <span class="material-icons" routerLink="/account/recovery" routerLinkActive="active-a"> send</span> &nbsp;
         Recuperar Credenciales
@@ -35,7 +35,9 @@
       </div>
       <div class="input-style">
 
-        <input type="email" placeholder="Correo electronico" [class.no-valido]="emailNoValido" formControlName="email"
+        <input type="email" placeholder="Correo electronico" 
+        [class.no-valido]="emailNoValido" 
+        formControlName="email"
           [class.valido]="!emailNoValido">
         <small *ngIf="emailNoValido">
           Tu correo electronico no es valido.
@@ -55,8 +57,12 @@
           Tu contraseña debe tener al menos 8 caracteres.
         </small>
         <section class="box-section-check" *ngIf="accion =='login'">
-          <a routerLink="/account/recovery"><small><span class="recovery-text "> ¿Olvidaste tu
-                contraseña?</span></small></a>
+            
+          <a routerLink="/account/recovery">
+            <small>
+              <span class="recovery-text "> ¿Olvidaste tu contraseña?</span>
+            </small>
+          </a>
           <mat-checkbox (change)="checked($event.checked)" class="box-margin-check" [checked]="check">Mantenerme
             conectado</mat-checkbox>
         </section>
@@ -98,13 +104,18 @@
         <p><span>Tambien puedes iniciar con tus redes</span></p>
         <div class="box-login-rrss_position">
           <div>
-            <button mat-raised-button color="primary" (click)="_auth.registerWithFacebook()" type="button">Ingresar con
-              facebook</button>
+            <button mat-raised-button color="primary" class="btn-social-media" (click)="_auth.registerWithFacebook()" type="button">
+              <span  class="material-icons txt-btn">
+                facebook
+                </span> Facebook</button>
           </div>
           <div class="espacio"></div>
           <div>
 
-            <button mat-raised-button color="primary" (click)="_auth.registerWithGoogle()" type="button">Ingresar con
+            <button mat-raised-button color="primary" class="btn-social-media" (click)="_auth.registerWithGoogle()" type="button">
+              <svg class="txt-btn" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+                <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+              </svg>
               Google</button>
           </div>
         </div>
