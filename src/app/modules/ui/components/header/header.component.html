@@ -1,7 +1,7 @@
 <mat-toolbar color="backgrond(300)" (window:resize)="onResize($event.target.innerWidth)">
 
   <div *ngIf="hiddeMenu">
-    <button mat-icon-button color="accent"><mat-icon>menu</mat-icon></button>
+    <button (click)="onClickMenuIcon()" mat-icon-button color="accent"><mat-icon>menu</mat-icon></button>
   </div>
 
   <div class="box-logo" routerLink="/">
@@ -11,7 +11,7 @@
     <div class="menu" *ngIf="!hiddeMenu">
       <ul>
         <li>
-          <a routerLinkActive="active" routerLink="/app">Inicio</a>
+          <a  routerLinkActive="active" routerLink="/app">Inicio</a>
         </li>
         <li>
           <a routerLinkActive="active" routerLink="/comunidades">Comunidades</a>
@@ -89,3 +89,19 @@
   </ng-template>
 
 </mat-toolbar>
+<div *ngIf="secundaryMenuActive"  class="secundary-menu">
+  <ul class="menu-list">
+    <li>
+      <a routerLinkActive="active" routerLink="/app">Inicio</a>
+    </li>
+    <li>
+      <a routerLinkActive="active" routerLink="/comunidades">Comunidades</a>
+    </li>
+    <li>
+      <a routerLinkActive="active" routerLink="/talleres">Talleres</a>
+    </li>
+    <li>
+      <a routerLinkActive="active" routerLink="/creadores">Creadores</a>
+    </li>
+  </ul>
+</div>

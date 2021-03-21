@@ -107,3 +107,18 @@ img {
 .click:hover{
   cursor: pointer;
 }
+
+.secundary-menu{
+  display:flex;
+  flex-direction: column;
+  height: 300px;
+  width: 100%;
+  background-color: whitesmoke;
+}
+
+ul li{
+  list-style-type: none ;
+  font-size: x-large;
+  font-weight: 500;
+  padding: 1rem 0 1rem 0;
+}
