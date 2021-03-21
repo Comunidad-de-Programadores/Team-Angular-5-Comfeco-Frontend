@@ -1,0 +1,122 @@
+<div class="page-container">
+  <div class="page-title">Grupos</div>
+  <div class="groups-container">
+    <div *ngIf="isUserOnAgroup$|async as isUserOnAgroup; else isNotInAgroup " class="my-group">
+      <ng-container *ngIf="userGroupMembers">
+        <div class="members-card">
+          <div class="custom-card">
+            <div class="title">
+              <h3>Mi Grupo</h3>
+              <a href="/">Ir al grupo</a>
+            </div>
+            <div class="group-name">
+              {{userGroupMembers.group.name}}
+              <div class="framework-logo">
+                <!-- <img *ngIf="usergroupMembers.group.img_url" class="framework-logo-img" [src]="usergroupMembers.group.framework.img_url"> -->
+              <img class="framework-logo-img"  [src]="userGroupMembers.group.framework.img_url">
+              </div>
+            </div>
+            <div class="custom-card-content full-width pb-1">
+              <ng-container *ngFor="let member of userGroupMembers.members let i = index">
+                <div class="member">
+                  <div class="img-profile">
+                    <img class="img-profile" [src]="member.photoURL">
+                  </div>
+                  <!-- TODO: obtener nombre del usuario e imagen de perfil desde firebase -->
+                  <div class="user-name">
+                    <ng-container *ngIf="member.fullName!==''; else userNameTemplate">
+                      {{member.fullName|titlecase}}
+                    </ng-container>
+                    <ng-template #userNameTemplate>
+                      {{member.userName|titlecase}}
+                    </ng-template>
+                  </div>
+                  <div class="user-group-rol">{{member.team_rol.name}}</div>
+                </div>
+                <hr *ngIf="userGroupMembers.members?.length-1 != i">
+              </ng-container>
+            </div>
+            <div class="custom-card-actions around">
+              <button mat-raised-button (click)="leaveGroup()" >Abandonar</button>
+              <button mat-raised-button>Ir al chat</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <ng-template #isNotInAgroup>
+      <div class="my-group">
+        <div class="members-card">
+          <div class="custom-card">
+            <div class="title">
+              <h3>Mi Grupo</h3>
+            </div>
+            <div class="no-group">Aun no formas parte de un grupo</div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="groups">
+      <div class="groups-header">
+        <div class="filter">
+          <mat-form-field>
+            <mat-select placeholder="Filtrar por framework" name="item" (selectionChange)="onFilterGroupChange($event.value)">
+              <mat-option value="">
+                Todos
+              </mat-option>
+              <mat-option value="Vue Js">
+                Vue Js
+              </mat-option>
+              <mat-option value="Svelte">
+                Svelte
+              </mat-option>
+              <mat-option value="Angular">
+                Angular
+              </mat-option>
+              <mat-option value="React">
+                React
+              </mat-option>
+              <!-- TODO: @erick recuperar lista de frameworks desde el estado de la aplicacion -->
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="search">
+          <mat-form-field>
+            <input #textSearch (keyup)="onSearchChange(textSearch.value)" matInput placeholder="Buscar grupo" >
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="groups-content">
+        <ng-container *ngFor="let group of groupList">
+          <div class="card-container">
+            <div class="custom-card">
+              <div class="card-relative">
+                <img class="img-header" [src]="group.img_url">
+                <mat-chip-list class="framework">
+                  <mat-chip color="custom" *ngIf="!group.framework">Sin framework definido</mat-chip>
+                  <mat-chip color="custom" [ngClass]="group.framework.id|frameworkChipColor" *ngIf="group.framework">{{group.framework.name}}</mat-chip>
+                </mat-chip-list>
+              </div>
+              <div class="custom-card-header">
+
+                <div class="custom-card-title center pt-1">
+                  {{group.name}}
+                </div>
+              </div>
+              <div class="custom-card-content content">
+                <div class="content">{{group.description}}</div>
+              </div>
+              <div class="custom-card-actions center">
+                <button mat-raised-button mat-button (click)="joinToGroup(group)">Unirse</button>
+              </div>
+
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+

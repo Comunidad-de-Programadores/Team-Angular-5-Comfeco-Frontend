@@ -1,1 +1,34 @@
-<p>workshops works!</p>
+<div class="container">
+    <h1>Talleres</h1>
+    <mat-form-field>
+        <mat-label>Busqueda por nombre</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Taller Angular" #input>
+      </mat-form-field>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort *ngIf="displayWorkshops.length > 0">
+
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef> Fecha </th>
+      <td mat-cell *matCellDef="let element">  <mat-icon>{{workshopStatus(element.date)}}</mat-icon> {{ element.date | date: 'dd/MM/yyyy'}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="autor">
+      <th mat-header-cell *matHeaderCellDef> Autor </th>
+      <td mat-cell *matCellDef="let element"> {{element.author_name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="area">
+        <th mat-header-cell *matHeaderCellDef> Área </th>
+        <td mat-cell *matCellDef="let element"> {{element.knowledge_area.name}} </td>
+      </ng-container>
+
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

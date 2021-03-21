@@ -130,3 +130,115 @@ h2{
 body{
   color: #272727;
 }
+
+
+// Custom Card Definition
+// El card de material causa conflicto con el componente carousel
+// Cambiar componente mat-card por la clase customcard
+
+.custom-card {
+  border-radius: 4px;
+  padding:1rem;
+  background: white;
+  color: rgba(0, 0, 0, 0.87);
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  position: relative;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+.custom-card-header{
+  margin-top: 0;
+  display:flex;
+  flex-direction: column;
+}
+
+.custom-card .custom-card-title{
+  margin-bottom: 12px;
+  font-size: 20px;
+  display: block;
+  font-weight: 500;
+}
+
+
+.custom-card .custom-card-subtitle{
+  margin-top: -8px;
+  display: block;
+  margin-bottom: 16px;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+}
+
+.custom-card .custom-card-content{
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.custom-card .custom-card-actions{
+  margin-top: 0.5rem;
+  display: flex;
+  width: 100%;
+}
+
+.custom-card-actions.right{
+  justify-content: flex-end;
+}
+
+.custom-card-actions.left{
+  justify-content: flex-start;
+}
+
+.custom-card-actions.center{
+  justify-content: center;
+}
+
+.custom-card-actions.between{
+  justify-content: space-between;
+}
+
+.custom-card-actions.around{
+  justify-content: space-around;
+}
+// Custom Scroll bar
+// Añade la definicion para añadir un scrollbar
+// A un contenedor con altura definida
+.custom-scrollbar{
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.custom-scrollbar:hover{
+  scrollbar-color: #8A178C whitesmoke;
+  scrollbar-width: thin;
+}
+
+.custom-scrollbar::-webkit-scrollbar{
+  // height:  .6rem;
+  width: .4rem;
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb{
+  background: #8A178C;
+  border-radius: 8px;
+}
+
+.center{
+  text-align: center;
+}
+
+.pt-1{
+  padding-top: 1rem;
+}
+
+.pb-1{
+  padding-bottom: 1rem;
+}
+
+.page-title{
+  width: 100%;
+  text-align: center;
+  font-size: xx-large;
+  font-weight: 500;
+  padding: 1rem 0 1rem 0;
+}

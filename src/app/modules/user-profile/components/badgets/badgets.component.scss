@@ -1,0 +1,39 @@
+.badges-area{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+  column-gap: 1rem;
+}
+
+.badge-container{
+  width: 350px;
+  display: flex;
+}
+
+.badge-container .badge-image{
+  height: 150px;
+  // background-color:blueviolet;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.badge-image .circle{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgb(62, 6, 167);
+  display: flex;
+  justify-content: center;
+  .image{
+    width: 80%;
+  }
+  margin-bottom: 1rem;
+}
+
+.subtitle{
+  margin-top: .7rem;
+  margin-bottom: .4rem;
+}

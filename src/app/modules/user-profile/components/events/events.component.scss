@@ -1,0 +1,40 @@
+.events-container{
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+}
+
+.events{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  row-gap: 10px;
+}
+
+.card-container{
+  width: 400px;
+  position: relative;
+}
+
+.img-header{
+  width: 368px;
+  height: 184px;
+}
+
+.image{
+  object-fit: cover;
+  width: 400px;
+  height: 200px;
+  position: absolute;
+  top:0;
+  left: 0;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.custom-card-actions .more{
+  display:flex;
+  align-items: center;
+  flex-grow: 1;
+}

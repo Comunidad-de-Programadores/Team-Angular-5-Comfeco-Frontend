@@ -1,12 +1,13 @@
 export interface Workshop{
   name:string;
-  by:string;
-  urlSocial:string;
   date: Date;
-  idArea:number;
+  author_name:string;
+  social_url:string;
+  knowledge_area:KnowledgeArea;
+  id:string;
 }
 
-export interface Area{
-  id:number;
+export interface KnowledgeArea{
   name:string;
+  id:string;
 }

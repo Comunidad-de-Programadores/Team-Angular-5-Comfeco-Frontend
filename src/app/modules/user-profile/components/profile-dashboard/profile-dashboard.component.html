@@ -1,0 +1,17 @@
+<div class="container" *ngIf="currentPage$|async as currentPage">
+ <div class="sub-navigation" [ngClass]="currentPage" @fadeIn>
+   <div class="nav-buttons">
+     <button mat-raised-button color="warns" (click)="onSelectCurrentPage('nav-profile')"><mat-icon>perm_identity</mat-icon> Perfil</button>
+     <button mat-raised-button color=warns (click)="onSelectCurrentPage('nav-badges')" ><mat-icon>military_tech</mat-icon>Insignias</button>
+      <button mat-raised-button color=warns (click)="onSelectCurrentPage('nav-groups')"><mat-icon>groups</mat-icon>Grupos</button>
+      <button mat-raised-button color=warns (click)="onSelectCurrentPage('nav-events')"><mat-icon>today</mat-icon>Eventos</button>
+    </div>
+  </div>
+  <div  class="dashboard-content">
+    <app-user-profile *ngIf="currentPage === dashboardRoutes.profile" ></app-user-profile>
+    <app-badgets *ngIf="currentPage === dashboardRoutes.badges"></app-badgets>
+    <app-groups *ngIf="currentPage === dashboardRoutes.groups"></app-groups>
+    <app-events *ngIf="currentPage === dashboardRoutes.events"></app-events>
+    <app-profile-config *ngIf="currentPage === dashboardRoutes.editProfile"></app-profile-config>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="badges-area">
+  <div class="page-title">Insignias</div>
+  <ng-container *ngFor="let badge of badges$|async">
+    <div class="badge-container">
+      <div class="custom-card">
+        <div class="badge-image">
+          <div class="circle">
+            <img [src]="badge.img_url" class="image">
+          </div>
+        </div>
+        <div class="custom-card-header">
+          <div class="custom-card-title center">{{badge.name}}</div>
+        </div>
+        <div class="custom-card-content center">
+          <div class="custom-card-subtitle center subtitle">Descripción</div>
+          {{badge.description}}
+        </div>
+        <hr>
+        <div class="custom-card-header">
+          <div class="custom-card-title center pt-1">¿Como ganarla?</div>
+        </div>
+        <div class="custom-card-content center">
+          {{badge.how_to}}
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<!-- <pre>
+  {{badges$|async|json}}
+</pre> -->

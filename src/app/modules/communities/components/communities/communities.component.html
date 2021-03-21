@@ -1,1 +1,24 @@
-<p>communities works!</p>
+<div class="communities-container">
+    <div class="page-title">Comunidades</div>
+    <div class="communities">
+      <ng-container *ngFor="let community of communities">
+        <div class="card-container">
+          <div class="custom-card">
+            <div class="img-header">
+              <img [src]="community.img? community.img : 'assets/Logos-Comfeco/Logo-con-fondo.png'" class="image">
+            </div>
+            <div class="custom-card-header">
+              <div class="custom-card-title center pt-1">{{community.name}}</div>
+            </div>
+            <div class="custom-card-actions">
+              <div class="more">        
+                  <a class="join-link" [href]="community.url? community.url :'http://google.com'" target="_blank" rel="noopener noreferrer">Unirme</a>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  

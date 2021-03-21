@@ -7,28 +7,28 @@ import { Observable } from 'rxjs';
 })
 export class BaseService {
 private headers: HttpHeaders;
-private config = {baseUrl:''};
+private config = {baseUrl:'https://restcountries.eu/rest/v2/'};
   constructor(private httpClient: HttpClient ) {
     this.headers = new HttpHeaders();
     this.headers.set('Content-Type','application/json');
     this.headers.set('Accept', 'application/json');
   }
 
-  get<T>(requestUrl: string, httpParams: any ={}):Observable<any>{
+  get<T>(baseUrl:string, requestUrl: string, httpParams: any ={}):Observable<any>{
     return this.httpClient
-            .get<T>(this.config.baseUrl+requestUrl, {headers: this.headers, params: httpParams});
+            .get<T>(baseUrl+requestUrl, {headers: this.headers, params: httpParams});
   }
 
-  post<T>(requestUrl:string, bodyRequest:any):Observable<any>{
-    return this.httpClient.post<T>(this.config.baseUrl+requestUrl,bodyRequest,{headers: this.headers});
+  post<T>(baseUrl:string, requestUrl:string, bodyRequest:any):Observable<any>{
+    return this.httpClient.post<T>(baseUrl+requestUrl,bodyRequest,{headers: this.headers});
   }
 
-  put<T>(requestUrl:string,bodyRequest:any):Observable<any>{
-    return this.httpClient.put(this.config.baseUrl+requestUrl, bodyRequest,{headers: this.headers});
+  put<T>(baseUrl:string,requestUrl:string,bodyRequest:any):Observable<any>{
+    return this.httpClient.put(baseUrl+requestUrl, bodyRequest,{headers: this.headers});
   }
 
-  delete<T>(requestUrl:string):Observable<any>{
-    return this.httpClient.delete(this.config.baseUrl+requestUrl,{headers: this.headers});
+  delete<T>(baseUrl:string,requestUrl:string):Observable<any>{
+    return this.httpClient.delete(baseUrl+requestUrl,{headers: this.headers});
   }
 
 }

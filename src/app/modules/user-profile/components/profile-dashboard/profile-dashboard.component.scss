@@ -1,0 +1,85 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub-navigation{
+  width: 100%;
+  height: 6.875rem;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 0 6px grey;
+  background-size: 400% 400%;
+
+}
+
+.nav-buttons{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  flex-wrap: wrap-reverse;
+}
+
+.nav-buttons button{
+  width: 150px;
+  height: 40px;
+}
+
+.nav-profile{
+// background-color: rgb(105, 21, 106);
+background-image: linear-gradient(40deg, #743ad5, #d53a9d, #FFB703);
+animation: gradient 8s ease infinite;
+
+
+}
+
+.nav-edit-profile{
+  background-image: linear-gradient(40deg, #743ad5, #d53a9d, #FFB703);
+  animation: gradient 8s ease infinite;
+}
+
+.nav-badges{
+  // background-color: rgb(223, 88, 101);
+  background-image: linear-gradient(180deg, #743ad5, #d53a9d, #FFB703);
+  animation: gradient 8s ease infinite;
+
+}
+
+.nav-groups{
+  // background-color: rgb(165, 99, 118);
+  background-image: linear-gradient(200deg, #743ad5, #d53a9d, #FFB703);
+  animation: gradient 8s ease infinite;
+
+}
+
+.nav-events{
+  // background-color: #ff9683;
+  background-image: linear-gradient(350deg, #743ad5, #d53a9d, #FFB703);
+  animation: gradient 8s ease infinite;
+
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 32%;
+	}
+	50% {
+		background-position: 32% 0%;
+	}
+	100% {
+		background-position: 0% 32%;
+	}
+}
+
+.dashboard-content{
+  justify-self: center;
+  width: 100%;
+  max-width: 1491px;
+  margin-top: .7rem;
+}

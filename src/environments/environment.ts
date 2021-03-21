@@ -12,6 +12,11 @@ export const environment = {
     messagingSenderId: "300779862888",
     appId: "1:300779862888:web:bad33a0a01bf7a9fb134dd",
     measurementId: "G-P3R5ZL89LC"
+  },
+  endpoindsUris:{
+    backend: 'https://comfecoapi.odprz.dev/',
+    countries: 'https://restcountries.eu/rest/v2/'
+    // TODO: @erick add uri countries
   }
 };
 

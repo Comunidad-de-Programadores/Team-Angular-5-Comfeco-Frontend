@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 
   nextEventTimeTarget='04/02/2022 12:00 AM';
 
+  // TODO: crear servicio para calcular tamaño actual de pantalla
   screenMediaSize:ScreenMediaSizes={lg:1600, xlg:1920};
   isMobile = false;
 
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
     this.onResize(window.innerWidth);
   }
 
+  // TODO: crear servicio para calcular tamaño en pantalla
   public onResize(width){
     let size = width;
     if(size> this.screenMediaSize.lg){
@@ -97,7 +99,7 @@ export class HomeComponent implements OnInit {
     }
 
 
-    console.log('tamaño de la pantalla', width)
+    // console.log('tamaño de la pantalla', width)
 
   }
 
