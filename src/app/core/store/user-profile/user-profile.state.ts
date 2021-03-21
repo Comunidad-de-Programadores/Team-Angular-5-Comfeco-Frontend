@@ -493,7 +493,7 @@ export class UserProfileState{
     let userDetail : UserDetail;
     return this.userService.removeEventToUser(payload.userId,payload.event).pipe(
       tap(res=>userDetail=res),
-      concatMap(userDetail=>this.userService.postUserActivity(payload.userId,{description:`Ha salido del evento "${payload.event}".`})),
+      concatMap(userDetail=>this.userService.postUserActivity(payload.userId,{description:`Ha salido del evento "${payload.event.name}".`})),
       tap(activity=>{
         patchState({...state,
           user:{...state.user,

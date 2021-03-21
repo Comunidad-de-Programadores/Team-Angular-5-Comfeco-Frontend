@@ -5,6 +5,17 @@
   width: 100%;
   flex-wrap: wrap;
 }
+
+@media (max-width: 1200px) {
+  .profile-area {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+
+
 .profile-card{
   width: 300px;
 }
@@ -83,6 +94,12 @@
   flex-grow: 1;
 }
 
+@media(max-width:1200px){
+  .center-area{
+    width: 100%;
+  }
+}
+
 .badges-area{
   // display: block;
   // height: 300px;
@@ -106,13 +123,25 @@
   padding: .5rem 0 4em 5px;
 }
 
+@media(max-width:1200px){
+  .right-area{
+    width: 95%;
+  }
+}
+
 .left-area{
   width: 350px;
   // background-color: red;
-  height: 450px;
+  // height: 450px;
   margin-left: 1.5rem;
   padding: .5rem 5px 0 5px;
+}
 
+@media(max-width: 400px){
+  .left-area{
+    margin-left: 0rem;
+    padding: 0 0 0 0;
+  }
 }
 
 div .card-badges{
@@ -194,45 +223,6 @@ ul>li{
   padding: 0;
 }
 
-// .custom-card {
-//   border-radius: 4px;
-//   padding:1rem;
-//   background: white;
-//   color: rgba(0, 0, 0, 0.87);
-//   font-family: Roboto, "Helvetica Neue", sans-serif;
-//   position: relative;
-//   // height: 100%;
-//   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
-//   transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
-// }
-
-// .custom-card-header{
-//   margin-top: 0;
-//   display:flex;
-//   flex-direction: column;
-// }
-
-// .custom-card-header .custom-card-title{
-//   margin-bottom: 12px;
-//   font-size: 20px;
-//   display: block;
-//   font-weight: 500;
-// }
-
-
-// .custom-card-header .custom-card-subtitle{
-//   margin-top: -8px;
-//   display: block;
-//   margin-bottom: 16px;
-//   color: rgba(0, 0, 0, 0.54);
-//   font-size: 14px;
-// }
-
-// .custom-card .custom-card-content{
-//   margin-bottom: 0;
-//   font-size: 14px;
-// }
-
 .card-title-action{
   display:flex;
   width: 100%;
@@ -242,8 +232,19 @@ ul>li{
   font-weight: 500;
 }
 
-.events{
-  height: 100%;
+// .events{
+//   height: 100%;
+// }
+
+@media(max-width:1200px){
+  .events-content{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .item-image-cover{
+    width: 300px;
+    height: 100%;
+  }
 }
 
 .item-image-cover{
@@ -259,6 +260,18 @@ ul>li{
 
 .events-content{
   max-height: 95%;
+}
+
+@media(max-width:1200px){
+  .events-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .item-image-cover{
+    width: 300px;
+    height: 254px;
+  }
 }
 
 .item-image-cover .img-bg{
