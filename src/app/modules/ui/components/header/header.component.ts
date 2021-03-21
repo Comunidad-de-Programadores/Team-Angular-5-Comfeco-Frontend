@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/modules/auth/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   hidden:boolean = false;
+  hiddeMenu=false;
 
   items: NotificationItem[] = [
     { img: "https://www.pngkey.com/png/full/589-5898981_0-10-looks-like-videl-dragon-ball-z.png", title: "Te saluda Videl", redirect: "" },
@@ -42,6 +43,17 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.onResize(window.innerWidth);
+  }
+
+  public onResize(width){
+    let size = width;
+    if(size <= 888){
+      this.hiddeMenu = true;
+    }
+    if(size > 888){
+      this.hiddeMenu = false;
+    }
   }
 
 }

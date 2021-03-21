@@ -1,3 +1,11 @@
+:host
+
+.header-menu{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 mat-toolbar {
   position: sticky;
   position: -webkit-sticky;
@@ -23,7 +31,7 @@ mat-toolbar {
 }
 
 /* On screens that are 600px or less*/
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 888px) {
   .box-logo{
     background-image: url("/assets/Logos-Comfeco/logo-sin-fondo.png");
   }
@@ -62,3 +70,40 @@ img {
   color: #FFF;
 }
 
+.expand{
+  min-width: 250px;
+}
+
+
+
+
+.profile{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-profile{
+  margin-top: .7rem;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  // background-color: purple;
+}
+
+.name-profile{
+  padding-top: .7rem;
+  font-size: larger;
+  font-weight: 500;
+}
+
+.correo-profile{
+  font-weight: 500;
+  color: darkgrey;
+}
+
+.click:hover{
+  cursor: pointer;
+}
