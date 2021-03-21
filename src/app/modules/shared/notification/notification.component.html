@@ -1,9 +1,7 @@
 <mat-list role="list" class="container-notification">
-    <div *ngFor="let item of items.slice(0, 10)" >
-        <mat-list-item role="listitem" class="list-menu" routerLink="item.redirect" >
-            <img [src]="item.img"
-                width="35px" height="35px">
-            &nbsp;  {{item.title}}
+    <div  *ngIf="userActivity$|async as userActivity">
+        <mat-list-item role="listitem" class="list-menu" *ngFor="let actiivity of userActivity.slice(0, 10)"  >
+            &nbsp;  {{actiivity.description}}
         </mat-list-item>
         <mat-divider></mat-divider>
     </div>
