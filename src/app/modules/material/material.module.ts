@@ -23,6 +23,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatTableModule} from '@angular/material/table';
+import {  MatPaginatorModule } from '@angular/material/paginator';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -70,7 +73,9 @@ import {MatRadioModule} from '@angular/material/radio';
     MatSnackBarModule,
     MatBadgeModule,
     MatNativeDateModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
 })
 export class MaterialModule { }

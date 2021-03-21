@@ -1,15 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // import { credencialesUsuario, User } from 'src/app/core/models/user';
-import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
 import { User, UserFirebase } from 'src/app/core/models/auth/user';
-import { LoginUser } from 'src/app/core/models/auth/user_login';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -19,8 +14,9 @@ import { UpdateActiveUserId } from 'src/app/core/store/application/application.a
 import { UserService } from 'src/app/core/services/api/user/user.service';
 import { UserDetail } from 'src/app/core/models/user/user.models';
 
-import { UserProfileState } from 'src/app/core/store/user-profile/user-profile.state';
 import { ResetUserProfile } from 'src/app/core/store/user-profile/user-profile.actions';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../shared/components/dialog/dialog/dialog.component';
 @Injectable({
   providedIn: 'root',
 })
@@ -34,7 +30,8 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private store: Store,
-    private _userService: UserService
+    private _userService: UserService,
+    public dialog: MatDialog
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -70,6 +67,7 @@ export class AuthService {
       }, err => { // TO-DO Implementar en caso que falle esta petición.
       })
     }).catch(error => {
+      this.openDialog(error.code, error.message)
       this._notification.openSnackBar(`Tu correo ya se encuentra registrado.`, "Error",)
       this.errores = parsearErroresAPI(error);
     }
@@ -82,7 +80,7 @@ export class AuthService {
       //  return this.updateUserData(user.user);
       return;
     }).catch(error => {
-      console.log(error)
+      this.openDialog(error.code, error.message)
       this._notification.openSnackBar(`Credenciales incorrectas!.`, "Error",)
       this.errores = parsearErroresAPI(error);
     }
@@ -116,7 +114,7 @@ export class AuthService {
         return this.updateUserData(user.user);
       }
     }).catch(error => {
-      this._notification.openSnackBar(`Tu correo ${error.email} ya se encuentra registrado.`, "Error",)
+      this.openDialog(error.code, error.message)
       this.errores = parsearErroresAPI(error);
     }
     )
@@ -168,5 +166,12 @@ export class AuthService {
   }
   async changePassword(password: string) {
     return await (await this.auth.currentUser).updatePassword(password);
+  }
+
+  openDialog(title: string, description: string): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+      data: {name: title, description: description}
+    });
   }
 }
