@@ -14,10 +14,11 @@ import { RouterModule } from '@angular/router';
 import { FrameworkChipColorPipe } from './utils/pipes/framework-chip-color.pipe';
 import { ProfileConfigComponent } from './components/profile-config/profile-config.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LeaveEventGroupDialogComponent } from './components/shared/leave-event-group-dialog/leave-event-group-dialog.component';
 
 
 @NgModule({
-  declarations: [ProfileDashboardComponent, UserProfileComponent, BadgetsComponent, GroupsComponent, EventsComponent, FrameworkChipColorPipe,ProfileConfigComponent],
+  declarations: [ProfileDashboardComponent, UserProfileComponent, BadgetsComponent, GroupsComponent, EventsComponent, FrameworkChipColorPipe,ProfileConfigComponent, LeaveEventGroupDialogComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,

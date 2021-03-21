@@ -31,6 +31,10 @@ export interface Event{
   date:Date;
 }
 
+export interface EventDetail extends Event{
+  isUserJoined:boolean;
+}
+
 export interface Group{
   id:string;
   framework:Framework;

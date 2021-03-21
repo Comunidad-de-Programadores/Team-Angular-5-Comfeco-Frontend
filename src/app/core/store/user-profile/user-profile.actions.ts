@@ -1,5 +1,5 @@
 import { UserFirebase } from "../../models/auth/user";
-import { Activity, Event } from "../../models/user/user.models";
+import { Activity, Event, Group } from "../../models/user/user.models";
 
 export class SetCurrentPage{
   static readonly type = '[USER PROFILE] Set Current Page'
@@ -14,7 +14,7 @@ export class AddAreaToUser{
 
 export class AddUserActivity{
   static readonly type = '[USER PROFILE] Add User Activity';
-  constructor(public payload: Activity){}
+  constructor(public payload:{userId:string, activity:Activity}){}
 }
 
 export class UpdateUserProfile{
@@ -64,4 +64,26 @@ export class LoadGroupMembers{
 
 export class ResetUserProfile{
   static readonly type = '[USER PROFILE] Reset User Profile Default Values'
+}
+
+
+export class AddUserToGroup{
+  static readonly type = '[USER PROFILE] Add User To Group';
+  constructor (public payload:{userId:string, group:Group}){}
+}
+
+
+export class RemoveUserOfGroup{
+  static readonly type ='[USER PROFILE] Remove User of Group';
+  constructor(public payload:{userId:string, group:Group}){}
+}
+
+export class AddEventToUser{
+  static readonly type = '[USER PROFILE] Add Event to User';
+  constructor(public payload:{userId:string, event:Event}){}
+}
+
+export class RemoveUserOfEvent{
+  static readonly type ='[USER PROFILE] Remove User Of Event';
+  constructor(public payload:{userId:string, event:Event}){}
 }

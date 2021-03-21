@@ -15,7 +15,10 @@
           </div>
           <div class="custom-card-actions">
             <div class="more"><a href="#">Más información</a></div>
-            <div class="button"> <button mat-raised-button>Participar</button> </div>
+            <div class="button">
+              <button *ngIf="!event.isUserJoined" mat-raised-button color="primary" (click)="onParticipateClick(event)">Participar</button>
+              <button *ngIf="event.isUserJoined" mat-raised-button color="warn" (click)="onLeaveClick(event)">Abandonar</button>
+            </div>
           </div>
         </div>
 
@@ -23,6 +26,3 @@
     </ng-container>
   </div>
 </div>
-
-<button mat-raised-button (click)="addUserActivity()" >Registrarse al evento</button>
-<!-- <pre>{{eventsLists$|async|json}}</pre> -->
