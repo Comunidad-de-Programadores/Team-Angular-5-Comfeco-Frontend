@@ -1,36 +1,48 @@
-# TeamAngular5ComfecoFrontend
+# Team Angular 5 COMFECO
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.4.
+Este proyecto forma parte de la competición [COMFECO 2021](https://www.comfeco.com/) COMFECO 2021, utilizando Angular 11.0
 
-## Development server
+### Instalación 🔧
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+_Para instalar la aplicación se deben utilizar los siguientes pasos_
 
-## Code scaffolding
+_Debemos clonar el repositorio y posterioremente ejecutar el siguiente comando _
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+npm start
+```
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Funcionamiento 🔧
+*![Home](https://i.ibb.co/37hbRh3/comfeco-home.png)
+*![Perfil](https://i.ibb.co/37hbRh3/comfeco-home.png)
 
 
-## Reglas para la documentación de commits
+## Construido con 🛠️
 
-Se agregan unas reglas a seguir para la documentacion de commits y permitan tener **mensajes
-legibles** y proporcionen un facil seguimiento en la **historia
-del proyecto**.
+_Herramientas del proyecto_
 
-[ver reglas de documentación de commits para mas detalles](doc/documentacion-commits.md)
+* [Angular](https://cli.angular.io/) - Angular CLI
+* [Angular Material](https://material.angular.io/) - Material Angular
+* [Firestore](https://firebase.google.com/docs/firestore?hl=es) - Firestore Angular
+* [strapi.io](https://strapi.io/) - Strapi
+
+
+
+
+## Versionado 📌
+
+[Ver reglas de documentación de commits para mas detalles](doc/documentacion-commits.md)
+
+## Autores ✒️
+
+* **Oscar Daniel** - [odprz-dev](https://github.com/odprz-dev)
+* **Erick Rivas** - [iamrivard](https://github.com/iAmRivard)
+
+
+## Despliegue 📦
+
+* **Frontend** - [frontend](https://comfeco.odprz.dev/)
+* **Backend** - [backend](https://comfecoapi.odprz.dev/)
+
+---
+⌨️ con ❤️
