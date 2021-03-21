@@ -35,6 +35,12 @@ export class WorkshopsComponent implements OnInit {
       }
     );
   }
+
+  workshopStatus(date: Date):string{
+    let moreIcon = 'more_horiz';
+    let dondeIcon = 'done';
+    return (new Date(date).getTime()> Date.now())? moreIcon:dondeIcon;
+  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
