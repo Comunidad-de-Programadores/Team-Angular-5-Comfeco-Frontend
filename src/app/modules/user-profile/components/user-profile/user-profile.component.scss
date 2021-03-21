@@ -232,9 +232,9 @@ ul>li{
   font-weight: 500;
 }
 
-// .events{
-//   height: 100%;
-// }
+.events{
+  height: 100%;
+}
 
 @media(max-width:1200px){
   .events-content{
@@ -244,6 +244,10 @@ ul>li{
   .item-image-cover{
     width: 300px;
     height: 100%;
+  }
+
+  .events{
+    height: auto;
   }
 }
 

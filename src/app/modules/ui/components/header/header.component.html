@@ -1,13 +1,17 @@
-<mat-toolbar color="backgrond(300)">
+<mat-toolbar color="backgrond(300)" (window:resize)="onResize($event.target.innerWidth)">
+
+  <div *ngIf="hiddeMenu">
+    <button (click)="onClickMenuIcon()" mat-icon-button color="accent"><mat-icon>menu</mat-icon></button>
+  </div>
 
   <div class="box-logo" routerLink="/">
   </div>
 
   <div class="wrapper">
-    <div class="menu">
+    <div class="menu" *ngIf="!hiddeMenu">
       <ul>
         <li>
-          <a routerLinkActive="active" routerLink="/app">Inicio</a>
+          <a  routerLinkActive="active" routerLink="/app">Inicio</a>
         </li>
         <li>
           <a routerLinkActive="active" routerLink="/comunidades">Comunidades</a>
@@ -29,11 +33,12 @@
 
   <!-- User NOT logged in -->
   <ng-template #guest>
-    <button mat-raised-button color="secondary" class="button" routerLink="/account/login">
+    <button  mat-button color="accent" class="button" routerLink="/account/login">
       <ng-container>
+        Iniciar Sesion
         <span class="material-icons">
           login
-        </span> Login
+        </span>
       </ng-container>
     </button>
 
@@ -52,15 +57,22 @@
           keyboard_arrow_down
         </span>
       </button>
-      <mat-menu #menu="matMenu">
+      <mat-menu #menu="matMenu" class="menu-profile">
+        <div class="profile">
+          <div><img class="image-profile" [src]="user.photoURL"></div>
+          <div class="name-profile">{{user.userName | titlecase}}</div>
+          <div class="correo-profile">{{user.email}}</div>
+          <div class="expand"></div>
+          <div><a class="click" (click)="route.navigate(['/miperfil'])">Mi perfil</a></div>
+        </div>
         <mat-list role="list">
-          <mat-list-item role="listitem" class="list-menu" (click)="route.navigate(['/miperfil']);">
+          <!-- <mat-list-item role="listitem" class="list-menu" (click)="route.navigate(['/miperfil']);">
             <span class="material-icons">
               account_circle
             </span>&nbsp;Mi Perfil
-          </mat-list-item>
+          </mat-list-item> -->
 
-          <mat-list-item role="listitem" (click)="auth.signOut()" class="list-menu">
+          <mat-list-item class="exit" role="listitem" (click)="auth.signOut()" class="list-menu">
             <span class="material-icons">
               logout
             </span>
@@ -77,3 +89,19 @@
   </ng-template>
 
 </mat-toolbar>
+<div *ngIf="secundaryMenuActive"  class="secundary-menu">
+  <ul class="menu-list">
+    <li>
+      <a routerLinkActive="active" routerLink="/app">Inicio</a>
+    </li>
+    <li>
+      <a routerLinkActive="active" routerLink="/comunidades">Comunidades</a>
+    </li>
+    <li>
+      <a routerLinkActive="active" routerLink="/talleres">Talleres</a>
+    </li>
+    <li>
+      <a routerLinkActive="active" routerLink="/creadores">Creadores</a>
+    </li>
+  </ul>
+</div>
