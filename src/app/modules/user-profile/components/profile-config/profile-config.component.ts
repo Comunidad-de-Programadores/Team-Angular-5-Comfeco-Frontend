@@ -73,9 +73,6 @@ export class ProfileConfigComponent implements OnInit {
     this.onChanges();
     this.breakpoint = (window.innerWidth <= 1000) ? 1 : 2;
     this.breakpointInput3 = (window.innerWidth <= 1200) ? 1 : 3;
-
-    
-
   }
 
   onChanges(): void {
