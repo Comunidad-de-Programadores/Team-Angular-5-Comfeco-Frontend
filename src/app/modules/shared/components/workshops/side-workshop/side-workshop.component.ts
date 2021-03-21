@@ -35,7 +35,7 @@ export class SideWorkshopComponent implements OnInit {
 
     this.workshopsService.getWorkshops().subscribe(
       result=> {
-        this.ws = result
+        this.ws = result.filter(n =>  new Date(new Date(n.date)).getDay()=== new Date().getDay());
         this.displayWorkshops = this.ws;
         console.log('data: ',this.displayWorkshops)
       },
