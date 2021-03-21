@@ -27,13 +27,12 @@
           <div class="description-item">
             <div class="title-item">{{workshop.name}}</div>
             <div class="subtitle-item">{{workshop.date | date:'hh:mm a'}}</div>
-            <div class="autor-item"> <b>By</b> <span class="autor-space"></span><a href="http://twitter.com" target="_blank" >{{workshop.by}}</a></div>
+            <div class="autor-item"> <b>By</b> <span class="autor-space"></span><a href="http://twitter.com" target="_blank" >{{workshop.author_name}}</a></div>
           </div>
         </div>
         <hr *ngIf="!(i === displayWorkshops.length-1)">
       </ng-container>
     </div>
-
 
 
   </div>

@@ -22,6 +22,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   declarations: [],
   imports: [
@@ -45,7 +46,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatToolbarModule,
     MatIconModule,
     MatSnackBarModule,
-    MatBadgeModule 
+    MatBadgeModule,
   ],
   exports: [
     MatSliderModule,
@@ -68,7 +69,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatIconModule,
     MatSnackBarModule,
     MatBadgeModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatRadioModule
   ],
 })
 export class MaterialModule { }

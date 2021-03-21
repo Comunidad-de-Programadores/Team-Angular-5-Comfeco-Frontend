@@ -32,7 +32,8 @@ button {
   border-width: 0.5px;
   border-radius: 5px;
   background: $base-bg;
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
 }
 
 .active-a {
@@ -198,3 +199,54 @@ ul {
     opacity: 1;
   }
 }
+.btn-social-media{
+  max-width: 150px;
+  width: 200px !important;
+}
+@media only screen and (max-width: 1400px) {
+  .btn-social-media{
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .btn-social-media{
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .btn-social-media{
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .btn-social-media{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .btn-social-media{
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .btn-social-media{
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .btn-social-media{
+    max-width: 100px;
+    font-size: 10px;
+  }
+  .txt-btn{
+    font-size: 20px;
+  }
+}
+@media only screen and (max-width: 280px) {
+  .btn-social-media{
+    width: 100%;
+  }
+}
+
+

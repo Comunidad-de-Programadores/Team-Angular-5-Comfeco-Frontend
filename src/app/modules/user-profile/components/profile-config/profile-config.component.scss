@@ -5,79 +5,14 @@ body {
 
 .wrapper {
   display: flex;
-  width: 800px;
-  margin: 40px auto 20px auto;
+  width: auto;
   display: flex;
   align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  max-width: 800px;
   justify-content: center;
   box-sizing: content-box;
-  border-radius: 25px;
-  padding: 10px;
-  background: rgb(70, 69, 69);
-  background-image: linear-gradient(
-    -45deg,
-    rgba(255, 255, 255, 0.2) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.2) 75%,
-    transparent 75%,
-    transparent
-  );
-  z-index: 1;
-  background-size: 50px 50px;
-
-}
-
-.wrapper-50 {
-  display: flex;
-  width: 800px;
-  margin: 40px auto 20px auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: content-box;
-  border-radius: 25px;
-  padding: 10px;
-  background: rgb(233, 218, 5);
-  background-image: linear-gradient(
-    -45deg,
-    rgba(255, 255, 255, 0.2) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.2) 75%,
-    transparent 75%,
-    transparent
-  );
-  z-index: 1;
-  background-size: 50px 50px;
-  animation: move 2s linear infinite;
-}
-.wrapper-100 {
-  display: flex;
-  width: 800px;
-  margin: 40px auto 20px auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: content-box;
-  border-radius: 25px;
-  padding: 10px;
-  background: rgb(3, 165, 71);
-  background-image: linear-gradient(
-    -45deg,
-    rgba(255, 255, 255, 0.2) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.2) 75%,
-    transparent 75%,
-    transparent
-  );
-  z-index: 1;
-  background-size: 50px 50px;
-  animation: move 2s linear infinite;
 }
 
 @keyframes move {
@@ -121,9 +56,12 @@ li {
 
 .right {
   background-color: white;
-  border-radius: 5px;
+  box-shadow: 2px 6px 20px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 2px 6px 20px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 6px 20px 0px rgba(0,0,0,0.75);
   height: 100%;
   width: 100%;
+  
 }
 
 h2 {
@@ -185,8 +123,8 @@ input {
 }
 
 .bottom {
-  margin-left: 250px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 button {
@@ -326,6 +264,135 @@ button:focus {
   cursor: pointer;
   transition: 0.3s;
 }
+.input-mat{
+  width:300px;
+}
+.input-3-mat{
+  width: 200px;
+}
+.input-mat-field{
+  width: 300px;
+}
+@media only screen and (max-width: 1400px) {
+  .wrapper{
+    width: 100%;
+  }
+  .input-mat{
+    width: 300px;
+  }
+  .input-3-mat{
+    width: 200px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .wrapper{
+    width: 80%;
+  }
+  .input-mat{
+    width: 250px;
+  }
+  .input-3-mat{
+    width: 650px;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .wrapper{
+    width: 90%;
+  }
+  .input-mat{
+    width: 650px;
+  }
+  .input-3-mat{
+    width: 650px;
+  }
+  .input-mat-field{
+    width: 650px;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .wrapper{
+    width: 90%;
+  }
+  .input-mat{
+    width: 450px;
+  }
+  .input-3-mat{
+    width: 450px;
+  }
+  .input-mat-field{
+    width: 450px;
+  }
+}
 
-
+@media only screen and (max-width: 600px) {
+  .wrapper{
+    width: 90%;
+  }
+  .input-mat{
+    width: 400px;
+  }
+  .input-mat-field{
+    width: 400px;
+  }
+  .input-3-mat{
+    width: 400px;
+  }
+  .input-mat-field{
+    width: 400px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .wrapper {
+   width: 95%;
+  
+  }
+  .input-mat{
+    width: 350px;
+  }
+  .input-mat-field{
+    width: 350px;
+  }
+  .input-3-mat{
+    width: 350px;
+  }
+  .input-mat-field{
+    width: 350px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .wrapper {
+   width: 95%;
+  
+  }
+  .input-mat{
+    width: 250px;
+  }
+  .input-mat-field{
+    width: 250px;
+  }
+  .input-3-mat{
+    width: 250px;
+  }
+  .input-mat-field{
+    width: 250px;
+  }
+}
+@media only screen and (max-width: 280px) {
+  .wrapper {
+   width: 95%;
+  padding: 0px;  
+  }
+  .input-mat{
+    width: 200px;
+  }
+  .input-mat-field{
+    width: 200px;
+  }
+  .input-3-mat{
+    width: 200px;
+  }
+  .input-mat-field{
+    width: 200px;
+  }
+}
 
