@@ -12,11 +12,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SuccessTemplateComponent } from './components/success-template/success-template.component';
 import { NotificationComponent } from './notification/notification.component';
 import { CountdownTimerComponent } from './components/countdown-timer/countdown-timer.component';
+import { DialogComponent } from './components/dialog/dialog/dialog.component';
 
 
 
 @NgModule({
-  declarations: [MostrarErroresComponent, CarouselComponent, LeaderCardComponent, SideCommunitiesComponent, SideWorkshopComponent, SuccessTemplateComponent, NotificationComponent, CountdownTimerComponent],
+  declarations: [MostrarErroresComponent, CarouselComponent, LeaderCardComponent, SideCommunitiesComponent, SideWorkshopComponent, SuccessTemplateComponent, NotificationComponent, CountdownTimerComponent, DialogComponent],
   imports: [
     CommonModule,
     MaterialModule,

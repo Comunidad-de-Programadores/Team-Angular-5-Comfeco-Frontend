@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { RegisterUser } from 'src/app/core/models/auth/user_register';
+import { ErrorItem } from 'src/app/core/models/notification/error';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -24,28 +25,10 @@ export class AuthFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.creacionDeFormulario();
-    // this.crearListeners();
-    this.cargardata()
     this.breakpoint = (window.innerWidth <= 1000) ? 1 : 2;
 
   }
-  cargardata() {
-    this.form.reset({
-      username: 'iamrivard',
-      email: 'erick.sgr10@gmail.com',
-      password: 'iamrivard',
-      passwordConfirm: 'iamrivard'
-    })
-  }
-  crearListeners() {
-    this.form.valueChanges.subscribe((valor) => {
-      console.log(valor);
-    });
-    this.form.statusChanges.subscribe((valor) => {
-      console.log(valor);
-    });
-  }
-    onResize(event) {
+  onResize(event) {
     this.breakpoint = (event.target.innerWidth <= 1000) ? 1 : 2;
   }
   creacionDeFormulario(): void {
@@ -114,22 +97,12 @@ export class AuthFormComponent implements OnInit {
     return this.errores[0] === "auth/user-not-found";
   }
 
-  obtenerMensajeErrorEmail() {
-    var campo = this.form.get('email');
-    if (campo.hasError('required')) {
-      return 'El campo Correo eléctronico es requerido';
-    }
 
-    if (campo.hasError('email')) {
-      return 'El Correo eléctronico no es válido';
-    }
-
-    return '';
-  }
   checked(event: boolean) {
     this.form.get('check').setValue(event);
     localStorage.setItem("keep_session", event ? "1" : "0")
   }
+
   matchPasswords(pass1: string, pass2: string): (formGroup: FormGroup) => void {
     return (formGroup: FormGroup) => {
       const password = formGroup.controls[pass1];
